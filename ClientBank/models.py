@@ -30,5 +30,12 @@ class ProductType(models.Model):
     def __unicode__(self):
         return self.choice
 
+class Currency(models.Model):
+    CurrencyName = models.CharField(max_length=100)
+    CurrencyCode = models.CharField(max_length=5)
+
+    def __unicode__(self):
+        return self.choice
+
 
 
