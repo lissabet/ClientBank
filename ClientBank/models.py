@@ -37,5 +37,17 @@ class Currency(models.Model):
     def __unicode__(self):
         return self.choice
 
+class Products(models.Model):
+    TypeId = models.ForeignKey(ProductType)
+    Balance = models.IntegerField
+    AccountNumber = models.CharField(max_length=25)
+    ContractNumber = models.CharField(max_length=10)
+    ContractDate = models.DateField
+    EndContractDate = models.CharField
+    StatusId = models.ForeignKey(ProductStatus)
+    CurrencyId = models.ForeignKey(Currency)
+
+    def __unicode__(self):
+        return self.choice
 
 
