@@ -50,4 +50,29 @@ class Products(models.Model):
     def __unicode__(self):
         return self.choice
 
+class Operations(models.Model):
+    OperationName = models.CharField(max_length=70)
+    OperationCost = models.IntegerField
 
+    def __unicode__(self):
+        return self.choice
+
+class UserOperations(models.Model):
+    UserId = models.ForeignKey(Users)
+    OperationId = models.ForeignKey(Operations)
+
+    def __unicode__(self):
+        return self.choice
+
+class Applications(models.Model):
+    ApplicationName = models.CharField(max_length=50)
+
+    def __unicode__(self):
+        return self.choice
+
+class UserApplication(models.Model):
+    UserId = models.ForeignKey(Users)
+    Application = models.ForeignKey(Applications)
+
+    def __unicode__(self):
+        return self.choice
