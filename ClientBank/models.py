@@ -18,4 +18,11 @@ class UserInformation(models.Model):
     def __unicode__(self):
         return self.choice
 
+class ProductStatus(models.Model):
+    StatusName = models.CharField(max_length=20)
+
+    def __unicode__(self):
+        return self.choice
+
+
 
