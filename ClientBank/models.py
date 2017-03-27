@@ -24,5 +24,11 @@ class ProductStatus(models.Model):
     def __unicode__(self):
         return self.choice
 
+class ProductType(models.Model):
+    TypeName = models.CharField(max_length=50)
+
+    def __unicode__(self):
+        return self.choice
+
 
 
