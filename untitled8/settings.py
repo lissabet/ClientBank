@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ClientBank',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -71,7 +72,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'untitled8.wsgi.application'
 
-
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'PAGINATE_BY': 10
+}
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
