@@ -51,6 +51,10 @@ class UserList(generics.ListCreateAPIView):
     model = Users
     serializer_class = UsersSerializer
     queryset = Users.objects.all()
+    template = loader.get_template('ClientBank/index.html')
+    context = Context({
+        'latest_user_list': queryset,
+    })
 
 class UsersDetail(generics.RetrieveUpdateDestroyAPIView):
     model = Users
