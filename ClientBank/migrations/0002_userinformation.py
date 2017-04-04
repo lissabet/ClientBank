@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('FullName', models.CharField(max_length=75)),
                 ('Address', models.CharField(max_length=250)),
-                ('Prone', models.CharField(max_length=15)),
+                ('Phone', models.CharField(max_length=15)),
                 ('UserId', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='ClientBank.Users')),
             ],
         ),

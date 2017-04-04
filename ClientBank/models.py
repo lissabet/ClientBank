@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 class Users(models.Model):
     email = models.CharField(max_length=50)
@@ -10,10 +12,10 @@ class Users(models.Model):
 
 
 class UserInformation(models.Model):
-    UserId = models.ForeignKey(Users)
+    UserId = models.ForeignKey(User)
     FullName = models.CharField(max_length=75)
     Address = models.CharField(max_length=250)
-    Phone = models.CharField(max_length=15)
+    Phone = models.CharField(max_length=50)
 
     def __unicode__(self):
         return self.choice
