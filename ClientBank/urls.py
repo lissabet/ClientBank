@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^groups/$', InfoList.as_view(), name='info-list'),
     url(r'^groups/(?P<pk>\d+)/$', InfoDetail.as_view(), name='info-detail'),
     url(r'^register/$', views.register, name='register'),
+    url(r'^login/$', views.user_login, name='login'),
 ]
 
 # Format suffixes
