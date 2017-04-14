@@ -14,7 +14,7 @@
 
 <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
+ <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -29,8 +29,15 @@
 
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="/basicview/register/">Register Here</a></li>
-                    <li><a href="/basicview/login/">LogIn</a> </li>
+
+                    {% if user.is_authenticated  %}
+                        <li>welcome {{ user.username }}</li>
+                        <li><a href="/basicview/logout/">LogOut</a> </li>
+                    {% else %}
+                        <li><a href="/basicview/register/">Register Here</a></li>
+                        <li><a href="/basicview/login/">LogIn</a> </li>
+                    {% endif %}
+
 
                 </ul>
     </div>
