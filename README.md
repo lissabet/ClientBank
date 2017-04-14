@@ -1,1 +1,2 @@
-# ClientBank it's a diplom project
+# ClientBank ESBank
+diplom project
