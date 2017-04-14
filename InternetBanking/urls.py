@@ -1,8 +1,8 @@
 from django.conf.urls import url, include
-from ClientBank import  views
+from InternetBanking import  views
 from django.contrib.auth import views as auth_views
 from rest_framework.urlpatterns import format_suffix_patterns
-from ClientBank.views import UserList, UsersDetail, InfoList, InfoDetail
+from InternetBanking.views import UserList, UsersDetail, InfoList, InfoDetail
 
 urlpatterns = [
 
@@ -12,7 +12,9 @@ urlpatterns = [
     url(r'^groups/(?P<pk>\d+)/$', InfoDetail.as_view(), name='info-detail'),
     url(r'^register/$', views.register, name='register'),
     url(r'^login/$', views.user_login, name ='login'),
-    url(r'^logout/$', auth_views.logout, {'template_name': 'ClientBank/login.html'}),
+    url(r'^logout/$', auth_views.logout, {'template_name': 'InternetBanking/login.html'}),
+    url(r'index/$',views.index,name='index'),
+    url(r'profile/$',views.profile, name='profile'),
 ]
 
 # Format suffixes

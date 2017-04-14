@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <h1>Личный профиль{{ profile.FullName }}</h1>
+    <ul>
+    <li> Имя: {{ profile.FullName }}</li>
+    <li>Адрес: {{ profile.Address }} </li>
+    <li>Телефон: {{ profile.Phone }} </li>
+    </ul>
+
+
+
+{% endblock content %}

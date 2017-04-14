@@ -9,7 +9,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ClientBank', '0003_auto_20170327_1814'),
+        ('InternetBanking', '0003_auto_20170327_1814'),
     ]
 
     operations = [
@@ -31,16 +31,16 @@ class Migration(migrations.Migration):
             name='UserApplication',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('Application', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='ClientBank.Applications')),
-                ('UserId', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='ClientBank.Users')),
+                ('Application', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='InternetBanking.Applications')),
+                ('UserId', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='InternetBanking.Users')),
             ],
         ),
         migrations.CreateModel(
             name='UserOperations',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('OperationId', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='ClientBank.Operations')),
-                ('UserId', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='ClientBank.Users')),
+                ('OperationId', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='InternetBanking.Operations')),
+                ('UserId', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='InternetBanking.Users')),
             ],
         ),
     ]

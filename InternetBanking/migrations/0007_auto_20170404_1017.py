@@ -10,7 +10,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ClientBank', '0006_merge_20170403_1206'),
+        ('InternetBanking', '0006_merge_20170403_1206'),
     ]
 
     operations = [

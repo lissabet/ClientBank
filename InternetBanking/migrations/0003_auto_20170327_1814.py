@@ -9,7 +9,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ClientBank', '0002_userinformation'),
+        ('InternetBanking', '0002_userinformation'),
     ]
 
     operations = [
@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('AccountNumber', models.CharField(max_length=25)),
                 ('ContractNumber', models.CharField(max_length=10)),
-                ('CurrencyId', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='ClientBank.Currency')),
+                ('CurrencyId', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='InternetBanking.Currency')),
             ],
         ),
         migrations.CreateModel(
@@ -47,11 +47,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='products',
             name='StatusId',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='ClientBank.ProductStatus'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='InternetBanking.ProductStatus'),
         ),
         migrations.AddField(
             model_name='products',
             name='TypeId',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='ClientBank.ProductType'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='InternetBanking.ProductType'),
         ),
     ]

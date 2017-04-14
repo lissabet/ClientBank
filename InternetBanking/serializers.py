@@ -1,4 +1,4 @@
-from ClientBank.models import Users, UserInformation, UserApplication, UserOperations, Operations, Applications, Products
+from InternetBanking.models import Users, UserInformation, UserApplication, UserOperations, Operations, Applications, Products
 from rest_framework import serializers
 
 class UsersSerializer(serializers.HyperlinkedModelSerializer):

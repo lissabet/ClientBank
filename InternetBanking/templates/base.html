@@ -23,7 +23,7 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <h2 class="navbar-brand">ESBank</h2>
+                <a href="/basicview/"><h2 class="navbar-brand"> ESBank </h2></a>
 
             </div>
 
@@ -31,7 +31,7 @@
                 <ul class="nav navbar-nav">
 
                     {% if user.is_authenticated  %}
-                        <li>welcome {{ user.username }}</li>
+                        <li><a href="/basicview/profile/">Welcome, {{ user.username }}</a></li>
                         <li><a href="/basicview/logout/">LogOut</a> </li>
                     {% else %}
                         <li><a href="/basicview/register/">Register Here</a></li>
@@ -44,7 +44,11 @@
     </div>
     </div>
      <div class="container body-content">
-{% block content %}{% endblock content %}
+{% block content %}
+    <div>
+    <a href="/basicview/index/">Перейти к списку операций</a>
+    </div>
+{% endblock content %}
      </div>
 </body>
 

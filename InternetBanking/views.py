@@ -1,22 +1,16 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import AnonymousUser
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 from django.template import Context, loader, RequestContext
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics
-from rest_framework.decorators import api_view
-from rest_framework.reverse import reverse
-from rest_framework.response import Response
-from ClientBank.serializers import UsersSerializer, UserInformationSerializer
-from ClientBank.forms import UserForm, UsersInformationFrom, UsersFrom, LoginForm
+from InternetBanking.serializers import UsersSerializer, UserInformationSerializer
+from InternetBanking.forms import UserForm, UsersInformationFrom, UsersFrom, LoginForm
 from django.contrib.auth import logout
 
-from ClientBank.models import Users, UserInformation, User
+from InternetBanking.models import Users, UserInformation, Operations
 
-def _call_or_get(function_or_property):
-    return function_or_property() if callable(function_or_property) else function_or_property
 def register(request):
     context = RequestContext(request)
     registered = False
@@ -47,7 +41,7 @@ def register(request):
         profile_form = UsersInformationFrom()
 
     return render(request,
-                  'ClientBank/register.html',
+                  'InternetBanking/register.html',
                   {'user_form': user_form, 'profile_form': profile_form, 'registered': registered, 'user': request.user}, context)
 
 
@@ -57,6 +51,12 @@ def my_view(request):
     return render(request,
                   'base.html',
                   {'user': request.user}, context)
+
+def profile(request):
+    context = UserInformation.objects.get(UserId=request.user.id)
+    return render(request,
+                  'InternetBanking/profile.html',
+                  {'profile': context, 'user': request.user}, RequestContext(request))
 
 def user_login(request):
     context = RequestContext(request)
@@ -71,9 +71,9 @@ def user_login(request):
             print(request.user.is_authenticated())
             return HttpResponseRedirect('/basicview/')
         else:
-            return render_to_response('ClientBank/login.html',{}, RequestContext(request))
+            return render_to_response('InternetBanking/login.html', {}, RequestContext(request))
     elif request.method == 'GET':
-        return render_to_response('ClientBank/login.html',{}, RequestContext(request))
+        return render_to_response('InternetBanking/login.html', {}, RequestContext(request))
 
 @login_required
 def user_logout(request):
@@ -82,10 +82,10 @@ def user_logout(request):
     return HttpResponseRedirect('/basicview/')
 
 def index(request):
-    latest_user_list = Users.objects.all()
-    template = loader.get_template('ClientBank/index.html')
+    operations = Operations.objects.all()
+    template = loader.get_template('InternetBanking/index.html')
     context = Context({
-        'latest_user_list': latest_user_list,
+        'operation': operations,
     })
     return HttpResponse(template.render(context))
 
@@ -94,7 +94,7 @@ class UserList(generics.ListCreateAPIView):
     model = Users
     serializer_class = UsersSerializer
     queryset = Users.objects.all()
-    template = loader.get_template('ClientBank/index.html')
+    template = loader.get_template('InternetBanking/index.html')
     context = Context({
         'latest_user_list': queryset,
     })

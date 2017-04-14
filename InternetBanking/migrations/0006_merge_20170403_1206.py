@@ -8,8 +8,8 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ClientBank', '0005_auto_20170331_1225'),
-        ('ClientBank', '0004_applications_operations_userapplication_useroperations'),
+        ('InternetBanking', '0005_auto_20170331_1225'),
+        ('InternetBanking', '0004_applications_operations_userapplication_useroperations'),
     ]
 
     operations = [

@@ -1,0 +1,19 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+    <table class = "table-bordered">
+    <caption>Операции</caption>
+    <tr>
+        <td>Наименование</td>
+    </tr>
+        {% for oper in operation %}
+            <tr>
+            <td>{{ oper.OperationName }}</td>
+            </tr>
+    {% endfor %}
+    </table>
+
+<a href="/basicview/">На главную</a><br />
+{% endblock content %}
