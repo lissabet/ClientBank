@@ -1,2 +1,2 @@
-# ClientBank ESBank
+# InternetBanking ESBank
 diplom project
