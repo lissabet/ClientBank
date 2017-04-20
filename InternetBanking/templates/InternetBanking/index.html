@@ -3,16 +3,14 @@
 {% load static %}
 {% block content %}
 
-    <table class = "table-bordered">
-    <caption>Операции</caption>
-    <tr>
-        <td>Наименование</td>
-    </tr>
+    <h1>Операции</h1>
+    <ul>
+
         {% for oper in operation %}
-            <tr>
-            <td>{{ oper.OperationName }}</td>
-            </tr>
+            <li>{{ oper.OperationName }}</li>
+
     {% endfor %}
+    </ul>
     </table>
 
 <a href="/basicview/">На главную</a><br />

@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -41,11 +42,11 @@ class Currency(models.Model):
 
 class Products(models.Model):
     TypeId = models.ForeignKey(ProductType)
-    Balance = models.IntegerField
-    AccountNumber = models.CharField(max_length=25)
+    Balance = models.IntegerField(default=0)
+    AccountNumber = models.ForeignKey(User)
     ContractNumber = models.CharField(max_length=10)
-    ContractDate = models.DateField
-    EndContractDate = models.CharField
+    ContractDate = models.DateField( default=datetime.date.today)
+    EndContractDate = models.DateField()
     StatusId = models.ForeignKey(ProductStatus)
     CurrencyId = models.ForeignKey(Currency)
 

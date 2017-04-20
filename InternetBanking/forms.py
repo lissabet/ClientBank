@@ -1,5 +1,10 @@
 from django import forms
-from InternetBanking.models import Users, UserInformation, User, Products
+from django.forms import ModelChoiceField
+
+from InternetBanking.models import Users, UserInformation, User, Products, ProductType, ProductStatus
+from InternetBanking.models import Currency
+import datetime
+import random
 
 class UsersFrom(forms.ModelForm):
     email = forms.CharField(max_length=50, help_text='Введите имейл')
@@ -31,12 +36,22 @@ class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
 
-# class ProductForm(forms.Form):
-#     TypeId = forms.S
-#     Balance = models.IntegerField
-#     AccountNumber = models.CharField(max_length=25)
-#     ContractNumber = models.CharField(max_length=10)
-#     ContractDate = models.DateField
-#     EndContractDate = models.CharField
-#     StatusId = models.ForeignKey(ProductStatus)
-#     CurrencyId = models.ForeignKey(Currency)
+class ChoiseForProductType(forms.ModelChoiceField):
+  def label_from_instance(self, obj):
+    return obj.TypeName
+
+class ChoiseForCurrency(forms.ModelChoiceField):
+    def label_from_instance(self, obj):
+        return obj.CurrencyName
+
+class ProductForm(forms.ModelForm):
+    TypeId = ChoiseForProductType(queryset=ProductType.objects.all())
+    Balance = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
+    ContractDate = forms.DateField(widget=forms.HiddenInput(), initial= datetime.date.today)
+    CurrencyId = ChoiseForCurrency(queryset=Currency.objects.all())
+    EndContractDate = forms.DateField(widget=forms.SelectDateWidget)
+
+
+    class Meta:
+        model = Products
+        fields = ('TypeId','CurrencyId','EndContractDate')

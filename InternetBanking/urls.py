@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, {'template_name': 'InternetBanking/login.html'}),
     url(r'index/$',views.index,name='index'),
     url(r'profile/$',views.profile, name='profile'),
+    url(r'create_product/$',views.CreateProduct, name='create_product')
 ]
 
 # Format suffixes

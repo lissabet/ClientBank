@@ -10,5 +10,14 @@
     </ul>
 
 
+    <h2>Список продуктов ESBank:</h2>
+    <ul>
+
+        {% for prod in products %}
+            <li>{{ prod.TypeId.TypeName }} : {{ prod.Balance }}</li>
+    {% endfor %}
+    </ul>
+
+<p><a href="/basicview/create_product/"> Добавить банковский продукт</a></p>
 
 {% endblock content %}

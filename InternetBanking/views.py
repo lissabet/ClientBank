@@ -3,13 +3,13 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 from django.template import Context, loader, RequestContext
-from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics
 from InternetBanking.serializers import UsersSerializer, UserInformationSerializer
-from InternetBanking.forms import UserForm, UsersInformationFrom, UsersFrom, LoginForm
+from InternetBanking.forms import UserForm, UsersInformationFrom
 from django.contrib.auth import logout
-
-from InternetBanking.models import Users, UserInformation, Operations
+from  InternetBanking.forms import ProductForm
+from InternetBanking.models import Users, UserInformation, Operations, Products, ProductStatus
+import random
 
 def register(request):
     context = RequestContext(request)
@@ -44,6 +44,28 @@ def register(request):
                   'InternetBanking/register.html',
                   {'user_form': user_form, 'profile_form': profile_form, 'registered': registered, 'user': request.user}, context)
 
+def CreateProduct(request):
+    context = RequestContext(request)
+    if request.method == 'POST':
+        product_form = ProductForm(data=request.POST)
+        if product_form.is_valid():
+
+            product = product_form.save(commit=False)
+            product.AccountNumber = request.user
+            product.StatusId = ProductStatus.objects.get(pk=1)
+            product.ContractNumber = int(random.randint(1555,1555555)*random.randint(2,555)/55)
+            product.save()
+            return HttpResponseRedirect('/basicview/profile/')
+        else:
+            print(product_form.errors)
+    else:
+        product_form = ProductForm()
+    return render(request,
+                  'InternetBanking/create_product.html',
+                  {'product_form': product_form,
+                   'user': request.user}, context)
+
+
 
 
 def my_view(request):
@@ -54,9 +76,11 @@ def my_view(request):
 
 def profile(request):
     context = UserInformation.objects.get(UserId=request.user.id)
+    products = Products.objects.filter(AccountNumber=request.user.id)
     return render(request,
                   'InternetBanking/profile.html',
-                  {'profile': context, 'user': request.user}, RequestContext(request))
+                  {'profile': context, 'user': request.user,'products':products}, RequestContext(request))
+
 
 def user_login(request):
     context = RequestContext(request)
@@ -86,6 +110,7 @@ def index(request):
     template = loader.get_template('InternetBanking/index.html')
     context = Context({
         'operation': operations,
+        'user': request.user,
     })
     return HttpResponse(template.render(context))
 
