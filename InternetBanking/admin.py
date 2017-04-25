@@ -1,6 +1,6 @@
 from django.contrib import admin
 from InternetBanking.models import Users, UserInformation, ProductStatus, ProductType, Currency, Products, Operations, UserOperations
-from  InternetBanking.models import Applications, UserApplication
+from  InternetBanking.models import Applications, UserApplication, MobileOperators, PhoneOperation
 
 admin.site.register(Users)
 admin.site.register(UserInformation)
@@ -12,3 +12,5 @@ admin.site.register(Operations)
 admin.site.register(UserOperations)
 admin.site.register(Applications)
 admin.site.register(UserApplication)
+admin.site.register(MobileOperators)
+admin.site.register(PhoneOperation)

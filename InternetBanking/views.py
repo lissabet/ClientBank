@@ -7,7 +7,7 @@ from rest_framework import generics
 from InternetBanking.serializers import UsersSerializer, UserInformationSerializer
 from InternetBanking.forms import UserForm, UsersInformationFrom
 from django.contrib.auth import logout
-from InternetBanking.forms import ProductForm
+from InternetBanking.forms import ProductForm, PhoneOperationForm
 from InternetBanking.models import Users, UserInformation, Operations, Products, ProductStatus,ProductType
 import random
 
@@ -51,6 +51,17 @@ def warring(request):
                   'InternetBanking/warring.html',
                   {'user': request.user}, context)
 
+def nomoney(request):
+    context = RequestContext(request)
+    return render(request,
+                  'InternetBanking/nomoney.html',
+                  {'user': request.user}, context)
+def operations(request):
+    context = RequestContext(request)
+    return render(request,
+                  'InternetBanking/operations.html',
+                  {'user': request.user}, context)
+
 
 def CreateProduct(request):
     context = RequestContext(request)
@@ -78,6 +89,29 @@ def CreateProduct(request):
                    'user': request.user}, context)
 
 
+def phone_operation(request):
+    context = RequestContext(request)
+    if request.method == 'POST':
+        phone_form = PhoneOperationForm(data=request.POST,eventUser=request.user)
+        if phone_form.is_valid():
+            pay = phone_form.save(commit=False)
+            balans = Products.objects.filter(ContractNumber=pay.ProductId.ContractNumber)
+            if balans[0].Balance >= pay.Amount:
+                pay.UserId = request.user
+                pay.save()
+                Products.objects.filter(pk = balans[0].id).update(Balance = balans[0].Balance - int(pay.Amount))
+                return HttpResponseRedirect('/basicview/profile/')
+            else:
+                return HttpResponseRedirect('/basicview/nomoney')
+
+        else:
+            print(phone_form.errors)
+    else:
+        phone_form = PhoneOperationForm(eventUser=request.user)
+    return render(request,
+                  'InternetBanking/phone_operation.html',
+                  {'phone_form': phone_form,
+                   'user': request.user}, context)
 
 
 def my_view(request):

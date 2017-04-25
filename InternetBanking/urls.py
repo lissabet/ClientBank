@@ -17,6 +17,9 @@ urlpatterns = [
     url(r'profile/$',views.profile, name='profile'),
     url(r'create_product/$',views.CreateProduct, name='create_product'),
     url(r'warring/$', views.warring, name='warring'),
+    url(r'nomoney/$', views.nomoney, name='nomoney'),
+    url(r'phone_operation/$',views.phone_operation,name='phone_operation'),
+    url(r'operations/$',views.operations,name='operations'),
 ]
 
 # Format suffixes

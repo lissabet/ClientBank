@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelChoiceField
 
 from InternetBanking.models import Users, UserInformation, User, Products, ProductType, ProductStatus
-from InternetBanking.models import Currency
+from InternetBanking.models import Currency, PhoneOperation, MobileOperators
 import datetime
 import random
 
@@ -55,3 +55,24 @@ class ProductForm(forms.ModelForm):
     class Meta:
         model = Products
         fields = ('TypeId','CurrencyId','EndContractDate')
+
+class ChoiseForMobileOperator(forms.ModelChoiceField):
+    def label_from_instance(self, obj):
+        return obj.Name
+
+class ChoiseForProduct(forms.ModelChoiceField):
+    def label_from_instance(self, obj):
+        res = ''.join(obj.TypeId.TypeName + ' №'+ obj.ContractNumber + ' ' + obj.CurrencyId.CurrencyName)
+        return res
+
+class PhoneOperationForm(forms.ModelForm):
+    MobileOperatorId = ChoiseForMobileOperator(queryset=MobileOperators.objects.all())
+    ProductId = ChoiseForProduct(queryset=Products.objects.all())
+
+    def __init__(self, eventUser, *args, **kwargs):
+        super(PhoneOperationForm, self).__init__(*args, **kwargs)
+        self.fields['ProductId'].queryset = Products.objects.filter(AccountNumber=eventUser.id)
+
+    class Meta:
+        model = PhoneOperation
+        fields = ('PhoneNumber', 'MobileOperatorId', 'Amount','ProductId')

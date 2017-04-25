@@ -55,7 +55,7 @@ class Products(models.Model):
 
 class Operations(models.Model):
     OperationName = models.CharField(max_length=70)
-    OperationCost = models.IntegerField
+    OperationCost = models.IntegerField()
 
     def __unicode__(self):
         return self.choice
@@ -63,6 +63,22 @@ class Operations(models.Model):
 class UserOperations(models.Model):
     UserId = models.ForeignKey(Users)
     OperationId = models.ForeignKey(Operations)
+
+    def __unicode__(self):
+        return self.choice
+
+class MobileOperators(models.Model):
+    Name = models.CharField(max_length=15)
+
+    def __unicode__(self):
+        return self.choice
+
+class PhoneOperation(models.Model):
+    UserId = models.ForeignKey(User)
+    PhoneNumber = models.CharField(max_length=15)
+    MobileOperatorId = models.ForeignKey(MobileOperators)
+    ProductId = models.ForeignKey(Products)
+    Amount = models.IntegerField()
 
     def __unicode__(self):
         return self.choice
