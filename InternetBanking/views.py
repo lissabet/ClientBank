@@ -7,8 +7,8 @@ from rest_framework import generics
 from InternetBanking.serializers import UsersSerializer, UserInformationSerializer
 from InternetBanking.forms import UserForm, UsersInformationFrom
 from django.contrib.auth import logout
-from  InternetBanking.forms import ProductForm
-from InternetBanking.models import Users, UserInformation, Operations, Products, ProductStatus
+from InternetBanking.forms import ProductForm
+from InternetBanking.models import Users, UserInformation, Operations, Products, ProductStatus,ProductType
 import random
 
 def register(request):
@@ -44,18 +44,30 @@ def register(request):
                   'InternetBanking/register.html',
                   {'user_form': user_form, 'profile_form': profile_form, 'registered': registered, 'user': request.user}, context)
 
+
+def warring(request):
+    context = RequestContext(request)
+    return render(request,
+                  'InternetBanking/warring.html',
+                  {'user': request.user}, context)
+
+
 def CreateProduct(request):
     context = RequestContext(request)
     if request.method == 'POST':
         product_form = ProductForm(data=request.POST)
         if product_form.is_valid():
-
             product = product_form.save(commit=False)
-            product.AccountNumber = request.user
-            product.StatusId = ProductStatus.objects.get(pk=1)
-            product.ContractNumber = int(random.randint(1555,1555555)*random.randint(2,555)/55)
-            product.save()
-            return HttpResponseRedirect('/basicview/profile/')
+            userProduct = Products.objects.filter(AccountNumber=request.user.id).filter(TypeId=product.TypeId).filter(CurrencyId=product.CurrencyId)
+            if userProduct.count() == 0:
+                product.AccountNumber = request.user
+                product.StatusId = ProductStatus.objects.get(pk=1)
+                product.ContractNumber = int(random.randint(1555, 1555555) * random.randint(2, 555) / 55)
+                product.save()
+                return HttpResponseRedirect('/basicview/profile/')
+            else:
+                return HttpResponseRedirect('/basicview/warring/')
+
         else:
             print(product_form.errors)
     else:
