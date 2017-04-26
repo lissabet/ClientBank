@@ -73,11 +73,28 @@ class MobileOperators(models.Model):
     def __unicode__(self):
         return self.choice
 
+
 class PhoneOperation(models.Model):
     UserId = models.ForeignKey(User)
     PhoneNumber = models.CharField(max_length=15)
     MobileOperatorId = models.ForeignKey(MobileOperators)
     ProductId = models.ForeignKey(Products)
+    Amount = models.IntegerField()
+
+    def __unicode__(self):
+        return self.choice
+
+class InternetProviders(models.Model):
+    Name = models.CharField(max_length=50)
+
+    def __unicode__(self):
+        return self.choice
+
+class InternetPay(models.Model):
+    UserId = models.ForeignKey(User)
+    ProductId = models.ForeignKey(Products)
+    InternetProviderId = models.ForeignKey(InternetProviders)
+    ContractNumber = models.CharField(max_length=15)
     Amount = models.IntegerField()
 
     def __unicode__(self):

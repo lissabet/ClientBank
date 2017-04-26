@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelChoiceField
 
 from InternetBanking.models import Users, UserInformation, User, Products, ProductType, ProductStatus
-from InternetBanking.models import Currency, PhoneOperation, MobileOperators
+from InternetBanking.models import Currency, PhoneOperation, MobileOperators, InternetPay, InternetProviders
 import datetime
 import random
 
@@ -56,7 +56,7 @@ class ProductForm(forms.ModelForm):
         model = Products
         fields = ('TypeId','CurrencyId','EndContractDate')
 
-class ChoiseForMobileOperator(forms.ModelChoiceField):
+class ChoiseForOperator(forms.ModelChoiceField):
     def label_from_instance(self, obj):
         return obj.Name
 
@@ -66,7 +66,7 @@ class ChoiseForProduct(forms.ModelChoiceField):
         return res
 
 class PhoneOperationForm(forms.ModelForm):
-    MobileOperatorId = ChoiseForMobileOperator(queryset=MobileOperators.objects.all())
+    MobileOperatorId = ChoiseForOperator(queryset=MobileOperators.objects.all())
     ProductId = ChoiseForProduct(queryset=Products.objects.all())
 
     def __init__(self, eventUser, *args, **kwargs):
@@ -76,3 +76,16 @@ class PhoneOperationForm(forms.ModelForm):
     class Meta:
         model = PhoneOperation
         fields = ('PhoneNumber', 'MobileOperatorId', 'Amount','ProductId')
+
+
+class InternetPayForm(forms.ModelForm):
+    InternetProviderId = ChoiseForOperator(queryset=InternetProviders.objects.all())
+    ProductId = ChoiseForProduct(queryset=Products.objects.all())
+
+    def __init__(self, eventUser, *args, **kwargs):
+        super(InternetPayForm, self).__init__(*args, **kwargs)
+        self.fields['ProductId'].queryset = Products.objects.filter(AccountNumber=eventUser.id)
+
+    class Meta:
+        model = InternetPay
+        fields = ('ContractNumber', 'InternetProviderId', 'Amount', 'ProductId')

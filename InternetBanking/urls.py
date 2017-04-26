@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'nomoney/$', views.nomoney, name='nomoney'),
     url(r'phone_operation/$',views.phone_operation,name='phone_operation'),
     url(r'operations/$',views.operations,name='operations'),
+    url(r'internet_pay/$',views.internet_pay,name='internet_pay'),
 ]
 
 # Format suffixes

@@ -8,7 +8,9 @@ from InternetBanking.serializers import UsersSerializer, UserInformationSerializ
 from InternetBanking.forms import UserForm, UsersInformationFrom
 from django.contrib.auth import logout
 from InternetBanking.forms import ProductForm, PhoneOperationForm
-from InternetBanking.models import Users, UserInformation, Operations, Products, ProductStatus,ProductType
+from InternetBanking.models import Users, UserInformation, Operations, Products, ProductStatus
+from InternetBanking.models import InternetPay, InternetProviders
+from InternetBanking.forms import InternetPayForm
 import random
 
 def register(request):
@@ -112,6 +114,27 @@ def phone_operation(request):
                   'InternetBanking/phone_operation.html',
                   {'phone_form': phone_form,
                    'user': request.user}, context)
+
+def internet_pay(request):
+    context =RequestContext(request)
+    if request.method == 'POST':
+        pay_form = InternetPayForm(data=request.POST, eventUser=request.user)
+        if pay_form.is_valid():
+            pay = pay_form.save(commit=False)
+            balance = Products.objects.filter(ContractNumber=pay.ProductId.ContractNumber)
+            if balance[0].Balance >= pay.Amount:
+                pay.UserId = request.user
+                pay.save()
+                Products.objects.filter(pk=balance[0].id).update(Balance= balance[0].Balance - int(pay.Amount))
+                return HttpResponseRedirect('/basicview/profile/')
+            else:
+                return HttpResponseRedirect('/basicview/nomoney/')
+        else:
+            print(pay_form.errors)
+    else:
+        pay_form = InternetPayForm(eventUser=request.user)
+    return render(request,'InternetBanking/internet_pay.html',{'pay_form':pay_form,
+                                                                  'user': request.user}, context)
 
 
 def my_view(request):
