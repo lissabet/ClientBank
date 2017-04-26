@@ -14,10 +14,10 @@
     <ul>
 
         {% for prod in products %}
-            <li>{{ prod.TypeId.TypeName }} : {{ prod.Balance }}</li>
+            <li>{{ prod.TypeId.TypeName }} : {{ prod.Balance }} Активен до: {{ prod.EndContractDate }}</li>
     {% endfor %}
     </ul>
-
+<p>Текущая дата: {{ date }}</p>
 <p><a href="/basicview/create_product/"> Добавить банковский продукт</a></p>
 
 {% endblock content %}

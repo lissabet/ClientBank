@@ -9,9 +9,8 @@ from InternetBanking.forms import UserForm, UsersInformationFrom
 from django.contrib.auth import logout
 from InternetBanking.forms import ProductForm, PhoneOperationForm
 from InternetBanking.models import Users, UserInformation, Operations, Products, ProductStatus
-from InternetBanking.models import InternetPay, InternetProviders
-from InternetBanking.forms import InternetPayForm
-import random
+from InternetBanking.forms import InternetPayForm, FlatPayForm
+import random, datetime
 
 def register(request):
     context = RequestContext(request)
@@ -137,6 +136,27 @@ def internet_pay(request):
                                                                   'user': request.user}, context)
 
 
+def flat_pay(request):
+    context = RequestContext(request)
+    if request.method == 'POST':
+        pay_form = FlatPayForm(data=request.POST, eventUser=request.user)
+        if pay_form.is_valid():
+            pay = pay_form.save(commit=False)
+            balance = Products.objects.filter(ContractNumber=pay.ProductId.ContractNumber)
+            if balance[0].Balance >= pay.Amount and pay.Amount > 0:
+                pay.UserId = request.user
+                pay.save()
+                Products.objects.filter(pk=balance[0].id).update(Balance=balance[0].Balance - int(pay.Amount))
+                return HttpResponseRedirect('/basicview/profile/')
+            else:
+                return HttpResponseRedirect('/basicview/nomoney/')
+        else:
+            print(pay_form.errors)
+    else:
+        pay_form = FlatPayForm(eventUser=request.user)
+    return render(request, 'InternetBanking/flat_pay.html', {'pay_form': pay_form,
+                                                                 'user': request.user}, context)
+
 def my_view(request):
     context = RequestContext(request)
     return render(request,
@@ -146,9 +166,16 @@ def my_view(request):
 def profile(request):
     context = UserInformation.objects.get(UserId=request.user.id)
     products = Products.objects.filter(AccountNumber=request.user.id)
+    date = datetime.date.today()
+    for prod in products:
+        if prod.EndContractDate >= date:
+            Products.objects.filter(pk= prod.id).update(StatusId=2)
     return render(request,
                   'InternetBanking/profile.html',
-                  {'profile': context, 'user': request.user,'products':products}, RequestContext(request))
+                  {'profile': context,
+                   'user': request.user,
+                   'products': products,
+                   'date': date}, RequestContext(request))
 
 
 def user_login(request):

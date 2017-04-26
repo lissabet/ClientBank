@@ -1,10 +1,7 @@
 from django import forms
-from django.forms import ModelChoiceField
-
-from InternetBanking.models import Users, UserInformation, User, Products, ProductType, ProductStatus
+from InternetBanking.models import Users, UserInformation, User, Products, ProductType, FlatPay
 from InternetBanking.models import Currency, PhoneOperation, MobileOperators, InternetPay, InternetProviders
 import datetime
-import random
 
 class UsersFrom(forms.ModelForm):
     email = forms.CharField(max_length=50, help_text='Введите имейл')
@@ -89,3 +86,14 @@ class InternetPayForm(forms.ModelForm):
     class Meta:
         model = InternetPay
         fields = ('ContractNumber', 'InternetProviderId', 'Amount', 'ProductId')
+
+class FlatPayForm(forms.ModelForm):
+    ProductId = ChoiseForProduct(queryset=Products.objects.all())
+
+    def __init__(self, eventUser, *args, **kwargs):
+        super(FlatPayForm, self).__init__(*args, **kwargs)
+        self.fields['ProductId'].queryset = Products.objects.filter(AccountNumber=eventUser.id)
+
+    class Meta:
+        model = FlatPay
+        fields = ('AccountNumber', 'Amount', 'ProductId')
