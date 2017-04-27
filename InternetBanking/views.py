@@ -45,7 +45,6 @@ def register(request):
                     key += str(random.randint(0, 9))
                 keys.append(key)
 
-            print(keys)
             userKey = UsersKeys(UserId=user,Key1= keys[0],Key2= keys[1],Key3= keys[2],Key4 =keys[3],Key5= keys[4],Key6 = keys[5],Key7= keys[6],Key8= keys[7],Key9 =keys[8])
             userKey.save()
             message = 'Welcome, {0}, to out Internet-Banking ESBBank!\n' \
@@ -54,6 +53,8 @@ def register(request):
                                                   'Key6: {5} \n Key7: {6} \n' \
                        'Key8: {7} \n Key9: {8} '.format(keys[0],keys[1],keys[2],keys[3],keys[4],keys[5],keys[6],keys[7],
                                                         keys[8])
+
+            print(user.email)
 
             receiverEmail = '{0}'.format(user.email)
 
