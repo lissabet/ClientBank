@@ -11,6 +11,7 @@ from InternetBanking.forms import ProductForm, PhoneOperationForm
 from InternetBanking.models import Users, UserInformation, Operations, Products, ProductStatus, UsersKeys
 from InternetBanking.forms import InternetPayForm, FlatPayForm, KeyForm
 import random, datetime
+from django.core.mail import send_mail
 
 
 i= 0
@@ -47,8 +48,17 @@ def register(request):
             print(keys)
             userKey = UsersKeys(UserId=user,Key1= keys[0],Key2= keys[1],Key3= keys[2],Key4 =keys[3],Key5= keys[4],Key6 = keys[5],Key7= keys[6],Key8= keys[7],Key9 =keys[8])
             userKey.save()
+            message = 'Welcome, {0}, to out Internet-Banking ESBBank!\n' \
+                      'We send for you your private keys. Please, save them and do not show anybody!' \
+                      '\n'.format(user.username) +'Key1: {0} \n Key2: {1} \n Key3: {2} \n Key4: {3} \n Key5: {4} \n ' \
+                                                  'Key6: {5} \n Key7: {6} \n' \
+                       'Key8: {7} \n Key9: {8} '.format(keys[0],keys[1],keys[2],keys[3],keys[4],keys[5],keys[6],keys[7],
+                                                        keys[8])
 
+            receiverEmail = '{0}'.format(user.email)
 
+            send_mail('ESbank keys for your banking', message,'lissa.johnas@gmail.com', [receiverEmail],
+                      fail_silently=False)
 
             registered = True
 
@@ -65,7 +75,7 @@ def register(request):
                    }, context)
 
 
-def keys(request):
+def keysView(request):
     context = RequestContext(request)
     listKeys = UsersKeys.objects.last()
     return render(request,'InternetBanking/keys.html',{'listKeys': listKeys,
