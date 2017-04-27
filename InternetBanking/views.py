@@ -8,9 +8,12 @@ from InternetBanking.serializers import UsersSerializer, UserInformationSerializ
 from InternetBanking.forms import UserForm, UsersInformationFrom
 from django.contrib.auth import logout
 from InternetBanking.forms import ProductForm, PhoneOperationForm
-from InternetBanking.models import Users, UserInformation, Operations, Products, ProductStatus
-from InternetBanking.forms import InternetPayForm, FlatPayForm
+from InternetBanking.models import Users, UserInformation, Operations, Products, ProductStatus, UsersKeys
+from InternetBanking.forms import InternetPayForm, FlatPayForm, KeyForm
 import random, datetime
+
+
+i= 0
 
 def register(request):
     context = RequestContext(request)
@@ -32,6 +35,21 @@ def register(request):
 
             profile.save()
 
+
+            keys = []
+            for k in range(9):
+                key = ''
+                key += str(random.randint(5525, 25896))
+                while len(key) < 10:
+                    key += str(random.randint(0, 9))
+                keys.append(key)
+
+            print(keys)
+            userKey = UsersKeys(UserId=user,Key1= keys[0],Key2= keys[1],Key3= keys[2],Key4 =keys[3],Key5= keys[4],Key6 = keys[5],Key7= keys[6],Key8= keys[7],Key9 =keys[8])
+            userKey.save()
+
+
+
             registered = True
 
         else:
@@ -43,8 +61,15 @@ def register(request):
 
     return render(request,
                   'InternetBanking/register.html',
-                  {'user_form': user_form, 'profile_form': profile_form, 'registered': registered, 'user': request.user}, context)
+                  {'user_form': user_form, 'profile_form': profile_form, 'registered': registered, 'user': request.user,
+                   }, context)
 
+
+def keys(request):
+    context = RequestContext(request)
+    listKeys = UsersKeys.objects.last()
+    return render(request,'InternetBanking/keys.html',{'listKeys': listKeys,
+                                                       'user':request.user},context)
 
 def warring(request):
     context = RequestContext(request)
@@ -92,12 +117,17 @@ def CreateProduct(request):
 
 def phone_operation(request):
     context = RequestContext(request)
+    global i
     if request.method == 'POST':
         phone_form = PhoneOperationForm(data=request.POST,eventUser=request.user)
-        if phone_form.is_valid():
+        key_form = KeyForm(data=request.POST)
+        userKey = UsersKeys.objects.filter(UserId=request.user)
+        field = 'Key{}'.format(i)
+        if phone_form.is_valid() and key_form.is_valid():
             pay = phone_form.save(commit=False)
+            key = key_form.cleaned_data.get('Key')
             balans = Products.objects.filter(ContractNumber=pay.ProductId.ContractNumber)
-            if balans[0].Balance >= pay.Amount:
+            if balans[0].Balance >= pay.Amount and key == userKey.values('{}'.format(field))[0][field]:
                 pay.UserId = request.user
                 pay.save()
                 Products.objects.filter(pk = balans[0].id).update(Balance = balans[0].Balance - int(pay.Amount))
@@ -109,19 +139,35 @@ def phone_operation(request):
             print(phone_form.errors)
     else:
         phone_form = PhoneOperationForm(eventUser=request.user)
+        key_form = KeyForm()
+        global i
+        i = random.randint(1, 9)
     return render(request,
                   'InternetBanking/phone_operation.html',
                   {'phone_form': phone_form,
-                   'user': request.user}, context)
+                   'user': request.user,
+                   'key_form': key_form,
+                   'Number': i
+                   }, context)
+
+
+
 
 def internet_pay(request):
     context =RequestContext(request)
+    global i
     if request.method == 'POST':
         pay_form = InternetPayForm(data=request.POST, eventUser=request.user)
-        if pay_form.is_valid():
+        key_form = KeyForm(data=request.POST)
+        userKey = UsersKeys.objects.filter(UserId=request.user)
+        field ='Key{}'.format(i)
+
+
+        if pay_form.is_valid() and key_form.is_valid():
             pay = pay_form.save(commit=False)
+            key = key_form.cleaned_data.get('Key')
             balance = Products.objects.filter(ContractNumber=pay.ProductId.ContractNumber)
-            if balance[0].Balance >= pay.Amount:
+            if balance[0].Balance >= pay.Amount and key == userKey.values('{}'.format(field))[0][field]:
                 pay.UserId = request.user
                 pay.save()
                 Products.objects.filter(pk=balance[0].id).update(Balance= balance[0].Balance - int(pay.Amount))
@@ -132,18 +178,29 @@ def internet_pay(request):
             print(pay_form.errors)
     else:
         pay_form = InternetPayForm(eventUser=request.user)
+        key_form = KeyForm()
+        global i
+        i = random.randint(1, 9)
+
     return render(request,'InternetBanking/internet_pay.html',{'pay_form':pay_form,
-                                                                  'user': request.user}, context)
+                                                                  'user': request.user,
+                                                               'key_form':key_form,
+                                                               'Number':i}, context)
 
 
 def flat_pay(request):
     context = RequestContext(request)
+    global i
     if request.method == 'POST':
         pay_form = FlatPayForm(data=request.POST, eventUser=request.user)
-        if pay_form.is_valid():
+        key_form = KeyForm(data=request.POST)
+        userKey = UsersKeys.objects.filter(UserId=request.user)
+        field = 'Key{}'.format(i)
+        if pay_form.is_valid() and key_form.is_valid():
             pay = pay_form.save(commit=False)
+            key = key_form.cleaned_data.get('Key')
             balance = Products.objects.filter(ContractNumber=pay.ProductId.ContractNumber)
-            if balance[0].Balance >= pay.Amount and pay.Amount > 0:
+            if balance[0].Balance >= pay.Amount and pay.Amount > 0 and key == userKey.values('{}'.format(field))[0][field]:
                 pay.UserId = request.user
                 pay.save()
                 Products.objects.filter(pk=balance[0].id).update(Balance=balance[0].Balance - int(pay.Amount))
@@ -154,8 +211,14 @@ def flat_pay(request):
             print(pay_form.errors)
     else:
         pay_form = FlatPayForm(eventUser=request.user)
+        key_form = KeyForm()
+        global i
+        i = random.randint(1, 9)
     return render(request, 'InternetBanking/flat_pay.html', {'pay_form': pay_form,
-                                                                 'user': request.user}, context)
+                                                                 'user': request.user,
+                                                             'key_form': key_form,
+                                                             'Number': i
+                                                             }, context)
 
 def my_view(request):
     context = RequestContext(request)
@@ -187,8 +250,6 @@ def user_login(request):
 
         if user:
             login(request, user)
-            print(username)
-            print(request.user.is_authenticated())
             return HttpResponseRedirect('/basicview/')
         else:
             return render_to_response('InternetBanking/login.html', {}, RequestContext(request))

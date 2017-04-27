@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+    <h1>Спасибо за регистрацию, {{ user.username }}</h1>
+    <p>Сохраните данные ключи и никому не показывайте. Данные ключи понадобятся для оплаты счетов и платежей.</p>
+    <ol>
+        <li>{{ listKeys.Key1 }}</li>
+        <li>{{ listKeys.Key2 }}</li>
+        <li>{{ listKeys.Key3 }}</li>
+        <li>{{ listKeys.Key4 }}</li>
+        <li>{{ listKeys.Key5 }}</li>
+        <li>{{ listKeys.Key6 }}</li>
+        <li>{{ listKeys.Key7 }}</li>
+        <li>{{ listKeys.Key8 }}</li>
+        <li>{{ listKeys.Key9 }}</li>
+    </ol>
+
+
+<a href="/basicview/">На главную</a><br />
+{% endblock content %}

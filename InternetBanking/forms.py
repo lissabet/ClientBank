@@ -97,3 +97,7 @@ class FlatPayForm(forms.ModelForm):
     class Meta:
         model = FlatPay
         fields = ('AccountNumber', 'Amount', 'ProductId')
+
+
+class KeyForm(forms.Form):
+    Key = forms.CharField()
