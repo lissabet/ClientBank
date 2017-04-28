@@ -1,16 +1,11 @@
 import csv
-
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 from django.template import Context, loader, RequestContext
-from rest_framework import generics
-from InternetBanking.serializers import UsersSerializer, UserInformationSerializer
 from InternetBanking.forms import UserForm, UsersInformationFrom
-from django.contrib.auth import logout
 from InternetBanking.forms import ProductForm, PhoneOperationForm
-from InternetBanking.models import Users, UserInformation, Operations, Products, ProductStatus, UsersKeys
+from InternetBanking.models import UserInformation, Operations, Products, ProductStatus, UsersKeys
 from InternetBanking.models import PhoneOperation, FlatPay, InternetPay
 from InternetBanking.forms import InternetPayForm, FlatPayForm, KeyForm
 import random, datetime
@@ -108,10 +103,11 @@ def export_phone(request):
         response['Content-Disposition'] = 'attachment; filename=export.csv'
 
         writer = csv.writer(response)
-        writer.writerow(['Номер Телефона', 'Сумма', 'Мобильный оператор', 'Номер продукта'])
+        writer.writerow(['Дата', 'Номер Телефона', 'Сумма', 'Мобильный оператор', 'Номер продукта'])
         pays = PhoneOperation.objects.filter(UserId=request.user)
         for rows in pays:
-            writer.writerow([rows.PhoneNumber,rows.Amount,rows.MobileOperatorId.Name,rows.ProductId.ContractNumber])
+            writer.writerow([rows.Date, rows.PhoneNumber, rows.Amount, rows.MobileOperatorId.Name,
+                             rows.ProductId.ContractNumber])
         return response
     except (Exception):
         print(Exception.__dict__)
@@ -123,13 +119,14 @@ def export_internet(request):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename=export_internet_operations.csv'
         writer = csv.writer(response)
-        writer.writerow(['Интернет Провайдер', 'Номер Договора', 'Сумма Оплаты', 'Номер продукта'])
+        writer.writerow(['Дата', 'Интернет Провайдер', 'Номер Договора', 'Сумма Оплаты', 'Номер продукта'])
         pays = InternetPay.objects.filter(UserId=request.user)
         for rows in pays:
             writer.writerow(
-                [rows.InternetProviderId.Name, rows.ContractNumber, rows.Amount, rows.ProductId.ContractNumber])
+                [rows.Date, rows.InternetProviderId.Name, rows.ContractNumber, rows.Amount,
+                 rows.ProductId.ContractNumber])
         return response
-    except (Exception):
+    except Exception:
         print(Exception.__dict__)
         return HttpResponseRedirect('/basicview/')
 
@@ -139,11 +136,11 @@ def export_flatpay(request):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename=export_flat_pay_operations.csv'
         writer = csv.writer(response)
-        writer.writerow(['Номер лицевого счета', 'Сумма Оплаты', 'Номер продукта'])
+        writer.writerow(['Дата', 'Номер лицевого счета', 'Сумма Оплаты', 'Номер продукта'])
         pays = FlatPay.objects.filter(UserId=request.user)
         for rows in pays:
             writer.writerow(
-                [rows.AccountNumber,rows.Amount, rows.ProductId.ContractNumber])
+                [rows.Date, rows.AccountNumber,rows.Amount, rows.ProductId.ContractNumber])
         return response
     except (Exception):
         print(Exception.__dict__)
@@ -317,11 +314,18 @@ def user_login(request):
     elif request.method == 'GET':
         return render_to_response('InternetBanking/login.html', {}, RequestContext(request))
 
-@login_required
-def user_logout(request):
-    logout(request)
 
-    return HttpResponseRedirect('/basicview/')
+def archive(request):
+    context = RequestContext(request)
+    phone_operations = PhoneOperation.objects.filter(UserId=request.user)
+    flat_pays = FlatPay.objects.filter(UserId=request.user)
+    internet_operations = InternetPay.objects.filter(UserId=request.user)
+    fullname = UserInformation.objects.filter(UserId=request.user)[0]
+    return render(request,'InternetBanking/archive.html',{'user':request.user,
+                                                        'phone': phone_operations,
+                                                        'flat': flat_pays,
+                                                        'internet': internet_operations,
+                                                        'userinf':fullname}, context)
 
 def index(request):
     operations = Operations.objects.all()
@@ -332,28 +336,4 @@ def index(request):
     })
     return HttpResponse(template.render(context))
 
-
-class UserList(generics.ListCreateAPIView):
-    model = Users
-    serializer_class = UsersSerializer
-    queryset = Users.objects.all()
-    template = loader.get_template('InternetBanking/index.html')
-    context = Context({
-        'latest_user_list': queryset,
-    })
-
-class UsersDetail(generics.RetrieveUpdateDestroyAPIView):
-    model = Users
-    serializer_class = UsersSerializer
-    queryset = Users.objects.all()
-
-class InfoList(generics.ListCreateAPIView):
-    model = UserInformation
-    serializer_class = UserInformationSerializer
-    queryset = UserInformation.objects.all()
-
-class InfoDetail(generics.RetrieveUpdateDestroyAPIView):
-    model = UserInformation
-    serializer_class = UserInformationSerializer
-    queryset = UserInformation.objects.all()
 

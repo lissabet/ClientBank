@@ -50,6 +50,8 @@ class PhoneOperation(models.Model):
     MobileOperatorId = models.ForeignKey(MobileOperators)
     ProductId = models.ForeignKey(Products)
     Amount = models.IntegerField()
+    Date = models.DateField(default=datetime.date.today())
+
 class InternetProviders(models.Model):
     Name = models.CharField(max_length=50)
 
@@ -59,12 +61,14 @@ class InternetPay(models.Model):
     InternetProviderId = models.ForeignKey(InternetProviders)
     ContractNumber = models.CharField(max_length=15)
     Amount = models.IntegerField()
+    Date = models.DateField(default=datetime.date.today())
 
 class FlatPay(models.Model):
     UserId = models.ForeignKey(User)
     ProductId = models.ForeignKey(Products)
     AccountNumber = models.CharField(max_length=25)
     Amount = models.IntegerField()
+    Date = models.DateField(default=datetime.date.today())
 
 
 class Applications(models.Model):

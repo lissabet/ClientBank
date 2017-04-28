@@ -1501,15 +1501,19 @@ th {
 
 .table-bordered {
   border: 1px solid #dddddd;
+  background-color: rgba(190, 215, 216, 0.51);
 }
-
+caption{
+  background-color:rgba(41, 109, 169, 0.62);
+  font-weight:bold;
+}
 .table-bordered > thead > tr > th,
 .table-bordered > tbody > tr > th,
 .table-bordered > tfoot > tr > th,
 .table-bordered > thead > tr > td,
 .table-bordered > tbody > tr > td,
 .table-bordered > tfoot > tr > td {
-  border: 1px solid #dddddd;
+  border: 1px solid rgba(113, 190, 214, 0.64);
 }
 
 .table-bordered > thead > tr > th,

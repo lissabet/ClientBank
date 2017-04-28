@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0"><object model="InternetBanking.phoneoperation" pk="15"><field name="UserId" rel="ManyToOneRel" to="auth.user">37</field><field name="PhoneNumber" type="CharField">+375293074232</field><field name="MobileOperatorId" rel="ManyToOneRel" to="InternetBanking.mobileoperators">1</field><field name="ProductId" rel="ManyToOneRel" to="InternetBanking.products">35</field><field name="Amount" type="IntegerField">1</field></object></django-objects>
