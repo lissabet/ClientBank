@@ -23,6 +23,10 @@ urlpatterns = [
     url(r'internet_pay/$',views.internet_pay,name='internet_pay'),
     url(r'flat_pay/$',views.flat_pay,name='flat_pay'),
     url(r'keys/$',views.keysView,name='keys'),
+    url(r'export_phone/$',views.export_phone,name='export_phone'),
+    url(r'export_internet/$',views.export_internet,name='export_internet'),
+    url(r'export_flatpay/$', views.export_flatpay, name='export_flatpay'),
+
 ]
 
 # Format suffixes

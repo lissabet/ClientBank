@@ -1,3 +1,5 @@
+import csv
+
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
@@ -9,6 +11,7 @@ from InternetBanking.forms import UserForm, UsersInformationFrom
 from django.contrib.auth import logout
 from InternetBanking.forms import ProductForm, PhoneOperationForm
 from InternetBanking.models import Users, UserInformation, Operations, Products, ProductStatus, UsersKeys
+from InternetBanking.models import PhoneOperation, FlatPay, InternetPay
 from InternetBanking.forms import InternetPayForm, FlatPayForm, KeyForm
 import random, datetime
 from django.core.mail import send_mail
@@ -98,6 +101,53 @@ def operations(request):
     return render(request,
                   'InternetBanking/operations.html',
                   {'user': request.user}, context)
+
+def export_phone(request):
+    try:
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename=export.csv'
+
+        writer = csv.writer(response)
+        writer.writerow(['Номер Телефона', 'Сумма', 'Мобильный оператор', 'Номер продукта'])
+        pays = PhoneOperation.objects.filter(UserId=request.user)
+        for rows in pays:
+            writer.writerow([rows.PhoneNumber,rows.Amount,rows.MobileOperatorId.Name,rows.ProductId.ContractNumber])
+        return response
+    except (Exception):
+        print(Exception.__dict__)
+        return HttpResponseRedirect('/basicview/')
+
+
+def export_internet(request):
+    try:
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename=export_internet_operations.csv'
+        writer = csv.writer(response)
+        writer.writerow(['Интернет Провайдер', 'Номер Договора', 'Сумма Оплаты', 'Номер продукта'])
+        pays = InternetPay.objects.filter(UserId=request.user)
+        for rows in pays:
+            writer.writerow(
+                [rows.InternetProviderId.Name, rows.ContractNumber, rows.Amount, rows.ProductId.ContractNumber])
+        return response
+    except (Exception):
+        print(Exception.__dict__)
+        return HttpResponseRedirect('/basicview/')
+
+
+def export_flatpay(request):
+    try:
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename=export_flat_pay_operations.csv'
+        writer = csv.writer(response)
+        writer.writerow(['Номер лицевого счета', 'Сумма Оплаты', 'Номер продукта'])
+        pays = FlatPay.objects.filter(UserId=request.user)
+        for rows in pays:
+            writer.writerow(
+                [rows.AccountNumber,rows.Amount, rows.ProductId.ContractNumber])
+        return response
+    except (Exception):
+        print(Exception.__dict__)
+        return HttpResponseRedirect('/basicview/')
 
 
 def CreateProduct(request):
