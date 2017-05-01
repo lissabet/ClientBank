@@ -80,22 +80,27 @@ def keysView(request):
     return render(request,'InternetBanking/keys.html',{'listKeys': listKeys,
                                                        'user':request.user},context)
 
+
 def warring(request):
     context = RequestContext(request)
     return render(request,
                   'InternetBanking/warring.html',
                   {'user': request.user}, context)
 
+
 def nomoney(request):
     context = RequestContext(request)
     return render(request,
                   'InternetBanking/nomoney.html',
                   {'user': request.user}, context)
+
+
 def operations(request):
     context = RequestContext(request)
     return render(request,
                   'InternetBanking/operations.html',
                   {'user': request.user}, context)
+
 
 def export_phone(request):
     try:
@@ -209,8 +214,6 @@ def phone_operation(request):
                    }, context)
 
 
-
-
 def internet_pay(request):
     context =RequestContext(request)
     global i
@@ -278,11 +281,13 @@ def flat_pay(request):
                                                              'Number': i
                                                              }, context)
 
+
 def my_view(request):
     context = RequestContext(request)
     return render(request,
                   'base.html',
                   {'user': request.user}, context)
+
 
 def profile(request):
     context = UserInformation.objects.get(UserId=request.user.id)
@@ -327,6 +332,7 @@ def archive(request):
                                                         'internet': internet_operations,
                                                         'userinf':fullname}, context)
 
+
 def index(request):
     operations = Operations.objects.all()
     template = loader.get_template('InternetBanking/index.html')
@@ -337,3 +343,40 @@ def index(request):
     return HttpResponse(template.render(context))
 
 
+def product_export(request):
+    try:
+        if request.method == "POST":
+            num = int(request.POST["num"])
+            response = HttpResponse(content_type='text/csv')
+            response['Content-Disposition'] = 'attachment; filename=exportproduct.csv'
+            writer = csv.writer(response)
+            writer.writerow(['Дата', 'Операция', 'Сумма Оплаты'])
+            pays = PhoneOperation.objects.filter(ProductId=num)
+            print(pays)
+            for rows in pays:
+                writer.writerow(
+                    [rows.Date, 'Оплата сотового телефона {0}'.format(rows.MobileOperatorId.Name), rows.Amount])
+            pays = FlatPay.objects.filter(ProductId=num)
+            print(pays)
+            for rows in pays:
+                writer.writerow(
+                    [rows.Date, 'Оплата услуг ЖКХ', rows.Amount]
+                )
+            pays = InternetPay.objects.filter(ProductId=num)
+            for rows in pays:
+                writer.writerow(
+                    [rows.Date, 'Оплата Интернет провайдера {0}'.format(rows.InternetProviderId.Name),
+                     rows.Amount]
+                )
+            return response
+
+
+    except (Exception):
+        print(Exception.__dict__)
+        return HttpResponseRedirect('/basicview/')
+
+
+def products(request):
+    product = Products.objects.filter(AccountNumber= request.user)
+    return render(request,'InternetBanking/products.html',{'user:':request.user,
+                                                           'product': product})

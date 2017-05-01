@@ -1,8 +1,14 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load static %}
-
 {% block content %}
-    <h1>Личный профиль{{ profile.FullName }}</h1>
+
+
+<script src="http://code.jquery.com/jquery-latest.js" ></script>
+    <script src="http://127.0.0.1:8000/static/bootstrap/js/bootstrap.js"></script>
+
+
+    <h1>Личный профиль: {{ profile.FullName }}</h1>
     <ul>
     <li> Имя: {{ profile.FullName }}</li>
     <li>Адрес: {{ profile.Address }} </li>
@@ -11,13 +17,38 @@
 
 
     <h2>Список продуктов ESBank:</h2>
-    <ul>
 
-        {% for prod in products %}
-            <li>{{ prod.TypeId.TypeName }} : {{ prod.Balance }} Активен до: {{ prod.EndContractDate }}</li>
-    {% endfor %}
-    </ul>
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Посмотреть продукты
+</button>
+
 <p>Текущая дата: {{ date }}</p>
-<p><a href="/basicview/create_product/"> Добавить банковский продукт</a></p>
+    <p><a href="/basicview/create_product/"> Добавить банковский продукт</a></p>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Список продуктов ESBank</h4>
+      </div>
+      <div class="modal-body">
+      <form method="post" action="/basicview/export_product/">
+      {% csrf_token %}
+         {% for prod in products %}
+            <li>{{ prod.TypeId.TypeName }} : {{ prod.Balance }} Активен до: {{ prod.EndContractDate }}</li>
+
+        <input type="submit"  name="num" value="{{ prod.id }}">
+</form>
+    {% endfor %}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock content %}
+
+

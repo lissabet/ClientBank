@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, {'template_name': 'InternetBanking/login.html'}),
     url(r'index/$',views.index,name='index'),
     url(r'profile/$',views.profile, name='profile'),
+    url(r'export_product/$', views.product_export, name='export_product'),
     url(r'create_product/$',views.CreateProduct, name='create_product'),
     url(r'warring/$', views.warring, name='warring'),
     url(r'nomoney/$', views.nomoney, name='nomoney'),
@@ -23,6 +24,7 @@ urlpatterns = [
     url(r'export_internet/$',views.export_internet,name='export_internet'),
     url(r'export_flatpay/$', views.export_flatpay, name='export_flatpay'),
     url(r'archive/$', views.archive, name='archive'),
+    url(r'products/$', views.products, name='products'),
 
 
 ]
