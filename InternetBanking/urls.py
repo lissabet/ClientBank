@@ -25,6 +25,9 @@ urlpatterns = [
     url(r'export_flatpay/$', views.export_flatpay, name='export_flatpay'),
     url(r'archive/$', views.archive, name='archive'),
     url(r'products/$', views.products, name='products'),
+    url(r'edit/$', views.edit ,name='edit'),
+    url(r'stop/$',views.stop,name='stop'),
+    url(r'active/$',views.active,name='active')
 
 
 ]

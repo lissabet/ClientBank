@@ -292,6 +292,9 @@ def my_view(request):
 def profile(request):
     context = UserInformation.objects.get(UserId=request.user.id)
     products = Products.objects.filter(AccountNumber=request.user.id)
+    user_profile = UserInformation.objects.filter(UserId=request.user)[0]
+    form = UsersInformationFrom(instance=user_profile)
+    product_form = ProductForm()
     date = datetime.date.today()
     for prod in products:
         if prod.EndContractDate >= date:
@@ -301,7 +304,9 @@ def profile(request):
                   {'profile': context,
                    'user': request.user,
                    'products': products,
-                   'date': date}, RequestContext(request))
+                   'date': date,
+                   'form':form,
+                   'product_form':product_form}, RequestContext(request))
 
 
 def user_login(request):
@@ -347,6 +352,7 @@ def product_export(request):
     try:
         if request.method == "POST":
             num = int(request.POST["num"])
+            print(num)
             response = HttpResponse(content_type='text/csv')
             response['Content-Disposition'] = 'attachment; filename=exportproduct.csv'
             writer = csv.writer(response)
@@ -378,5 +384,38 @@ def product_export(request):
 
 def products(request):
     product = Products.objects.filter(AccountNumber= request.user)
+    for prod in product:
+        print(prod.StatusId)
     return render(request,'InternetBanking/products.html',{'user:':request.user,
                                                            'product': product})
+
+
+def edit(request):
+    context = RequestContext(request)
+    user_profile = UserInformation.objects.filter(UserId=request.user)[0]
+
+    if request.method == 'POST':
+        form = UsersInformationFrom(request.POST, instance=user_profile)
+        form.save()
+        UserInformation.objects.filter(pk=user_profile.id).update()
+
+        return HttpResponseRedirect('/basicview/profile')
+    else:
+        form = UsersInformationFrom(instance=user_profile)
+    return render(request,'InternetBanking/Profile/edit.html',{'user':request.user,
+                                                          'form': form},context)
+
+def stop(request):
+        if request.method == "POST":
+            num = int(request.POST["num"])
+            Products.objects.filter(pk=num).update(StatusId=2)
+            return HttpResponseRedirect('/basicview/profile/')
+
+
+def active(request):
+    if request.method == "POST":
+        num = int(request.POST["num"])
+        Products.objects.filter(pk=num).update(StatusId=1)
+        return HttpResponseRedirect('/basicview/profile/')
+
+

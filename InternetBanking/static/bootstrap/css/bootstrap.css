@@ -353,6 +353,7 @@ body {
   font-size: 14px;
   line-height: 1.428571429;
   color: #333333;
+  background-image: url('http://cdn2.wallpapersok.com/uploads/picture/119/64119/les-listya-opavshie-osen-list.jpg?width=2048&height=1366&crop=true');
 }
 
 input,
@@ -549,7 +550,7 @@ h6 {
 
 h1,
 .h1 {
-  font-size: 36px;
+  font-size: 29px;
 }
 
 h2,
@@ -2133,9 +2134,11 @@ fieldset[disabled] .btn-default.active {
 
 .btn-primary {
   color: #ffffff;
-  background-color: #428bca;
-  border-color: #357ebd;
+  background-color: rgba(162, 159, 108, 0.61);
+  border-color: rgba(175, 187, 145, 0.47);
 }
+
+
 
 .btn-primary:hover,
 .btn-primary:focus,
@@ -2143,8 +2146,8 @@ fieldset[disabled] .btn-default.active {
 .btn-primary.active,
 .open .dropdown-toggle.btn-primary {
   color: #ffffff;
-  background-color: #3276b1;
-  border-color: #285e8e;
+  background-color: #8f9455;
+  border-color: rgba(142, 189, 118, 0.53);
 }
 
 .btn-primary:active,
@@ -5735,8 +5738,8 @@ body.modal-open,
 
 .modal-header {
   min-height: 16.428571429px;
+  text-align: center;
   padding: 15px;
-  border-bottom: 1px solid #e5e5e5;
 }
 
 .modal-header .close {
@@ -5750,14 +5753,13 @@ body.modal-open,
 
 .modal-body {
   position: relative;
-  padding: 20px;
+  padding: 10px;
+  margin: auto; /* Выравниваем по центру */
 }
 
 .modal-footer {
-  padding: 19px 20px 20px;
-  margin-top: 15px;
-  text-align: right;
-  border-top: 1px solid #e5e5e5;
+  padding: 20px;
+  text-align: center;
 }
 
 .modal-footer:before,

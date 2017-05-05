@@ -14,10 +14,10 @@ class UsersFrom(forms.ModelForm):
         fields = '__all__'
 
 class UsersInformationFrom(forms.ModelForm):
-
-
+    FullName = forms.CharField(label="ФИО")
+    Address = forms.CharField(label="Адрес")
+    Phone = forms.CharField(label="Номер телефона")
     class Meta:
-        # Создаем связь между ModelForm и моделью
         model = UserInformation
         fields = ('FullName','Address','Phone')
 
@@ -42,11 +42,11 @@ class ChoiseForCurrency(forms.ModelChoiceField):
         return obj.CurrencyName
 
 class ProductForm(forms.ModelForm):
-    TypeId = ChoiseForProductType(queryset=ProductType.objects.all())
+    TypeId = ChoiseForProductType(queryset=ProductType.objects.all(),label="Тип продукта")
     Balance = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
     ContractDate = forms.DateField(widget=forms.HiddenInput(), initial= datetime.date.today)
-    CurrencyId = ChoiseForCurrency(queryset=Currency.objects.all())
-    EndContractDate = forms.DateField(widget=forms.SelectDateWidget)
+    CurrencyId = ChoiseForCurrency(queryset=Currency.objects.all(),label="Вылюта продукта")
+    EndContractDate = forms.DateField(widget=forms.SelectDateWidget,label="Срок действия продукта")
 
 
     class Meta:
