@@ -1,5 +1,6 @@
 import csv
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 from django.template import Context, loader, RequestContext
@@ -7,7 +8,8 @@ from InternetBanking.forms import UserForm, UsersInformationFrom
 from InternetBanking.forms import ProductForm, PhoneOperationForm
 from InternetBanking.models import UserInformation, Operations, Products, ProductStatus, UsersKeys
 from InternetBanking.models import PhoneOperation, FlatPay, InternetPay
-from InternetBanking.forms import InternetPayForm, FlatPayForm, KeyForm
+from InternetBanking.forms import InternetPayForm, FlatPayForm, KeyForm, LoginForm
+from django.http import JsonResponse
 import random, datetime
 from django.core.mail import send_mail
 
@@ -94,7 +96,7 @@ def nomoney(request):
                   'InternetBanking/nomoney.html',
                   {'user': request.user}, context)
 
-
+@login_required(login_url='/basicview/login/')
 def operations(request):
     context = RequestContext(request)
     return render(request,
@@ -288,7 +290,7 @@ def my_view(request):
                   'base.html',
                   {'user': request.user}, context)
 
-
+@login_required(login_url='/basicview/login/')
 def profile(request):
     context = UserInformation.objects.get(UserId=request.user.id)
     products = Products.objects.filter(AccountNumber=request.user.id)
@@ -311,18 +313,30 @@ def profile(request):
 
 def user_login(request):
     context = RequestContext(request)
+    message ="Введен неверный логин или пароль"
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(username=username, password=password)
+        form = LoginForm(data=request.POST)
+        if form.is_valid() and request.POST.get('username') != "Логин" and request.POST.get('password') != "Пароль":
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(username=username, password=password)
+            if user:
+                login(request, user)
+                return HttpResponseRedirect('/basicview/')
+            else:
+                return render(request,
+                              'InternetBanking/login.html',
+                              {"message": message}, context)
 
-        if user:
-            login(request, user)
-            return HttpResponseRedirect('/basicview/')
         else:
-            return render_to_response('InternetBanking/login.html', {}, RequestContext(request))
-    elif request.method == 'GET':
-        return render_to_response('InternetBanking/login.html', {}, RequestContext(request))
+            return render(request,
+                          'InternetBanking/login.html',
+                          {"message": message}, context)
+    else:
+        form = LoginForm()
+    return render(request,
+                  'InternetBanking/login.html',
+                  {}, context)
 
 
 def archive(request):
@@ -337,7 +351,7 @@ def archive(request):
                                                         'internet': internet_operations,
                                                         'userinf':fullname}, context)
 
-
+@login_required
 def index(request):
     operations = Operations.objects.all()
     template = loader.get_template('InternetBanking/index.html')

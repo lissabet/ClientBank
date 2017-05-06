@@ -128,7 +128,7 @@
                         {% for prod in products %}
                             <tr>
                                 <td>{{ prod.TypeId.TypeName }}</td>
-                                <td>{{ prod.Balance }} {{ prod.CurrencyId.CurrencyCode }}</td>
+                                <td >{{ prod.Balance }} {{ prod.CurrencyId.CurrencyCode }}</td>
                                 {% if prod.StatusId.StatusName == "Активирован" %}
                                     <td> Активен до: {{ prod.EndContractDate }} </td>
                             {% else %}

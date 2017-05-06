@@ -1,17 +1,35 @@
 {% extends "base.html" %}
 {% load static %}
 
+
 {% block content %}
-        <h1>Login to Rango</h1>
+<link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/static/bootstrap/css/login_style.css">
 
-        <form id="login_form" method="post" action="/basicview/login/">
+
+    <div id="login">
+    <h1 id="log">Войти в ESBank</h1>
+        {% if message %}
+            <label style="color: red">
+            {{ message }}
+            </label>
+        {% endif %}
+        <form class="login_form" method="post" action="/basicview/login/">
             {% csrf_token %}
-            Username: <input type="text" name="username" value="" size="50" />
-            <br />
-            Password: <input type="password" name="password" value="" size="50" />
-            <br />
+                <p><span class="fontawesome-user"></span> <input type="text" name="username" value="Логин"
+                                                                 onBlur="if(this.value == '') this.value = 'Логин'"
+                                                                 onFocus="if(this.value == 'Логин') this.value = ''"
+                                                                 required/></p>
+                <br/>
+                <p><span class="fontawesome-lock"></span><input type="password" name="password" value="Пароль"
+                                                                onBlur="if(this.value == '') this.value = 'Пароль'"
+                                                                onFocus="if(this.value == 'Пароль') this.value = ''"
+                                                                required/></p>
+            <div class="links"><a href="/basicview/register/">Регистрация |</a>
+            <a href="#">Забыли пароль?</a></div>
+                <br/>
 
-            <input type="submit" value="submit" />
+            <button type="submit" class="btn loginbtn"> Войти </button>
         </form>
+    </div>
 
 {% endblock content %}
