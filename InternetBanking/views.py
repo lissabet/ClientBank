@@ -1,21 +1,21 @@
 import csv
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.shortcuts import render, render_to_response
 from django.template import Context, loader, RequestContext
 from InternetBanking.forms import UserForm, UsersInformationFrom
 from InternetBanking.forms import ProductForm, PhoneOperationForm
 from InternetBanking.models import UserInformation, Operations, Products, ProductStatus, UsersKeys
-from InternetBanking.models import PhoneOperation, FlatPay, InternetPay
+from InternetBanking.models import PhoneOperation, FlatPay, InternetPay, User
 from InternetBanking.forms import InternetPayForm, FlatPayForm, KeyForm, LoginForm
-from django.http import JsonResponse
+from InternetBanking.forms import ChangePassword, RecoverCodeForm, NewPasswordForm
 import random, datetime
 from django.core.mail import send_mail
 
 
 i= 0
-
+name = ''
 def register(request):
     context = RequestContext(request)
     registered = False
@@ -54,7 +54,6 @@ def register(request):
                        'Key8: {7} \n Key9: {8} '.format(keys[0],keys[1],keys[2],keys[3],keys[4],keys[5],keys[6],keys[7],
                                                         keys[8])
 
-            print(user.email)
 
             receiverEmail = '{0}'.format(user.email)
 
@@ -216,6 +215,8 @@ def phone_operation(request):
                    }, context)
 
 
+
+
 def internet_pay(request):
     context =RequestContext(request)
     global i
@@ -338,6 +339,94 @@ def user_login(request):
                   'InternetBanking/login.html',
                   {}, context)
 
+
+def change_password(request):
+    context = RequestContext(request)
+    identity = False
+    if request.method == 'POST':
+        form = ChangePassword(data=request.POST)
+        code_form = RecoverCodeForm(data=request.POST)
+        if form.is_valid():
+            email = request.POST.get('email')
+            key = UsersKeys.objects.filter(UserId=User.objects.get(email=email)).values_list()
+            i = random.randint(2,10)
+            print(key)
+            if key:
+                identity = True
+                code = int(key[0][i]) ^ int(User.objects.get(email=email).id)
+                print(User.objects.get(email=email).id)
+                print(code)
+                send_code = str(code)+'i'+str(i)+'i'+str(User.objects.get(email=email).id)
+                global name
+                name = User.objects.get(email=email).username
+                print('name',name)
+                message = 'Your code :{0}'.format(send_code)
+                receiverEmail = '{0}'.format(email)
+                send_mail('Recover code ESBank', message, 'lissa.johnas@gmail.com', [receiverEmail],
+                          fail_silently=False)
+                return render(request,
+                              'InternetBanking/change_password.html',
+                              {'form': form,
+                               'code_form': code_form,
+                               'identity': identity}, context)
+        else:
+            print(form.errors)
+    else:
+        form = ChangePassword()
+        code_form = RecoverCodeForm()
+    return render(request,
+                  'InternetBanking/change_password.html',
+                  {'form': form,
+                   'identity': identity}, context)
+
+
+def code(request):
+    context = RequestContext(request)
+    identity = True
+    if request.method == 'POST':
+        code_form = RecoverCodeForm(data=request.POST)
+        if code_form.is_valid():
+            recovercode = request.POST.get('code')
+            code_part = int(recovercode.split('i')[0])
+            num_part = int(recovercode.split('i')[1])
+            id_part = int(recovercode.split('i')[2])
+            print(id_part)
+            print(code_part)
+            key = UsersKeys.objects.filter(UserId=User.objects.get(pk=id_part)).values_list()[0][num_part]
+            print(key)
+            print(str(code_part ^ id_part) == str(key))
+            if(str(code_part ^id_part)) == str(key):
+                return HttpResponseRedirect('/basicview/new_password/')
+        else:
+            print(code_form.errors)
+    else:
+        code_form = RecoverCodeForm()
+    return render(request,
+                  'InternetBanking/change_password.html',
+                  {'code_form': code_form,
+                   'identity': identity}, context)
+
+def new_password(request):
+    context = RequestContext(request)
+    if request.method == 'POST':
+        password_form = NewPasswordForm(data=request.POST)
+        if password_form and password_form.is_valid() and name:
+            print(name)
+            user = User.objects.get(username=name)
+            user.set_password(request.POST.get('password'))
+            user.save()
+            message = 'Пароль успещно обновлен\n' \
+                      'Спасибо, что используете наш Интернет-банкинг\n\n\n\n' \
+                      'С Уважением, Администрация ESBank'
+            receiverEmail = '{0}'.format(user.email)
+            send_mail('Пароль успещно обновлен', message, 'lissa.johnas@gmail.com', [receiverEmail],
+                      fail_silently=False)
+            return HttpResponseRedirect('/basicview/')
+        else:
+            return HttpResponseNotFound(status=403)
+    else:
+        password_form = NewPasswordForm()
+    return render(request,'InternetBanking/Profile/new_password.html',{'form':password_form},context)
 
 def archive(request):
     context = RequestContext(request)

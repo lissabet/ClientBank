@@ -100,4 +100,24 @@ class FlatPayForm(forms.ModelForm):
 
 
 class KeyForm(forms.Form):
-    Key = forms.CharField()
+    Key = forms.CharField(label="ключ")
+
+class ChangePassword(forms.Form):
+    email = forms.CharField(label="Введите email")
+
+class RecoverCodeForm(forms.Form):
+    code = forms.CharField(label="Код",required=False)
+
+class NewPasswordForm(forms.Form):
+    password = forms.CharField(label="Введите новый пароль",required=False)
+    confirm_password = forms.CharField(label="Повторите пароль",required=False)
+
+    def clean(self):
+        cleaned_data = super(NewPasswordForm, self).clean()
+        password1 = cleaned_data.get('password')
+        password2 = cleaned_data.get('confirm_password')
+
+        if password1 and password1 != password2:
+            raise forms.ValidationError("Пароли не совпадают")
+
+        return cleaned_data

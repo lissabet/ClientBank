@@ -27,8 +27,10 @@ urlpatterns = [
     url(r'products/$', views.products, name='products'),
     url(r'edit/$', views.edit ,name='edit'),
     url(r'stop/$',views.stop,name='stop'),
-    url(r'active/$',views.active,name='active')
-
+    url(r'active/$',views.active,name='active'),
+    url(r'change_password/$',views.change_password,name='change_password'),
+    url(r'code/$',views.code,name='code'),
+    url(r'new_password/$',views.new_password,name='new_password'),
 
 ]
 
