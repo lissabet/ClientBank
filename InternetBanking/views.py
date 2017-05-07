@@ -1,7 +1,7 @@
 import csv
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 from django.template import Context, loader, RequestContext
 from InternetBanking.forms import UserForm, UsersInformationFrom
@@ -422,8 +422,6 @@ def new_password(request):
             send_mail('Пароль успещно обновлен', message, 'lissa.johnas@gmail.com', [receiverEmail],
                       fail_silently=False)
             return HttpResponseRedirect('/basicview/')
-        else:
-            return HttpResponseNotFound(status=403)
     else:
         password_form = NewPasswordForm()
     return render(request,'InternetBanking/Profile/new_password.html',{'form':password_form},context)
