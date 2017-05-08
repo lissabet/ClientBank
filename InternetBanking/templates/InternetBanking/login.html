@@ -26,10 +26,10 @@
                                                             onBlur="if(this.value == '') this.value = 'Пароль'"
                                                             onFocus="if(this.value == 'Пароль') this.value = ''"
                                                             required/></p>
-            <div class="links" >
+            <div class="links">
                 <button type="button" class="btn btn-link"><a href="/basicview/register/">
                     Регистрация
-                    </a>
+                </a>
                 </button>
                 |
                 <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">
@@ -57,7 +57,7 @@
                             {% csrf_token %}
                             {{ form.as_p }}
                             <div align="center" class="sendcode_btn">
-                                <input type="submit" name="submit"  class="btn btn-default sendcode"
+                                <input type="submit" name="submit" class="btn btn-default sendcode"
                                        value="Получить код"/>
                                 <button type="button" class="btn btn-default sendcode" data-dismiss="modal">Отменить
                                 </button>

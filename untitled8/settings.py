@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = '!g5v2*5ab1d+%000i*8#_8^d0#3z2eta@ent_bwu1uea(!!&i('
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -43,7 +41,7 @@ INSTALLED_APPS = [
 ]
 AUTH_PROFILE_MODULE = 'project.pm.UserProfile'
 MIDDLEWARE = [
-        'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
@@ -52,10 +50,9 @@ MIDDLEWARE = [
 ]
 
 PASSWORD_HASHERS = (
-'django.contrib.auth.hashers.PBKDF2PasswordHasher',
-'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
 )
-
 
 ROOT_URLCONF = 'untitled8.urls'
 
@@ -96,8 +93,6 @@ DATABASES = {
     }
 }
 
-
-
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
@@ -116,7 +111,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -129,7 +123,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'lissa.johnas@gmail.com'

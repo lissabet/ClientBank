@@ -109,29 +109,29 @@
                 <div class="modal-body">
 
                     <table class="table">
-                    <tr>
-                    <td>
-                        Продукт
-                    </td>
-                    <td>
-                        Баланс
-                    </td>
-                    <td>
-                        Статус
-                    </td>
-                    <td>
-                    </td>
-                    <td></td>
-                    </tr>
+                        <tr>
+                            <td>
+                                Продукт
+                            </td>
+                            <td>
+                                Баланс
+                            </td>
+                            <td>
+                                Статус
+                            </td>
+                            <td>
+                            </td>
+                            <td></td>
+                        </tr>
 
 
                         {% for prod in products %}
                             <tr>
                                 <td>{{ prod.TypeId.TypeName }}</td>
-                                <td >{{ prod.Balance }} {{ prod.CurrencyId.CurrencyCode }}</td>
+                                <td>{{ prod.Balance }} {{ prod.CurrencyId.CurrencyCode }}</td>
                                 {% if prod.StatusId.StatusName == "Активирован" %}
                                     <td> Активен до: {{ prod.EndContractDate }} </td>
-                            {% else %}
+                                {% else %}
                                     <td>{{ prod.StatusId.StatusName }}</td>
                                 {% endif %}
                                 <td>

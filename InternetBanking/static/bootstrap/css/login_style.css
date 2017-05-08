@@ -2,15 +2,12 @@
 
 /* ---------- FONTAWESOME ---------- */
 
-
-
-
 [class*="fontawesome-"]:before {
-  font-family: 'FontAwesome', sans-serif;
+    font-family: 'FontAwesome', sans-serif;
 }
 
-span.fontawesome.reg{
-	background-color: rgba(59, 65, 72, 0.56);
+span.fontawesome.reg {
+    background-color: rgba(59, 65, 72, 0.56);
     border-radius: 3px 0px 0px 3px;
     -moz-border-radius: 3px 0px 0px 3px;
     -webkit-border-radius: 3px 0px 0px 3px;
@@ -22,158 +19,159 @@ span.fontawesome.reg{
     text-align: center;
     width: 80px;
     font-weight: 100;
-	font-size: 10px;
+    font-size: 10px;
 }
 
 input {
-	border: none;
-	font-family: 'Open Sans', Arial, sans-serif;
-	font-size: 14px;
-	line-height: 1.5em;
-	padding: 0;
-	-webkit-appearance: none;
+    border: none;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5em;
+    padding: 0;
+    -webkit-appearance: none;
 }
 
-.links{
+.links {
     font-weight: 100;
     padding: 0px 10px 0px 0px;
 }
 
-#register{
-	width: 1000px;
+#register {
+    width: 1000px;
     position: relative;
     left: 450px;
-	height: 610px;
+    height: 610px;
 }
 
-h1#title_for_reg{
-	margin-top: 3px;
+h1#title_for_reg {
+    margin-top: 3px;
 
 }
 
-#register_form{
-	width: 1000px;
-	height: 610px;
+#register_form {
+    width: 1000px;
+    height: 610px;
 }
 
 #login,
-#new_password{
-	width: 300px;
+#new_password {
+    width: 300px;
     position: relative;
     left: 525px;
 }
-h1#log{
+
+h1#log {
     position: relative;
     left: 17px;
     font-size: 25px;
     margin: 20px;
     font-weight: 500;
-	display: inline;
+    display: inline;
 }
 
-.login_form{
-	padding-top: 15px;
+.login_form {
+    padding-top: 15px;
 }
 
-
-h1#title{
-	font-size: 25px;
+h1#title {
+    font-size: 25px;
 }
 
+.clearfix {
+    *zoom: 1;
+}
 
-.clearfix { *zoom: 1; } /* For IE 6/7 */
+/* For IE 6/7 */
 .clearfix:before, .clearfix:after {
-	display: table;
-	content: "";
+    display: table;
+    content: "";
 }
-.clearfix:after { clear: both; }
 
+.clearfix:after {
+    clear: both;
+}
 
 #login form span,
-#new_password form span{
-	background-color: #363b41;
-	border-radius: 3px 0px 0px 3px;
-	-moz-border-radius: 3px 0px 0px 3px;
-	-webkit-border-radius: 3px 0px 0px 3px;
-	color: #606468;
-	display: block;
-	float: left;
-	height: 50px;
-	line-height: 50px;
-	text-align: center;
-	width: 50px;
+#new_password form span {
+    background-color: #363b41;
+    border-radius: 3px 0px 0px 3px;
+    -moz-border-radius: 3px 0px 0px 3px;
+    -webkit-border-radius: 3px 0px 0px 3px;
+    color: #606468;
+    display: block;
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    width: 50px;
 }
 
 #login form input,
 #new_password form input,
-#register form input{
-	height: 50px;
-	outline:none;
+#register form input {
+    height: 50px;
+    outline: none;
 }
 
 #login form input[type="text"], input[type="password"],
-#new_password input[type="text"],input[type="password"]{
-	background-color: #3b4148;
-	border-radius: 0px 3px 3px 0px;
-	-moz-border-radius: 0px 3px 3px 0px;
-	-webkit-border-radius: 0px 3px 3px 0px;
-	color: #606468;
-	margin-bottom: 1em;
-	padding: 0 16px;
-	width: 218px;
+#new_password input[type="text"], input[type="password"] {
+    background-color: #3b4148;
+    border-radius: 0px 3px 3px 0px;
+    -moz-border-radius: 0px 3px 3px 0px;
+    -webkit-border-radius: 0px 3px 3px 0px;
+    color: #606468;
+    margin-bottom: 1em;
+    padding: 0 16px;
+    width: 218px;
 }
 
-.message{
-	color: tomato;
-	position: relative;
+.message {
+    color: tomato;
+    position: relative;
     left: 65px;
     padding: 5px;
 }
 
-
-#field{
-	line-height: 15px;
-	font-size: 15px;
-	text-align: center;
-	padding-top: 15px;
-	padding-bottom: 15px;
-	font-weight: bold;
-	font-family: 'FontAwesome', sans-serif;;
+#field {
+    line-height: 15px;
+    font-size: 15px;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-weight: bold;
+    font-family: 'FontAwesome', sans-serif;;
 }
-#register input{
-	background-color: #3b4148;
-	border-radius: 0px 3px 3px 0px;
-	-moz-border-radius: 0px 3px 3px 0px;
-	-webkit-border-radius: 0px 3px 3px 0px;
-	color: #606468;
-	margin-bottom: 1em;
-	padding: 0 16px;
-	width: 280px;
+
+#register input {
+    background-color: #3b4148;
+    border-radius: 0px 3px 3px 0px;
+    -moz-border-radius: 0px 3px 3px 0px;
+    -webkit-border-radius: 0px 3px 3px 0px;
+    color: #606468;
+    margin-bottom: 1em;
+    padding: 0 16px;
+    width: 280px;
 }
 
 #login form input:focus,
 #new_password form input:focus,
-#register form input:focus{
-	color:#fff;
+#register form input:focus {
+    color: #fff;
 }
 
-
-
-
-
-#login > p ,
+#login > p,
 #new_password > p,
 #register > p {
-	text-align: center;
+    text-align: center;
 }
 
-#login > p span ,
+#login > p span,
 #new_password > p span,
-#register > p span{
-	padding-left: 5px;
+#register > p span {
+    padding-left: 5px;
 }
 
-.loginbtn{
+.loginbtn {
     padding: 8px 60px;
     text-align: center;
     position: relative;
@@ -181,13 +179,14 @@ h1#title{
     background-color: rgba(59, 65, 72, 0.61);
     color: #b6b8b9;
     border-radius: 3px;
-	margin-top: 1px;
+    margin-top: 1px;
 }
+
 .loginbtn:hover,
 .loginbtn:focus,
 .loginbtn:active,
 .loginbtn.active,
 .open .dropdown-toggle.loginbtn {
-  color: #ffffff;
-  background-color: rgba(83, 83, 75, 0.57);
+    color: #ffffff;
+    background-color: rgba(83, 83, 75, 0.57);
 }

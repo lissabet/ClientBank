@@ -13,9 +13,10 @@ from InternetBanking.forms import ChangePassword, RecoverCodeForm, NewPasswordFo
 import random, datetime
 from django.core.mail import send_mail
 
-
-i= 0
+i = 0
 name = ''
+
+
 def register(request):
     context = RequestContext(request)
     registered = False
@@ -36,7 +37,6 @@ def register(request):
 
             profile.save()
 
-
             keys = []
             for k in range(9):
                 key = ''
@@ -45,19 +45,22 @@ def register(request):
                     key += str(random.randint(0, 9))
                 keys.append(key)
 
-            userKey = UsersKeys(UserId=user,Key1= keys[0],Key2= keys[1],Key3= keys[2],Key4 =keys[3],Key5= keys[4],Key6 = keys[5],Key7= keys[6],Key8= keys[7],Key9 =keys[8])
+            userKey = UsersKeys(UserId=user, Key1=keys[0], Key2=keys[1], Key3=keys[2], Key4=keys[3], Key5=keys[4],
+                                Key6=keys[5], Key7=keys[6], Key8=keys[7], Key9=keys[8])
             userKey.save()
             mail_message = 'Welcome, {0}, to out Internet-Banking ESBBank!\n' \
-                      'We send for you your private keys. Please, save them and do not show anybody!' \
-                      '\n'.format(user.username) +'Key1: {0} \n Key2: {1} \n Key3: {2} \n Key4: {3} \n Key5: {4} \n ' \
-                                                  'Key6: {5} \n Key7: {6} \n' \
-                       'Key8: {7} \n Key9: {8} '.format(keys[0],keys[1],keys[2],keys[3],keys[4],keys[5],keys[6],keys[7],
-                                                        keys[8])
-
+                           'We send for you your private keys. Please, save them and do not show anybody!' \
+                           '\n'.format(
+                user.username) + 'Key1: {0} \n Key2: {1} \n Key3: {2} \n Key4: {3} \n Key5: {4} \n ' \
+                                 'Key6: {5} \n Key7: {6} \n' \
+                                 'Key8: {7} \n Key9: {8} '.format(keys[0], keys[1], keys[2], keys[3], keys[4], keys[5],
+                                                                  keys[6], keys[7],
+                                                                  keys[8])
 
             receiverEmail = '{0}'.format(user.email)
 
-            send_mail('ESbank keys for your banking', mail_message,'Do not reply <do_not_replay@domain.com>', [receiverEmail],
+            send_mail('ESbank keys for your banking', mail_message, 'Do not reply <do_not_replay@domain.com>',
+                      [receiverEmail],
                       fail_silently=False)
 
             registered = True
@@ -82,8 +85,8 @@ def register(request):
 def keysView(request):
     context = RequestContext(request)
     listKeys = UsersKeys.objects.last()
-    return render(request,'InternetBanking/keys.html',{'listKeys': listKeys,
-                                                       'user':request.user},context)
+    return render(request, 'InternetBanking/keys.html', {'listKeys': listKeys,
+                                                         'user': request.user}, context)
 
 
 def warring(request):
@@ -98,6 +101,7 @@ def nomoney(request):
     return render(request,
                   'InternetBanking/nomoney.html',
                   {'user': request.user}, context)
+
 
 @login_required(login_url='/basicview/login/')
 def operations(request):
@@ -150,7 +154,7 @@ def export_flatpay(request):
         pays = FlatPay.objects.filter(UserId=request.user)
         for rows in pays:
             writer.writerow(
-                [rows.Date, rows.AccountNumber,rows.Amount, rows.ProductId.ContractNumber])
+                [rows.Date, rows.AccountNumber, rows.Amount, rows.ProductId.ContractNumber])
         return response
     except (Exception):
         print(Exception.__dict__)
@@ -163,7 +167,8 @@ def CreateProduct(request):
         product_form = ProductForm(data=request.POST)
         if product_form.is_valid():
             product = product_form.save(commit=False)
-            userProduct = Products.objects.filter(AccountNumber=request.user.id).filter(TypeId=product.TypeId).filter(CurrencyId=product.CurrencyId)
+            userProduct = Products.objects.filter(AccountNumber=request.user.id).filter(TypeId=product.TypeId).filter(
+                CurrencyId=product.CurrencyId)
             if userProduct.count() == 0:
                 product.AccountNumber = request.user
                 product.StatusId = ProductStatus.objects.get(pk=1)
@@ -187,7 +192,7 @@ def phone_operation(request):
     context = RequestContext(request)
     global i
     if request.method == 'POST':
-        phone_form = PhoneOperationForm(data=request.POST,eventUser=request.user)
+        phone_form = PhoneOperationForm(data=request.POST, eventUser=request.user)
         key_form = KeyForm(data=request.POST)
         userKey = UsersKeys.objects.filter(UserId=request.user)
         field = 'Key{}'.format(i)
@@ -198,7 +203,7 @@ def phone_operation(request):
             if balans[0].Balance >= pay.Amount and key == userKey.values('{}'.format(field))[0][field]:
                 pay.UserId = request.user
                 pay.save()
-                Products.objects.filter(pk = balans[0].id).update(Balance = balans[0].Balance - int(pay.Amount))
+                Products.objects.filter(pk=balans[0].id).update(Balance=balans[0].Balance - int(pay.Amount))
                 return HttpResponseRedirect('/basicview/profile/')
             else:
                 return HttpResponseRedirect('/basicview/nomoney')
@@ -219,17 +224,14 @@ def phone_operation(request):
                    }, context)
 
 
-
-
 def internet_pay(request):
-    context =RequestContext(request)
+    context = RequestContext(request)
     global i
     if request.method == 'POST':
         pay_form = InternetPayForm(data=request.POST, eventUser=request.user)
         key_form = KeyForm(data=request.POST)
         userKey = UsersKeys.objects.filter(UserId=request.user)
-        field ='Key{}'.format(i)
-
+        field = 'Key{}'.format(i)
 
         if pay_form.is_valid() and key_form.is_valid():
             pay = pay_form.save(commit=False)
@@ -238,7 +240,7 @@ def internet_pay(request):
             if balance[0].Balance >= pay.Amount and key == userKey.values('{}'.format(field))[0][field]:
                 pay.UserId = request.user
                 pay.save()
-                Products.objects.filter(pk=balance[0].id).update(Balance= balance[0].Balance - int(pay.Amount))
+                Products.objects.filter(pk=balance[0].id).update(Balance=balance[0].Balance - int(pay.Amount))
                 return HttpResponseRedirect('/basicview/profile/')
             else:
                 return HttpResponseRedirect('/basicview/nomoney/')
@@ -250,10 +252,10 @@ def internet_pay(request):
         global i
         i = random.randint(1, 9)
 
-    return render(request,'InternetBanking/internet_pay.html',{'pay_form':pay_form,
-                                                                  'user': request.user,
-                                                               'key_form':key_form,
-                                                               'Number':i}, context)
+    return render(request, 'InternetBanking/internet_pay.html', {'pay_form': pay_form,
+                                                                 'user': request.user,
+                                                                 'key_form': key_form,
+                                                                 'Number': i}, context)
 
 
 def flat_pay(request):
@@ -268,7 +270,8 @@ def flat_pay(request):
             pay = pay_form.save(commit=False)
             key = key_form.cleaned_data.get('Key')
             balance = Products.objects.filter(ContractNumber=pay.ProductId.ContractNumber)
-            if balance[0].Balance >= pay.Amount and pay.Amount > 0 and key == userKey.values('{}'.format(field))[0][field]:
+            if balance[0].Balance >= pay.Amount and pay.Amount > 0 and key == userKey.values('{}'.format(field))[0][
+                field]:
                 pay.UserId = request.user
                 pay.save()
                 Products.objects.filter(pk=balance[0].id).update(Balance=balance[0].Balance - int(pay.Amount))
@@ -283,7 +286,7 @@ def flat_pay(request):
         global i
         i = random.randint(1, 9)
     return render(request, 'InternetBanking/flat_pay.html', {'pay_form': pay_form,
-                                                                 'user': request.user,
+                                                             'user': request.user,
                                                              'key_form': key_form,
                                                              'Number': i
                                                              }, context)
@@ -295,6 +298,7 @@ def my_view(request):
                   'base.html',
                   {'user': request.user}, context)
 
+
 @login_required(login_url='/basicview/login/')
 def profile(request):
     context = UserInformation.objects.get(UserId=request.user.id)
@@ -305,21 +309,21 @@ def profile(request):
     date = datetime.date.today()
     for prod in products:
         if prod.EndContractDate >= date:
-            Products.objects.filter(pk= prod.id).update(StatusId=2)
+            Products.objects.filter(pk=prod.id).update(StatusId=2)
     return render(request,
                   'InternetBanking/profile.html',
                   {'profile': context,
                    'user': request.user,
                    'products': products,
                    'date': date,
-                   'form':form,
-                   'product_form':product_form}, RequestContext(request))
+                   'form': form,
+                   'product_form': product_form}, RequestContext(request))
 
 
 def user_login(request):
     context = RequestContext(request)
     identity = False
-    message ="Введен неверный логин или пароль"
+    message = "Введен неверный логин или пароль"
     if request.method == 'POST':
         form = LoginForm(data=request.POST)
         if form.is_valid() and request.POST.get('username') != "Логин" and request.POST.get('password') != "Пароль":
@@ -358,17 +362,17 @@ def change_password(request):
         if form.is_valid():
             email = request.POST.get('email')
             key = UsersKeys.objects.filter(UserId=User.objects.get(email=email)).values_list()
-            i = random.randint(2,10)
+            i = random.randint(2, 10)
             print(key)
             if key:
                 identity = True
                 code = int(key[0][i]) ^ int(User.objects.get(email=email).id)
                 print(User.objects.get(email=email).id)
                 print(code)
-                send_code = str(code)+'i'+str(i)+'i'+str(User.objects.get(email=email).id)
+                send_code = str(code) + 'i' + str(i) + 'i' + str(User.objects.get(email=email).id)
                 global name
                 name = User.objects.get(email=email).username
-                print('name',name)
+                print('name', name)
                 message = 'Your code :{0}'.format(send_code)
                 receiverEmail = '{0}'.format(email)
                 send_mail('Recover code ESBank', message, 'Do not reply <do_not_replay@domain.com>', [receiverEmail],
@@ -401,7 +405,7 @@ def code(request):
             key = UsersKeys.objects.filter(UserId=User.objects.get(pk=id_part)).values_list()[0][num_part]
             print(key)
             print(str(code_part ^ id_part) == str(key))
-            if(str(code_part ^id_part)) == str(key):
+            if (str(code_part ^ id_part)) == str(key):
                 return HttpResponseRedirect('/basicview/new_password/')
         else:
             print(code_form.errors)
@@ -411,6 +415,7 @@ def code(request):
                   'InternetBanking/change_password.html',
                   {'code_form': code_form,
                    'identity': identity}, context)
+
 
 def new_password(request):
     context = RequestContext(request)
@@ -433,15 +438,18 @@ def new_password(request):
             message = "Пароль введен неверно"
     else:
         password_form = NewPasswordForm()
-    return render(request,'InternetBanking/Profile/new_password.html',{'form':password_form,
-                                                                       'message': message},context)
+    return render(request, 'InternetBanking/Profile/new_password.html', {'form': password_form,
+                                                                         'message': message}, context)
+
+
 def successfully_password(request):
-    id_user = User.objects.get(username= name).id
+    id_user = User.objects.get(username=name).id
     full_name = UserInformation.objects.get(UserId=id_user).FullName
     return render(request,
                   'InternetBanking/Messeges/Successfully_password.html',
-                  {'name': full_name },
+                  {'name': full_name},
                   RequestContext(request))
+
 
 def archive(request):
     context = RequestContext(request)
@@ -449,11 +457,12 @@ def archive(request):
     flat_pays = FlatPay.objects.filter(UserId=request.user)
     internet_operations = InternetPay.objects.filter(UserId=request.user)
     fullname = UserInformation.objects.filter(UserId=request.user)[0]
-    return render(request,'InternetBanking/archive.html',{'user':request.user,
-                                                        'phone': phone_operations,
-                                                        'flat': flat_pays,
-                                                        'internet': internet_operations,
-                                                        'userinf':fullname}, context)
+    return render(request, 'InternetBanking/archive.html', {'user': request.user,
+                                                            'phone': phone_operations,
+                                                            'flat': flat_pays,
+                                                            'internet': internet_operations,
+                                                            'userinf': fullname}, context)
+
 
 @login_required
 def index(request):
@@ -501,11 +510,11 @@ def product_export(request):
 
 
 def products(request):
-    product = Products.objects.filter(AccountNumber= request.user)
+    product = Products.objects.filter(AccountNumber=request.user)
     for prod in product:
         print(prod.StatusId)
-    return render(request,'InternetBanking/products.html',{'user:':request.user,
-                                                           'product': product})
+    return render(request, 'InternetBanking/products.html', {'user:': request.user,
+                                                             'product': product})
 
 
 def edit(request):
@@ -520,14 +529,15 @@ def edit(request):
         return HttpResponseRedirect('/basicview/profile')
     else:
         form = UsersInformationFrom(instance=user_profile)
-    return render(request,'InternetBanking/Profile/edit.html',{'user':request.user,
-                                                          'form': form},context)
+    return render(request, 'InternetBanking/Profile/edit.html', {'user': request.user,
+                                                                 'form': form}, context)
+
 
 def stop(request):
-        if request.method == "POST":
-            num = int(request.POST["num"])
-            Products.objects.filter(pk=num).update(StatusId=2)
-            return HttpResponseRedirect('/basicview/profile/')
+    if request.method == "POST":
+        num = int(request.POST["num"])
+        Products.objects.filter(pk=num).update(StatusId=2)
+        return HttpResponseRedirect('/basicview/profile/')
 
 
 def active(request):
@@ -535,5 +545,3 @@ def active(request):
         num = int(request.POST["num"])
         Products.objects.filter(pk=num).update(StatusId=1)
         return HttpResponseRedirect('/basicview/profile/')
-
-

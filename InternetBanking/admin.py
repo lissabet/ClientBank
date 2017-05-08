@@ -1,6 +1,8 @@
 from django.contrib import admin
-from InternetBanking.models import Users, UserInformation, ProductStatus, ProductType, Currency, Products, Operations, UserOperations
-from InternetBanking.models import Applications, UserApplication, MobileOperators, PhoneOperation, InternetProviders, InternetPay
+from InternetBanking.models import Users, UserInformation, ProductStatus, ProductType, Currency, Products, Operations, \
+    UserOperations
+from InternetBanking.models import Applications, UserApplication, MobileOperators, PhoneOperation, InternetProviders, \
+    InternetPay
 from InternetBanking.models import FlatPay
 
 admin.site.register(Users)

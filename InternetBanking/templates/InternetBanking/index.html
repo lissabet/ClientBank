@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
@@ -9,8 +8,8 @@
         {% for oper in operation %}
             <li>{{ oper.OperationName }}</li>
 
-    {% endfor %}
+        {% endfor %}
     </ul>
 
-<a href="/basicview/">На главную</a><br />
+    <a href="/basicview/">На главную</a><br/>
 {% endblock content %}

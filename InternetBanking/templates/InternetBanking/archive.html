@@ -4,7 +4,7 @@
 
     <h1 align="center">Архив совершенных операций клиента: {{ userinf.FullName }}</h1>
     <table class="table table-bordered">
-    <caption>Оплата мобильного телефона</caption>
+        <caption>Оплата мобильного телефона</caption>
         <tr style="border: #1a1a1a; color: midnightblue; background-color: #3a87ad">
             <td>Дата оплаты</td>
             <td>Мобильный оператор</td>
@@ -12,19 +12,19 @@
             <td>Сумма платежа</td>
         </tr>
 
-            {% for pay in phone %}
-                <tr>
+        {% for pay in phone %}
+            <tr>
                 <td>{{ pay.Date }}</td>
-                <td>{{ pay.MobileOperatorId.Name}}</td>
+                <td>{{ pay.MobileOperatorId.Name }}</td>
                 <td>{{ pay.ProductId.TypeId.TypeName }} №{{ pay.ProductId.ContractNumber }}</td>
                 <td>{{ pay.Amount }} {{ pay.ProductId.CurrencyId.CurrencyCode }}</td>
-                </tr>
-            {% endfor %}
+            </tr>
+        {% endfor %}
 
     </table>
 
     <table class="table table-bordered">
-    <caption>Оплата Интернет услуг</caption>
+        <caption>Оплата Интернет услуг</caption>
         <tr style="border: #1a1a1a; color: midnightblue; background-color: #3a87ad">
             <td>Дата</td>
             <td>Интернет Провайдер</td>
@@ -33,20 +33,20 @@
             <td>Сумма платежа</td>
         </tr>
 
-            {% for pay in internet %}
-                <tr>
+        {% for pay in internet %}
+            <tr>
                 <td>{{ pay.Date }}</td>
                 <td>{{ pay.InternetProviderId.Name }}</td>
                 <td>{{ pay.ContractNumber }}</td>
                 <td>{{ pay.ProductId.TypeId.TypeName }} №{{ pay.ProductId.ContractNumber }}</td>
                 <td>{{ pay.Amount }} {{ pay.ProductId.CurrencyId.CurrencyCode }}</td>
-                </tr>
-            {% endfor %}
+            </tr>
+        {% endfor %}
 
     </table>
 
-    <table class="table table-bordered" >
-    <caption>Оплата ЖКХ услуг</caption>
+    <table class="table table-bordered">
+        <caption>Оплата ЖКХ услуг</caption>
         <tr style="border: #1a1a1a; color: midnightblue; background-color: #3a87ad">
             <td>Дата</td>
             <td>Номер лицевого счета</td>
@@ -54,16 +54,16 @@
             <td>Сумма платежа</td>
         </tr>
 
-            {% for pay in flat %}
-                <tr>
+        {% for pay in flat %}
+            <tr>
                 <td>{{ pay.Date }}</td>
                 <td>{{ pay.AccountNumber }}</td>
                 <td>{{ pay.ProductId.TypeId.TypeName }} №{{ pay.ProductId.ContractNumber }}</td>
                 <td>{{ pay.Amount }} {{ pay.ProductId.CurrencyId.CurrencyCode }}</td>
-                </tr>
-            {% endfor %}
+            </tr>
+        {% endfor %}
 
     </table>
 
-<div align="center"><a href="/basicview/">На главную</a><br /></div>
+    <div align="center"><a href="/basicview/">На главную</a><br/></div>
 {% endblock content %}

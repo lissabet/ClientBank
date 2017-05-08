@@ -3,6 +3,7 @@ from InternetBanking.models import Users, UserInformation, User, Products, Produ
 from InternetBanking.models import Currency, PhoneOperation, MobileOperators, InternetPay, InternetProviders
 import datetime
 
+
 class UsersFrom(forms.ModelForm):
     email = forms.CharField(max_length=50, help_text='Введите имейл')
     login = forms.CharField(max_length=25)
@@ -14,13 +15,15 @@ class UsersFrom(forms.ModelForm):
         model = Users
         fields = '__all__'
 
+
 class UsersInformationFrom(forms.ModelForm):
     FullName = forms.CharField(label="ФИО")
     Address = forms.CharField(label="Адрес")
     Phone = forms.CharField(label="Телефон")
+
     class Meta:
         model = UserInformation
-        fields = ('FullName','Address','Phone')
+        fields = ('FullName', 'Address', 'Phone')
 
 
 class UserForm(forms.ModelForm):
@@ -43,38 +46,44 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('username', 'email', 'password')
 
+
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
 
+
 class ChoiseForProductType(forms.ModelChoiceField):
-  def label_from_instance(self, obj):
-    return obj.TypeName
+    def label_from_instance(self, obj):
+        return obj.TypeName
+
 
 class ChoiseForCurrency(forms.ModelChoiceField):
     def label_from_instance(self, obj):
         return obj.CurrencyName
 
-class ProductForm(forms.ModelForm):
-    TypeId = ChoiseForProductType(queryset=ProductType.objects.all(),label="Тип продукта")
-    Balance = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
-    ContractDate = forms.DateField(widget=forms.HiddenInput(), initial= datetime.date.today)
-    CurrencyId = ChoiseForCurrency(queryset=Currency.objects.all(),label="Вылюта продукта")
-    EndContractDate = forms.DateField(widget=forms.SelectDateWidget,label="Срок действия продукта")
 
+class ProductForm(forms.ModelForm):
+    TypeId = ChoiseForProductType(queryset=ProductType.objects.all(), label="Тип продукта")
+    Balance = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
+    ContractDate = forms.DateField(widget=forms.HiddenInput(), initial=datetime.date.today)
+    CurrencyId = ChoiseForCurrency(queryset=Currency.objects.all(), label="Вылюта продукта")
+    EndContractDate = forms.DateField(widget=forms.SelectDateWidget, label="Срок действия продукта")
 
     class Meta:
         model = Products
-        fields = ('TypeId','CurrencyId','EndContractDate')
+        fields = ('TypeId', 'CurrencyId', 'EndContractDate')
+
 
 class ChoiseForOperator(forms.ModelChoiceField):
     def label_from_instance(self, obj):
         return obj.Name
 
+
 class ChoiseForProduct(forms.ModelChoiceField):
     def label_from_instance(self, obj):
-        res = ''.join(obj.TypeId.TypeName + ' №'+ obj.ContractNumber + ' ' + obj.CurrencyId.CurrencyName)
+        res = ''.join(obj.TypeId.TypeName + ' №' + obj.ContractNumber + ' ' + obj.CurrencyId.CurrencyName)
         return res
+
 
 class PhoneOperationForm(forms.ModelForm):
     MobileOperatorId = ChoiseForOperator(queryset=MobileOperators.objects.all())
@@ -86,7 +95,7 @@ class PhoneOperationForm(forms.ModelForm):
 
     class Meta:
         model = PhoneOperation
-        fields = ('PhoneNumber', 'MobileOperatorId', 'Amount','ProductId')
+        fields = ('PhoneNumber', 'MobileOperatorId', 'Amount', 'ProductId')
 
 
 class InternetPayForm(forms.ModelForm):
@@ -100,6 +109,7 @@ class InternetPayForm(forms.ModelForm):
     class Meta:
         model = InternetPay
         fields = ('ContractNumber', 'InternetProviderId', 'Amount', 'ProductId')
+
 
 class FlatPayForm(forms.ModelForm):
     ProductId = ChoiseForProduct(queryset=Products.objects.all())
@@ -116,15 +126,18 @@ class FlatPayForm(forms.ModelForm):
 class KeyForm(forms.Form):
     Key = forms.CharField(label="ключ")
 
+
 class ChangePassword(forms.Form):
     email = forms.CharField(label="Введите email")
 
+
 class RecoverCodeForm(forms.Form):
-    code = forms.CharField(label="Код",required=False)
+    code = forms.CharField(label="Код", required=False)
+
 
 class NewPasswordForm(forms.Form):
-    password = forms.CharField(label="Введите новый пароль",required=False,widget=forms.PasswordInput())
-    confirm_password = forms.CharField(label="Повторите пароль",required=False,widget=forms.PasswordInput())
+    password = forms.CharField(label="Введите новый пароль", required=False, widget=forms.PasswordInput())
+    confirm_password = forms.CharField(label="Повторите пароль", required=False, widget=forms.PasswordInput())
 
     def clean(self):
         cleaned_data = super(NewPasswordForm, self).clean()

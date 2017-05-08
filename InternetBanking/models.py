@@ -8,41 +8,51 @@ class Users(models.Model):
     login = models.CharField(max_length=25)
     password = models.CharField(max_length=75)
 
+
 class UserInformation(models.Model):
     UserId = models.ForeignKey(User)
     FullName = models.CharField(max_length=75)
     Address = models.CharField(max_length=250)
     Phone = models.CharField(max_length=50)
+
+
 class ProductStatus(models.Model):
     StatusName = models.CharField(max_length=20)
+
 
 class ProductType(models.Model):
     TypeName = models.CharField(max_length=50)
 
+
 class Currency(models.Model):
     CurrencyName = models.CharField(max_length=100)
     CurrencyCode = models.CharField(max_length=5)
+
 
 class Products(models.Model):
     TypeId = models.ForeignKey(ProductType)
     Balance = models.IntegerField(default=0)
     AccountNumber = models.ForeignKey(User)
     ContractNumber = models.CharField(max_length=10)
-    ContractDate = models.DateField( default=datetime.date.today)
+    ContractDate = models.DateField(default=datetime.date.today)
     EndContractDate = models.DateField()
     StatusId = models.ForeignKey(ProductStatus)
     CurrencyId = models.ForeignKey(Currency)
+
 
 class Operations(models.Model):
     OperationName = models.CharField(max_length=70)
     OperationCost = models.IntegerField()
 
+
 class UserOperations(models.Model):
     UserId = models.ForeignKey(Users)
     OperationId = models.ForeignKey(Operations)
 
+
 class MobileOperators(models.Model):
     Name = models.CharField(max_length=15)
+
 
 class PhoneOperation(models.Model):
     UserId = models.ForeignKey(User)
@@ -52,8 +62,10 @@ class PhoneOperation(models.Model):
     Amount = models.IntegerField()
     Date = models.DateField(default=datetime.date.today())
 
+
 class InternetProviders(models.Model):
     Name = models.CharField(max_length=50)
+
 
 class InternetPay(models.Model):
     UserId = models.ForeignKey(User)
@@ -62,6 +74,7 @@ class InternetPay(models.Model):
     ContractNumber = models.CharField(max_length=15)
     Amount = models.IntegerField()
     Date = models.DateField(default=datetime.date.today())
+
 
 class FlatPay(models.Model):
     UserId = models.ForeignKey(User)
@@ -78,6 +91,7 @@ class Applications(models.Model):
 class UserApplication(models.Model):
     UserId = models.ForeignKey(Users)
     Application = models.ForeignKey(Applications)
+
 
 class UsersKeys(models.Model):
     UserId = models.ForeignKey(User)
