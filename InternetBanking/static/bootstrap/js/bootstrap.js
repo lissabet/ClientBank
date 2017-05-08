@@ -1066,7 +1066,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * ========================================================== */
-
+$( "lll" ).submit(function( event ) {
+  event.preventDefault();
+});
 
 !function ($) {
 

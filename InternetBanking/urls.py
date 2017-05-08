@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'change_password/$',views.change_password,name='change_password'),
     url(r'code/$',views.code,name='code'),
     url(r'new_password/$',views.new_password,name='new_password'),
+    url(r'successfully_password/$',views.successfully_password,name='successfully_password'),
 
 ]
 

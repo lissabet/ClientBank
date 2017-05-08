@@ -1,35 +1,72 @@
 {% extends "base.html" %}
 {% load static %}
-
+{% load i18n %}
 
 {% block content %}
-<link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/static/bootstrap/css/login_style.css">
-
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/static/bootstrap/css/login_style.css">
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/static/bootstrap/css/change_password_style.css">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="http://127.0.0.1:8000/static/bootstrap/js/bootstrap.js"></script>
 
     <div id="login">
-    <h1 id="log">Войти в ESBank</h1>
+        <h1 id="log">Войти в ESBank</h1>
         {% if message %}
             <label style="color: red">
-            {{ message }}
+                {{ message }}
             </label>
         {% endif %}
         <form class="login_form" method="post" action="/basicview/login/">
             {% csrf_token %}
-                <p><span class="fontawesome-user"></span> <input type="text" name="username" value="Логин"
-                                                                 onBlur="if(this.value == '') this.value = 'Логин'"
-                                                                 onFocus="if(this.value == 'Логин') this.value = ''"
-                                                                 required/></p>
-                <br/>
-                <p><span class="fontawesome-lock"></span><input type="password" name="password" value="Пароль"
-                                                                onBlur="if(this.value == '') this.value = 'Пароль'"
-                                                                onFocus="if(this.value == 'Пароль') this.value = ''"
-                                                                required/></p>
+            <p><span class="fontawesome-user"></span> <input type="text" name="username" value="Логин"
+                                                             onBlur="if(this.value == '') this.value = 'Логин'"
+                                                             onFocus="if(this.value == 'Логин') this.value = ''"
+                                                             required/></p>
+            <br/>
+            <p><span class="fontawesome-lock"></span><input type="password" name="password" value="Пароль"
+                                                            onBlur="if(this.value == '') this.value = 'Пароль'"
+                                                            onFocus="if(this.value == 'Пароль') this.value = ''"
+                                                            required/></p>
             <div class="links"><a href="/basicview/register/">Регистрация |</a>
-            <a href="/basicview/change_password/">Забыли пароль?</a></div>
-                <br/>
+                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">
+                    Забыли пароль?
+                </button>
+            </div>
 
-            <button type="submit" class="btn loginbtn"> Войти </button>
+            <br/>
+
+            <button type="submit" class="btn loginbtn"> Войти</button>
         </form>
     </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h2 class="modal-title" id="myModalLabel">Забыли пароль?</h2>
+                </div>
+                <div class="modal-body">
+                    {% if identity == False %}
+                        <form id="user_form" method="post"
+                              action="/basicview/change_password/"
+                              enctype="multipart/form-data">
+
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <div align="center" class="sendcode_btn">
+                                <input type="submit" name="submit"  class="btn btn-default sendcode"
+                                       value="Получить код"/>
+                                <button type="button" class="btn btn-default sendcode" data-dismiss="modal">Отменить
+                                </button>
+                            </div>
+                        </form>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 {% endblock content %}

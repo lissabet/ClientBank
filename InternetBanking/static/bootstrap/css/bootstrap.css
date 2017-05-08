@@ -2340,31 +2340,35 @@ fieldset[disabled] .btn-info.active {
 }
 
 .btn-link {
-  font-weight: normal;
-  color: #428bca;
+  color: black;
+  font-weight: 600;
+  text-decoration: none;
   cursor: pointer;
   border-radius: 0;
+  background-color: transparent;
 }
 
-.btn-link,
 .btn-link:active,
 .btn-link[disabled],
 fieldset[disabled] .btn-link {
   background-color: transparent;
+  color: #1c3e18;
   -webkit-box-shadow: none;
           box-shadow: none;
 }
 
-.btn-link,
+
 .btn-link:hover,
 .btn-link:focus,
 .btn-link:active {
+  color: #1c3e18;
+  text-decoration: underline;
   border-color: transparent;
 }
 
 .btn-link:hover,
 .btn-link:focus {
-  color: #2a6496;
+  color: #1c3e18;
   text-decoration: underline;
   background-color: transparent;
 }
@@ -2373,7 +2377,8 @@ fieldset[disabled] .btn-link {
 fieldset[disabled] .btn-link:hover,
 .btn-link[disabled]:focus,
 fieldset[disabled] .btn-link:focus {
-  color: #999999;
+  color: #1c3e18;
+  text-decoration: underline;
   text-decoration: none;
 }
 

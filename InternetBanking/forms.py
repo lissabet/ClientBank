@@ -109,8 +109,8 @@ class RecoverCodeForm(forms.Form):
     code = forms.CharField(label="Код",required=False)
 
 class NewPasswordForm(forms.Form):
-    password = forms.CharField(label="Введите новый пароль",required=False)
-    confirm_password = forms.CharField(label="Повторите пароль",required=False)
+    password = forms.CharField(label="Введите новый пароль",required=False,widget=forms.PasswordInput())
+    confirm_password = forms.CharField(label="Повторите пароль",required=False,widget=forms.PasswordInput())
 
     def clean(self):
         cleaned_data = super(NewPasswordForm, self).clean()

@@ -57,7 +57,7 @@ def register(request):
 
             receiverEmail = '{0}'.format(user.email)
 
-            send_mail('ESbank keys for your banking', message,'lissa.johnas@gmail.com', [receiverEmail],
+            send_mail('ESbank keys for your banking', message,'Do not reply <do_not_replay@domain.com>', [receiverEmail],
                       fail_silently=False)
 
             registered = True
@@ -314,6 +314,7 @@ def profile(request):
 
 def user_login(request):
     context = RequestContext(request)
+    identity = False
     message ="Введен неверный логин или пароль"
     if request.method == 'POST':
         form = LoginForm(data=request.POST)
@@ -335,9 +336,13 @@ def user_login(request):
                           {"message": message}, context)
     else:
         form = LoginForm()
+        code_form = RecoverCodeForm()
+        change_form = ChangePassword()
     return render(request,
                   'InternetBanking/login.html',
-                  {}, context)
+                  {'form': change_form,
+                   'code_form': code_form,
+                   'identity': identity}, context)
 
 
 def change_password(request):
@@ -362,13 +367,9 @@ def change_password(request):
                 print('name',name)
                 message = 'Your code :{0}'.format(send_code)
                 receiverEmail = '{0}'.format(email)
-                send_mail('Recover code ESBank', message, 'lissa.johnas@gmail.com', [receiverEmail],
+                send_mail('Recover code ESBank', message, 'Do not reply <do_not_replay@domain.com>', [receiverEmail],
                           fail_silently=False)
-                return render(request,
-                              'InternetBanking/change_password.html',
-                              {'form': form,
-                               'code_form': code_form,
-                               'identity': identity}, context)
+
         else:
             print(form.errors)
     else:
@@ -377,6 +378,7 @@ def change_password(request):
     return render(request,
                   'InternetBanking/change_password.html',
                   {'form': form,
+                   'code_form': code_form,
                    'identity': identity}, context)
 
 
@@ -408,6 +410,7 @@ def code(request):
 
 def new_password(request):
     context = RequestContext(request)
+    message = ''
     if request.method == 'POST':
         password_form = NewPasswordForm(data=request.POST)
         if password_form and password_form.is_valid() and name:
@@ -419,12 +422,22 @@ def new_password(request):
                       'Спасибо, что используете наш Интернет-банкинг\n\n\n\n' \
                       'С Уважением, Администрация ESBank'
             receiverEmail = '{0}'.format(user.email)
-            send_mail('Пароль успещно обновлен', message, 'lissa.johnas@gmail.com', [receiverEmail],
+            send_mail('Пароль успещно обновлен', message, 'Do not reply <do_not_replay@domain.com>', [receiverEmail],
                       fail_silently=False)
-            return HttpResponseRedirect('/basicview/')
+            return HttpResponseRedirect('/basicview/successfully_password/')
+        else:
+            message = "Пароль введен неверно"
     else:
         password_form = NewPasswordForm()
-    return render(request,'InternetBanking/Profile/new_password.html',{'form':password_form},context)
+    return render(request,'InternetBanking/Profile/new_password.html',{'form':password_form,
+                                                                       'message': message},context)
+def successfully_password(request):
+    id_user = User.objects.get(username= name).id
+    full_name = UserInformation.objects.get(UserId=id_user).FullName
+    return render(request,
+                  'InternetBanking/Messeges/Successfully_password.html',
+                  {'name': full_name },
+                  RequestContext(request))
 
 def archive(request):
     context = RequestContext(request)
