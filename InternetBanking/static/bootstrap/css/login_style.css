@@ -9,6 +9,22 @@
   font-family: 'FontAwesome', sans-serif;
 }
 
+span.fontawesome.reg{
+	background-color: rgba(59, 65, 72, 0.56);
+    border-radius: 3px 0px 0px 3px;
+    -moz-border-radius: 3px 0px 0px 3px;
+    -webkit-border-radius: 3px 0px 0px 3px;
+    color: #0c0d0f;
+    display: block;
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    width: 80px;
+    font-weight: 100;
+	font-size: 10px;
+}
+
 input {
 	border: none;
 	font-family: 'Open Sans', Arial, sans-serif;
@@ -20,9 +36,25 @@ input {
 
 .links{
     font-weight: 100;
-    padding: 0px 20px 0px 25px;
+    padding: 0px 10px 0px 0px;
 }
 
+#register{
+	width: 1000px;
+    position: relative;
+    left: 450px;
+	height: 610px;
+}
+
+h1#title_for_reg{
+	margin-top: 3px;
+
+}
+
+#register_form{
+	width: 1000px;
+	height: 610px;
+}
 
 #login,
 #new_password{
@@ -38,6 +70,11 @@ h1#log{
     font-weight: 500;
 	display: inline;
 }
+
+.login_form{
+	padding-top: 15px;
+}
+
 
 h1#title{
 	font-size: 25px;
@@ -68,7 +105,8 @@ h1#title{
 }
 
 #login form input,
-#new_password form input{
+#new_password form input,
+#register form input{
 	height: 50px;
 	outline:none;
 }
@@ -85,8 +123,37 @@ h1#title{
 	width: 218px;
 }
 
+.message{
+	color: tomato;
+	position: relative;
+    left: 65px;
+    padding: 5px;
+}
+
+
+#field{
+	line-height: 15px;
+	font-size: 15px;
+	text-align: center;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	font-weight: bold;
+	font-family: 'FontAwesome', sans-serif;;
+}
+#register input{
+	background-color: #3b4148;
+	border-radius: 0px 3px 3px 0px;
+	-moz-border-radius: 0px 3px 3px 0px;
+	-webkit-border-radius: 0px 3px 3px 0px;
+	color: #606468;
+	margin-bottom: 1em;
+	padding: 0 16px;
+	width: 280px;
+}
+
 #login form input:focus,
-#new_password form input:focus{
+#new_password form input:focus,
+#register form input:focus{
 	color:#fff;
 }
 
@@ -95,12 +162,14 @@ h1#title{
 
 
 #login > p ,
-#new_password > p{
+#new_password > p,
+#register > p {
 	text-align: center;
 }
 
 #login > p span ,
-#new_password > p span{
+#new_password > p span,
+#register > p span{
 	padding-left: 5px;
 }
 
@@ -112,6 +181,7 @@ h1#title{
     background-color: rgba(59, 65, 72, 0.61);
     color: #b6b8b9;
     border-radius: 3px;
+	margin-top: 1px;
 }
 .loginbtn:hover,
 .loginbtn:focus,

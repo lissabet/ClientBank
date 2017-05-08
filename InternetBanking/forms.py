@@ -7,6 +7,7 @@ class UsersFrom(forms.ModelForm):
     email = forms.CharField(max_length=50, help_text='Введите имейл')
     login = forms.CharField(max_length=25)
     password = forms.CharField(max_length=75)
+    confirmpassword = forms.CharField(max_length=75)
 
     class Meta:
         # Создаем связь между ModelForm и моделью
@@ -16,14 +17,27 @@ class UsersFrom(forms.ModelForm):
 class UsersInformationFrom(forms.ModelForm):
     FullName = forms.CharField(label="ФИО")
     Address = forms.CharField(label="Адрес")
-    Phone = forms.CharField(label="Номер телефона")
+    Phone = forms.CharField(label="Телефон")
     class Meta:
         model = UserInformation
         fields = ('FullName','Address','Phone')
 
 
 class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
+    password = forms.CharField(widget=forms.PasswordInput(), label="Пароль")
+    confirm_password = forms.CharField(widget=forms.PasswordInput(), label="Повторите пароль")
+    username = forms.CharField(label="Логин")
+    email = forms.CharField(label="Email")
+
+    def clean(self):
+        cleaned_data = super(UserForm, self).clean()
+        password1 = cleaned_data.get('password')
+        password2 = cleaned_data.get('confirm_password')
+
+        if password1 and password1 != password2:
+            raise forms.ValidationError("Пароли не совпадают")
+
+        return cleaned_data
 
     class Meta:
         model = User

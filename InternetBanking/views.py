@@ -19,12 +19,12 @@ name = ''
 def register(request):
     context = RequestContext(request)
     registered = False
-
+    message = ''
     if request.method == 'POST':
         user_form = UserForm(data=request.POST)
         profile_form = UsersInformationFrom(data=request.POST)
 
-        if user_form.is_valid() and profile_form.is_valid():
+        if user_form.is_valid() and profile_form.is_valid() and user_form:
 
             user = user_form.save()
 
@@ -47,7 +47,7 @@ def register(request):
 
             userKey = UsersKeys(UserId=user,Key1= keys[0],Key2= keys[1],Key3= keys[2],Key4 =keys[3],Key5= keys[4],Key6 = keys[5],Key7= keys[6],Key8= keys[7],Key9 =keys[8])
             userKey.save()
-            message = 'Welcome, {0}, to out Internet-Banking ESBBank!\n' \
+            mail_message = 'Welcome, {0}, to out Internet-Banking ESBBank!\n' \
                       'We send for you your private keys. Please, save them and do not show anybody!' \
                       '\n'.format(user.username) +'Key1: {0} \n Key2: {1} \n Key3: {2} \n Key4: {3} \n Key5: {4} \n ' \
                                                   'Key6: {5} \n Key7: {6} \n' \
@@ -57,13 +57,13 @@ def register(request):
 
             receiverEmail = '{0}'.format(user.email)
 
-            send_mail('ESbank keys for your banking', message,'Do not reply <do_not_replay@domain.com>', [receiverEmail],
+            send_mail('ESbank keys for your banking', mail_message,'Do not reply <do_not_replay@domain.com>', [receiverEmail],
                       fail_silently=False)
 
             registered = True
 
         else:
-            print(user_form.errors, profile_form.errors)
+            message = "Неккоректно введены данные"
 
     else:
         user_form = UserForm()
@@ -71,7 +71,11 @@ def register(request):
 
     return render(request,
                   'InternetBanking/register.html',
-                  {'user_form': user_form, 'profile_form': profile_form, 'registered': registered, 'user': request.user,
+                  {'user_form': user_form,
+                   'profile_form': profile_form,
+                   'registered': registered,
+                   'user': request.user,
+                   'message': message,
                    }, context)
 
 

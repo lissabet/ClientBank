@@ -26,14 +26,16 @@
                                                             onBlur="if(this.value == '') this.value = 'Пароль'"
                                                             onFocus="if(this.value == 'Пароль') this.value = ''"
                                                             required/></p>
-            <div class="links"><a href="/basicview/register/">Регистрация |</a>
+            <div class="links" >
+                <button type="button" class="btn btn-link"><a href="/basicview/register/">
+                    Регистрация
+                    </a>
+                </button>
+                |
                 <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">
                     Забыли пароль?
                 </button>
             </div>
-
-            <br/>
-
             <button type="submit" class="btn loginbtn"> Войти</button>
         </form>
     </div>
