@@ -1,35 +1,152 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/static/bootstrap/css/pay.css">
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/static/bootstrap/css/pay.css">
     <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/static/bootstrap/css/style_for_icons.css">
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/static/bootstrap/css/operation_style.css">
     <script src="http://127.0.0.1:8000/static/bootstrap/js/foundation.min.js"></script>
     <script src="http://127.0.0.1:8000/static/bootstrap/js/pay.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="http://127.0.0.1:8000/static/bootstrap/js/bootstrap.js"></script>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <h1 class="operation">Операции Интернет-банкинга ESBank</h1>
 
 
     <div id="features" class="section features" data-magellan-destination="features">
-	<div class="row hi-icon-wrap hi-icon-effect-3 hi-icon-effect-3b">
-		<div class="large-4 columns feature">
-			<a href="/basicview/phone_operation/"><span class="icon icon-phone hi-icon"></span></a>
-            <p style="text-align: center; font-weight: bold;"><a href="/basicview/phone_operation/">Оплатить мобильный телефон</a></p>
-			<p style="text-align: center; font-weight: bold;"><a href="/basicview/export_phone/">Получить выписку</a></p>
+        <div class="row hi-icon-wrap hi-icon-effect-3 hi-icon-effect-3b">
+            <div class="large-4 columns feature">
 
-		</div>
-		<div class="large-4 columns feature">
-			<a href="/basicview/internet_pay/"><span class="icon icon-internet hi-icon"></span></a>
-			<p style="text-align: center; font-weight: bold;"><a href="/basicview/internet_pay/">Оплатить Интернет</a></p>
-			<p style="text-align: center; font-weight: bold;"><a href="/basicview/export_internet/">Получить выписку</a></p>
-		</div>
+                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">
+                    <span class="icon icon-phone hi-icon"></span>
+                </button>
+                <p style="text-align: center; font-weight: bold;">
+                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">
+                        Оплатить мобильный телефон
+                    </button>
+                </p>
+                <p style="text-align: center; font-weight: bold;"><a href="/basicview/export_phone/">Получить
+                    выписку</a></p>
 
-		<div class="large-4 columns feature">
-			<a href="/basicview/flat_pay/"><span class="icon icon-trophy hi-icon"></span></a>
-			<p style="text-align: center; font-weight: bold;"><a href="/basicview/flat_pay/">Оплатить услуги ЖКХ</a></p>
-			<p style="text-align: center; font-weight: bold;"><a href="/basicview/export_flatpay/">Получить выписку</a></p>
-		</div>
-	</div>
-</div>
+            </div>
+            <div class="large-4 columns feature">
+                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#InternetModal">
+                    <span class="icon icon-phone hi-icon"></span>
+                </button>
+                <p style="text-align: center; font-weight: bold;">
+                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#InternetModal">
+                        Оплатить Интернет
+                    </button>
+                </p>
+                <p style="text-align: center; font-weight: bold;"><a href="/basicview/export_internet/">Получить
+                    выписку</a></p>
+            </div>
+
+            <div class="large-4 columns feature">
+                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#FlatModal">
+                    <span class="icon icon-phone hi-icon"></span>
+                </button>
+                <p style="text-align: center; font-weight: bold;">
+                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#FlatModal">
+                        Оплатить услуги ЖКХ
+                    </button>
+                </p>
+                <p style="text-align: center; font-weight: bold;"><a href="/basicview/export_flatpay/">Получить
+                    выписку</a></p>
+            </div>
+        </div>
+    </div>
 
     <p class="operation"><a href="/basicview/">На главную</a></p>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title" id="myModalLabel">Пополнить баланс</h3>
+                </div>
+                <div class="modal-body">
+
+                    <form style="margin: 10px" id="user_form" method="post" action="/basicview/phone_operation/"
+                          enctype="multipart/form-data" class="main">
+
+                        {% csrf_token %}
+                        {{ phone_form.as_p }}
+                        <p class="key">Введите ключ номер №{{ Number }}</p>
+                        {{ key_form.as_p }}
+                        <div class="modal-footer" align="center">
+                            <div align="center"><input type="submit" name="submit" value="Сохранить"
+                                                       class="btn btn-default"/>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Отменить</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="InternetModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title" id="myModalLabel">Оплатить Интернет</h3>
+                </div>
+                <div class="modal-body">
+
+                    <form id="user_form" method="post" action="/basicview/internet_pay/"
+                          enctype="multipart/form-data">
+
+                        {% csrf_token %}
+                        {{ pay_form.as_p }}
+                        <p class="key">Введите ключ номер №{{ Number }}</p>
+                        {{ key_form.as_p }}
+
+                        <div class="modal-footer" align="center">
+                            <div align="center"><input type="submit" name="submit" value="Сохранить"
+                                                       class="btn btn-default"/>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Отменить</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="FlatModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title" id="myModalLabel">Оплатить услуги ЖКХ</h3>
+                </div>
+                <div class="modal-body">
+
+                    <form id="user_form" method="post" action="/basicview/flat_pay/"
+                          enctype="multipart/form-data">
+
+                        {% csrf_token %}
+                        {{ pay_flat.as_p }}
+                        <p class="key">Введите ключ номер №{{ Number }}</p>
+                        {{ key_form.as_p }}
+                        <div class="modal-footer" align="center">
+                            <div align="center"><input type="submit" name="submit" value="Сохранить"
+                                                       class="btn btn-default"/>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Отменить</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock content %}

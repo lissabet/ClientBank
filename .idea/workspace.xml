@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="825da9e0-ae28-4dbf-bd3d-b6eae99f5c30" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/InternetBanking/static/bootstrap/fonts/Descr.WD3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/InternetBanking/static/bootstrap/fonts/entypo.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/InternetBanking/static/bootstrap/fonts/entypo.eot@" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/InternetBanking/static/bootstrap/fonts/entypo.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/InternetBanking/static/bootstrap/fonts/entypo.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/InternetBanking/static/bootstrap/css/style_for_icons.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/InternetBanking/static/bootstrap/fonts/entypo.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/InternetBanking/static/bootstrap/css/operation_style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/InternetBanking/templates/InternetBanking/index.html" afterPath="$PROJECT_DIR$/InternetBanking/templates/InternetBanking/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/InternetBanking/forms.py" afterPath="$PROJECT_DIR$/InternetBanking/forms.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/InternetBanking/templates/InternetBanking/operations.html" afterPath="$PROJECT_DIR$/InternetBanking/templates/InternetBanking/operations.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/InternetBanking/views.py" afterPath="$PROJECT_DIR$/InternetBanking/views.py" />
     </list>
@@ -50,28 +44,43 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/InternetBanking/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3392">
-              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+            <state relative-caret-position="309">
+              <caret line="522" column="17" selection-start-line="522" selection-start-column="17" selection-end-line="522" selection-end-column="17" />
               <folding>
+                <element signature="e#879#3842#0" expanded="false" />
                 <element signature="e#3872#4113#0" expanded="false" />
                 <element signature="e#4142#4303#0" expanded="false" />
                 <element signature="e#4332#4493#0" expanded="false" />
-                <element signature="e#4572#4736#0" expanded="false" />
-                <element signature="e#4770#5432#0" expanded="false" />
-                <element signature="e#5469#6162#0" expanded="false" />
-                <element signature="e#6198#6825#0" expanded="false" />
-                <element signature="e#8008#9473#0" expanded="false" />
-                <element signature="e#11067#12669#0" expanded="false" />
-                <element signature="e#12698#12840#0" expanded="false" />
-                <element signature="e#19129#19872#0" expanded="false" />
-                <element signature="e#19915#20161#0" expanded="false" />
-                <element signature="e#20210#21358#0" expanded="false" />
-                <element signature="e#21393#21469#0" expanded="false" />
-                <element signature="e#21499#21780#0" expanded="false" />
-                <element signature="e#21806#22412#0" expanded="false" />
-                <element signature="e#22438#22623#0" expanded="false" />
-                <element signature="e#22651#22836#0" expanded="false" />
+                <element signature="e#5200#5862#0" expanded="false" />
+                <element signature="e#5899#6592#0" expanded="false" />
+                <element signature="e#6628#7255#0" expanded="false" />
+                <element signature="e#8438#9903#0" expanded="false" />
+                <element signature="e#11497#13099#0" expanded="false" />
+                <element signature="e#13128#13270#0" expanded="false" />
+                <element signature="e#13346#14145#0" expanded="false" />
+                <element signature="e#14177#15429#0" expanded="false" />
+                <element signature="e#15466#16942#0" expanded="false" />
+                <element signature="e#16968#18001#0" expanded="false" />
+                <element signature="e#18035#19192#0" expanded="false" />
+                <element signature="e#19235#19530#0" expanded="false" />
+                <element signature="e#19559#20302#0" expanded="false" />
+                <element signature="e#20345#20591#0" expanded="false" />
+                <element signature="e#21823#21899#0" expanded="false" />
+                <element signature="e#21929#22210#0" expanded="false" />
+                <element signature="e#22236#22842#0" expanded="false" />
+                <element signature="e#22868#23053#0" expanded="false" />
+                <element signature="e#23081#23266#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="profile.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/InternetBanking/templates/InternetBanking/profile.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="256">
+              <caret line="82" column="37" selection-start-line="82" selection-start-column="37" selection-end-line="82" selection-end-column="37" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -79,18 +88,18 @@
       <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/InternetBanking/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="42" column="27" selection-start-line="42" selection-start-column="27" selection-end-line="42" selection-end-column="27" />
+            <state relative-caret-position="144">
+              <caret line="153" column="67" selection-start-line="153" selection-start-column="67" selection-end-line="153" selection-end-column="67" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style_for_icons.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/InternetBanking/static/bootstrap/css/style_for_icons.css">
+      <file leaf-file-name="bootstrap.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/InternetBanking/static/bootstrap/css/bootstrap.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
+            <state relative-caret-position="94">
+              <caret line="2347" column="32" selection-start-line="2347" selection-start-column="32" selection-end-line="2347" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -99,15 +108,15 @@
       <file leaf-file-name="operations.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/InternetBanking/templates/InternetBanking/operations.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="14" column="99" selection-start-line="14" selection-start-column="99" selection-end-line="14" selection-end-column="99" />
+            <state relative-caret-position="-1458">
+              <caret line="41" column="18" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="18" />
               <folding>
-                <element signature="e#875#921#0#HTML" expanded="true" />
-                <element signature="e#1001#1047#0#HTML" expanded="true" />
-                <element signature="e#1255#1301#0#HTML" expanded="true" />
-                <element signature="e#1369#1415#0#HTML" expanded="true" />
-                <element signature="e#1620#1666#0#HTML" expanded="true" />
-                <element signature="e#1732#1778#0#HTML" expanded="true" />
+                <element signature="e#1270#1316#0#HTML" expanded="true" />
+                <element signature="e#1546#1592#0#HTML" expanded="true" />
+                <element signature="e#1963#2009#0#HTML" expanded="true" />
+                <element signature="e#2236#2282#0#HTML" expanded="true" />
+                <element signature="e#2652#2698#0#HTML" expanded="true" />
+                <element signature="e#2923#2969#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -116,18 +125,48 @@
       <file leaf-file-name="flat_pay.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/InternetBanking/templates/InternetBanking/flat_pay.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="16" selection-end-column="22" />
+            <state relative-caret-position="224">
+              <caret line="14" column="11" selection-start-line="3" selection-start-column="4" selection-end-line="14" selection-end-column="11" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/InternetBanking/templates/InternetBanking/login.html">
+      <file leaf-file-name="keys.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/InternetBanking/templates/InternetBanking/keys.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-352">
-              <caret line="11" column="40" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
+            <state relative-caret-position="256">
+              <caret line="16" column="9" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="internet_pay.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/InternetBanking/templates/InternetBanking/internet_pay.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="224">
+              <caret line="14" column="11" selection-start-line="3" selection-start-column="3" selection-end-line="14" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="operation_style.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/InternetBanking/static/bootstrap/css/operation_style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="16">
+              <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="phone_operation.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/InternetBanking/templates/InternetBanking/phone_operation.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="10" column="40" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -140,8 +179,8 @@
       <list>
         <option value="Python Script" />
         <option value="HTML File" />
-        <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -151,7 +190,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/ClientBank/migrations/0005_auto_20170331_1225.py" />
         <option value="$PROJECT_DIR$/ClientBank/templates/ClientBank/register.html" />
         <option value="$PROJECT_DIR$/ClientBank/templates/ClientBank/login.html" />
         <option value="$PROJECT_DIR$/ClientBank/templates/ClientBank/index.html" />
@@ -171,7 +209,6 @@
         <option value="$PROJECT_DIR$/InternetBanking/templates/InternetBanking/Messages.css" />
         <option value="$PROJECT_DIR$/InternetBanking/templates/InternetBanking/register.html" />
         <option value="$PROJECT_DIR$/InternetBanking/templates/InternetBanking/login.html" />
-        <option value="$PROJECT_DIR$/InternetBanking/forms.py" />
         <option value="$PROJECT_DIR$/InternetBanking/static/bootstrap/css/login_style.css" />
         <option value="$PROJECT_DIR$/InternetBanking/static/bootstrap/js/bootstrap.js" />
         <option value="$PROJECT_DIR$/InternetBanking/templates/InternetBanking/Messeges/Successfully_password.html" />
@@ -195,13 +232,15 @@
         <option value="$PROJECT_DIR$/untitled8/urls.py" />
         <option value="$PROJECT_DIR$/untitled8/settings.py" />
         <option value="$PROJECT_DIR$/InternetBanking/static/bootstrap/css/change_password_style.css" />
-        <option value="$PROJECT_DIR$/InternetBanking/views.py" />
         <option value="$PROJECT_DIR$/InternetBanking/templates/InternetBanking/index.html" />
         <option value="$PROJECT_DIR$/InternetBanking/static/bootstrap/js/pay.js" />
         <option value="$PROJECT_DIR$/InternetBanking/static/bootstrap/js/foundation.min.js" />
         <option value="$PROJECT_DIR$/InternetBanking/static/bootstrap/css/pay.css" />
         <option value="$PROJECT_DIR$/InternetBanking/static/bootstrap/css/style_for_icons.css" />
+        <option value="$PROJECT_DIR$/InternetBanking/static/bootstrap/css/operation_style.css" />
         <option value="$PROJECT_DIR$/InternetBanking/templates/InternetBanking/operations.html" />
+        <option value="$PROJECT_DIR$/InternetBanking/forms.py" />
+        <option value="$PROJECT_DIR$/InternetBanking/views.py" />
       </list>
     </option>
   </component>
@@ -211,8 +250,10 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1340" />
-    <option name="height" value="733" />
+    <option name="x" value="-2" />
+    <option name="y" value="-3" />
+    <option name="width" value="1370" />
+    <option name="height" value="740" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -330,58 +371,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="bootstrap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="untitled8" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="untitled8" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="InternetBanking" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bootstrap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="untitled8" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="untitled8" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="InternetBanking" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="static" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bootstrap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fonts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -827,13 +816,13 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1340" height="733" extended-state="4" />
+    <frame x="-2" y="-3" width="1370" height="740" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22565688" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2205438" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32899022" sideWeight="0.49693722" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.070032574" sideWeight="0.53632146" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="manage.py@untitled8" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.070032574" sideWeight="0.4636785" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="manage.py@untitled8" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27858293" sideWeight="0.4636785" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294753" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32899022" sideWeight="0.49693722" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32899022" sideWeight="0.49384615" order="7" side_tool="false" content_ui="tabs" />
@@ -912,13 +901,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/untitled8/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/InternetBanking/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -975,14 +957,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/InternetBanking/static/bootstrap/css/bootstrap.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="2347" column="32" selection-start-line="2347" selection-start-column="32" selection-end-line="2347" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1058,22 +1032,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/InternetBanking/templates/InternetBanking/internet_pay.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/InternetBanking/templates/InternetBanking/keys.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="16" column="9" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/InternetBanking/templates/InternetBanking/nomoney.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
@@ -1082,26 +1040,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/InternetBanking/templates/InternetBanking/phone_operation.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/InternetBanking/templates/InternetBanking/products.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
           <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/InternetBanking/templates/InternetBanking/profile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2684">
-          <caret line="39" column="9" selection-start-line="39" selection-start-column="9" selection-end-line="39" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1224,26 +1166,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/InternetBanking/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="42" column="27" selection-start-line="42" selection-start-column="27" selection-end-line="42" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/InternetBanking/templates/InternetBanking/flat_pay.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="16" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/InternetBanking/static/bootstrap/fonts/entypo.svg">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-14614">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/InternetBanking/templates/InternetBanking/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-352">
+          <caret line="11" column="40" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/InternetBanking/templates/InternetBanking/profile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="82" column="37" selection-start-line="82" selection-start-column="37" selection-end-line="82" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/InternetBanking/templates/InternetBanking/phone_operation.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="10" column="40" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="40" />
           <folding />
         </state>
       </provider>
@@ -1256,52 +1206,97 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/InternetBanking/static/bootstrap/css/bootstrap.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="94">
+          <caret line="2347" column="32" selection-start-line="2347" selection-start-column="32" selection-end-line="2347" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/InternetBanking/static/bootstrap/css/operation_style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/InternetBanking/templates/InternetBanking/keys.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="16" column="9" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/InternetBanking/templates/InternetBanking/internet_pay.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="14" column="11" selection-start-line="3" selection-start-column="3" selection-end-line="14" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/InternetBanking/templates/InternetBanking/flat_pay.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="14" column="11" selection-start-line="3" selection-start-column="4" selection-end-line="14" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/InternetBanking/templates/InternetBanking/operations.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="14" column="99" selection-start-line="14" selection-start-column="99" selection-end-line="14" selection-end-column="99" />
+        <state relative-caret-position="-1458">
+          <caret line="41" column="18" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="18" />
           <folding>
-            <element signature="e#875#921#0#HTML" expanded="true" />
-            <element signature="e#1001#1047#0#HTML" expanded="true" />
-            <element signature="e#1255#1301#0#HTML" expanded="true" />
-            <element signature="e#1369#1415#0#HTML" expanded="true" />
-            <element signature="e#1620#1666#0#HTML" expanded="true" />
-            <element signature="e#1732#1778#0#HTML" expanded="true" />
+            <element signature="e#1270#1316#0#HTML" expanded="true" />
+            <element signature="e#1546#1592#0#HTML" expanded="true" />
+            <element signature="e#1963#2009#0#HTML" expanded="true" />
+            <element signature="e#2236#2282#0#HTML" expanded="true" />
+            <element signature="e#2652#2698#0#HTML" expanded="true" />
+            <element signature="e#2923#2969#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/InternetBanking/templates/InternetBanking/login.html">
+    <entry file="file://$PROJECT_DIR$/InternetBanking/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-352">
-          <caret line="11" column="40" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
+        <state relative-caret-position="144">
+          <caret line="153" column="67" selection-start-line="153" selection-start-column="67" selection-end-line="153" selection-end-column="67" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/InternetBanking/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3392">
-          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        <state relative-caret-position="309">
+          <caret line="522" column="17" selection-start-line="522" selection-start-column="17" selection-end-line="522" selection-end-column="17" />
           <folding>
+            <element signature="e#879#3842#0" expanded="false" />
             <element signature="e#3872#4113#0" expanded="false" />
             <element signature="e#4142#4303#0" expanded="false" />
             <element signature="e#4332#4493#0" expanded="false" />
-            <element signature="e#4572#4736#0" expanded="false" />
-            <element signature="e#4770#5432#0" expanded="false" />
-            <element signature="e#5469#6162#0" expanded="false" />
-            <element signature="e#6198#6825#0" expanded="false" />
-            <element signature="e#8008#9473#0" expanded="false" />
-            <element signature="e#11067#12669#0" expanded="false" />
-            <element signature="e#12698#12840#0" expanded="false" />
-            <element signature="e#19129#19872#0" expanded="false" />
-            <element signature="e#19915#20161#0" expanded="false" />
-            <element signature="e#20210#21358#0" expanded="false" />
-            <element signature="e#21393#21469#0" expanded="false" />
-            <element signature="e#21499#21780#0" expanded="false" />
-            <element signature="e#21806#22412#0" expanded="false" />
-            <element signature="e#22438#22623#0" expanded="false" />
-            <element signature="e#22651#22836#0" expanded="false" />
+            <element signature="e#5200#5862#0" expanded="false" />
+            <element signature="e#5899#6592#0" expanded="false" />
+            <element signature="e#6628#7255#0" expanded="false" />
+            <element signature="e#8438#9903#0" expanded="false" />
+            <element signature="e#11497#13099#0" expanded="false" />
+            <element signature="e#13128#13270#0" expanded="false" />
+            <element signature="e#13346#14145#0" expanded="false" />
+            <element signature="e#14177#15429#0" expanded="false" />
+            <element signature="e#15466#16942#0" expanded="false" />
+            <element signature="e#16968#18001#0" expanded="false" />
+            <element signature="e#18035#19192#0" expanded="false" />
+            <element signature="e#19235#19530#0" expanded="false" />
+            <element signature="e#19559#20302#0" expanded="false" />
+            <element signature="e#20345#20591#0" expanded="false" />
+            <element signature="e#21823#21899#0" expanded="false" />
+            <element signature="e#21929#22210#0" expanded="false" />
+            <element signature="e#22236#22842#0" expanded="false" />
+            <element signature="e#22868#23053#0" expanded="false" />
+            <element signature="e#23081#23266#0" expanded="false" />
           </folding>
         </state>
       </provider>

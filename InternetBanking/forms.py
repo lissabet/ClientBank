@@ -4,18 +4,6 @@ from InternetBanking.models import Currency, PhoneOperation, MobileOperators, In
 import datetime
 
 
-class UsersFrom(forms.ModelForm):
-    email = forms.CharField(max_length=50, help_text='Введите имейл')
-    login = forms.CharField(max_length=25)
-    password = forms.CharField(max_length=75)
-    confirmpassword = forms.CharField(max_length=75)
-
-    class Meta:
-        # Создаем связь между ModelForm и моделью
-        model = Users
-        fields = '__all__'
-
-
 class UsersInformationFrom(forms.ModelForm):
     FullName = forms.CharField(label="ФИО")
     Address = forms.CharField(label="Адрес")
@@ -86,12 +74,26 @@ class ChoiseForProduct(forms.ModelChoiceField):
 
 
 class PhoneOperationForm(forms.ModelForm):
-    MobileOperatorId = ChoiseForOperator(queryset=MobileOperators.objects.all())
-    ProductId = ChoiseForProduct(queryset=Products.objects.all())
+    MobileOperatorId = ChoiseForOperator(queryset=MobileOperators.objects.all(),label="Мобильный оператор",empty_label=None)
+    ProductId = ChoiseForProduct(queryset=Products.objects.all(),label="Продукт ESBank", empty_label=None)
+    PhoneNumber = forms.CharField(label="Номер телефона")
+    Amount = forms.IntegerField(label="Сумма оплаты")
 
     def __init__(self, eventUser, *args, **kwargs):
         super(PhoneOperationForm, self).__init__(*args, **kwargs)
         self.fields['ProductId'].queryset = Products.objects.filter(AccountNumber=eventUser.id)
+        self.fields['MobileOperatorId'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['ProductId'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['PhoneNumber'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['Amount'].widget.attrs.update({
+            'class': 'form-control'
+        })
 
     class Meta:
         model = PhoneOperation
@@ -99,12 +101,26 @@ class PhoneOperationForm(forms.ModelForm):
 
 
 class InternetPayForm(forms.ModelForm):
-    InternetProviderId = ChoiseForOperator(queryset=InternetProviders.objects.all())
-    ProductId = ChoiseForProduct(queryset=Products.objects.all())
+    InternetProviderId = ChoiseForOperator(queryset=InternetProviders.objects.all(), label="Провайдер",empty_label=None)
+    ProductId = ChoiseForProduct(queryset=Products.objects.all(),label="Продукт ESBank", empty_label=None)
+    ContractNumber = forms.CharField(label="Номер договора")
+    Amount = forms.IntegerField(label="Сумма оплаты")
 
     def __init__(self, eventUser, *args, **kwargs):
         super(InternetPayForm, self).__init__(*args, **kwargs)
         self.fields['ProductId'].queryset = Products.objects.filter(AccountNumber=eventUser.id)
+        self.fields['InternetProviderId'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['ProductId'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['ContractNumber'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['Amount'].widget.attrs.update({
+            'class': 'form-control'
+        })
 
     class Meta:
         model = InternetPay
@@ -112,11 +128,22 @@ class InternetPayForm(forms.ModelForm):
 
 
 class FlatPayForm(forms.ModelForm):
-    ProductId = ChoiseForProduct(queryset=Products.objects.all())
+    ProductId = ChoiseForProduct(queryset=Products.objects.all(),label="Продукт ESBank", empty_label=None)
+    AccountNumber = forms.CharField(label="Номер лицевого счета")
+    Amount = forms.IntegerField(label="Сумма оплаты")
 
     def __init__(self, eventUser, *args, **kwargs):
         super(FlatPayForm, self).__init__(*args, **kwargs)
         self.fields['ProductId'].queryset = Products.objects.filter(AccountNumber=eventUser.id)
+        self.fields['ProductId'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['AccountNumber'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['Amount'].widget.attrs.update({
+            'class': 'form-control'
+        })
 
     class Meta:
         model = FlatPay
@@ -124,7 +151,13 @@ class FlatPayForm(forms.ModelForm):
 
 
 class KeyForm(forms.Form):
-    Key = forms.CharField(label="ключ")
+    Key = forms.CharField(label="Ключ",widget=forms.PasswordInput())
+
+    def __init__(self,  *args, **kwargs):
+        super(KeyForm, self).__init__(*args, **kwargs)
+        self.fields['Key'].widget.attrs.update({
+            'class': 'form-control'
+        })
 
 
 class ChangePassword(forms.Form):

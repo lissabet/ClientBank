@@ -115,9 +115,20 @@ def nomoney(request):
 @login_required(login_url='/basicview/login/')
 def operations(request):
     context = RequestContext(request)
+    key_form = KeyForm()
+    phone_form = PhoneOperationForm(eventUser=request.user)
+    pay_form = InternetPayForm(eventUser=request.user)
+    pay_flat = FlatPayForm(eventUser=request.user)
+    global i
+    i = random.randint(1, 9)
     return render(request,
                   'InternetBanking/operations.html',
-                  {'user': request.user}, context)
+                  {'user': request.user,
+                   'key_form': key_form,
+                   'phone_form':phone_form,
+                   'pay_form': pay_form,
+                   'pay_flat':pay_flat,
+                   'Number':i}, context)
 
 
 def export_phone(request):
