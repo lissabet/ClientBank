@@ -1,18 +1,35 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-
-    <h1>Операции</h1>
-    <ul>
-        <li><a href="/basicview/phone_operation/">Оплатить мобильный телефон</a> | <a href="/basicview/export_phone/">Сделать
-            выписку</a></li>
-        <li><a href="/basicview/internet_pay/">Оплатить Интернет</a> | <a href="/basicview/export_internet/">Сделать
-            выписку</a></li>
-        <li><a href="/basicview/flat_pay/">Оплатить услуги ЖКХ</a> | <a href="/basicview/export_flatpay/">Сделать
-            выписку</a></li>
-    </ul>
+<link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/static/bootstrap/css/pay.css">
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/static/bootstrap/css/style_for_icons.css">
+    <script src="http://127.0.0.1:8000/static/bootstrap/js/foundation.min.js"></script>
+    <script src="http://127.0.0.1:8000/static/bootstrap/js/pay.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <h1 class="operation">Операции Интернет-банкинга ESBank</h1>
 
 
+    <div id="features" class="section features" data-magellan-destination="features">
+	<div class="row hi-icon-wrap hi-icon-effect-3 hi-icon-effect-3b">
+		<div class="large-4 columns feature">
+			<a href="/basicview/phone_operation/"><span class="icon icon-phone hi-icon"></span></a>
+            <p style="text-align: center; font-weight: bold;"><a href="/basicview/phone_operation/">Оплатить мобильный телефон</a></p>
+			<p style="text-align: center; font-weight: bold;"><a href="/basicview/export_phone/">Получить выписку</a></p>
 
-    <p style="display: block"><a href="/basicview/">На главную</a></p>
+		</div>
+		<div class="large-4 columns feature">
+			<a href="/basicview/internet_pay/"><span class="icon icon-internet hi-icon"></span></a>
+			<p style="text-align: center; font-weight: bold;"><a href="/basicview/internet_pay/">Оплатить Интернет</a></p>
+			<p style="text-align: center; font-weight: bold;"><a href="/basicview/export_internet/">Получить выписку</a></p>
+		</div>
+
+		<div class="large-4 columns feature">
+			<a href="/basicview/flat_pay/"><span class="icon icon-trophy hi-icon"></span></a>
+			<p style="text-align: center; font-weight: bold;"><a href="/basicview/flat_pay/">Оплатить услуги ЖКХ</a></p>
+			<p style="text-align: center; font-weight: bold;"><a href="/basicview/export_flatpay/">Получить выписку</a></p>
+		</div>
+	</div>
+</div>
+
+    <p class="operation"><a href="/basicview/">На главную</a></p>
 {% endblock content %}

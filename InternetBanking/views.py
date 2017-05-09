@@ -30,40 +30,49 @@ def register(request):
             user = user_form.save()
 
             user.set_password(user.password)
-            user.save()
+            emails = User.objects.filter(email=user.email)
+            logins = User.objects.filter(username=user.username)
+            if emails != []:
+                message = 'Пользователь с таким email уже существует'
+            elif logins != []:
+                message = 'Пользователь с таким логином уже существует'
+            else:
+                user.save()
 
-            profile = profile_form.save(commit=False)
-            profile.UserId = user
+                profile = profile_form.save(commit=False)
+                profile.UserId = user
 
-            profile.save()
+                profile.save()
 
-            keys = []
-            for k in range(9):
-                key = ''
-                key += str(random.randint(5525, 25896))
-                while len(key) < 10:
-                    key += str(random.randint(0, 9))
-                keys.append(key)
+                keys = []
+                for k in range(9):
+                    key = ''
+                    key += str(random.randint(5525, 25896))
+                    while len(key) < 10:
+                        key += str(random.randint(0, 9))
+                    keys.append(key)
 
-            userKey = UsersKeys(UserId=user, Key1=keys[0], Key2=keys[1], Key3=keys[2], Key4=keys[3], Key5=keys[4],
-                                Key6=keys[5], Key7=keys[6], Key8=keys[7], Key9=keys[8])
-            userKey.save()
-            mail_message = 'Welcome, {0}, to out Internet-Banking ESBBank!\n' \
-                           'We send for you your private keys. Please, save them and do not show anybody!' \
-                           '\n'.format(
-                user.username) + 'Key1: {0} \n Key2: {1} \n Key3: {2} \n Key4: {3} \n Key5: {4} \n ' \
-                                 'Key6: {5} \n Key7: {6} \n' \
-                                 'Key8: {7} \n Key9: {8} '.format(keys[0], keys[1], keys[2], keys[3], keys[4], keys[5],
-                                                                  keys[6], keys[7],
-                                                                  keys[8])
+                userKey = UsersKeys(UserId=user, Key1=keys[0], Key2=keys[1], Key3=keys[2], Key4=keys[3], Key5=keys[4],
+                                    Key6=keys[5], Key7=keys[6], Key8=keys[7], Key9=keys[8])
+                userKey.save()
+                mail_message = 'Welcome, {0}, to out Internet-Banking ESBBank!\n' \
+                               'We send for you your private keys. Please, save them and do not show anybody!' \
+                               '\n'.format(
+                    user.username) + 'Key1: {0} \n Key2: {1} \n Key3: {2} \n Key4: {3} \n Key5: {4} \n ' \
+                                     'Key6: {5} \n Key7: {6} \n' \
+                                     'Key8: {7} \n Key9: {8} '.format(keys[0], keys[1], keys[2], keys[3], keys[4],
+                                                                      keys[5],
+                                                                      keys[6], keys[7],
+                                                                      keys[8])
 
-            receiverEmail = '{0}'.format(user.email)
+                receiverEmail = '{0}'.format(user.email)
 
-            send_mail('ESbank keys for your banking', mail_message, 'Do not reply <do_not_replay@domain.com>',
-                      [receiverEmail],
-                      fail_silently=False)
+                send_mail('ESbank keys for your banking', mail_message, 'Do not reply <do_not_replay@domain.com>',
+                          [receiverEmail],
+                          fail_silently=False)
 
-            registered = True
+                registered = True
+
 
         else:
             message = "Неккоректно введены данные"
