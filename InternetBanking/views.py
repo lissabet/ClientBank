@@ -324,6 +324,8 @@ def profile(request):
     context = UserInformation.objects.get(UserId=request.user.id)
     products = Products.objects.filter(AccountNumber=request.user.id)
     user_profile = UserInformation.objects.filter(UserId=request.user)[0]
+    user = User.objects.get(pk= request.user.id)
+    user_form = UserForm(instance=user)
     form = UsersInformationFrom(instance=user_profile)
     product_form = ProductForm()
     date = datetime.date.today()
@@ -337,7 +339,8 @@ def profile(request):
                    'products': products,
                    'date': date,
                    'form': form,
-                   'product_form': product_form}, RequestContext(request))
+                   'product_form': product_form,
+                   'user_form':user_form}, RequestContext(request))
 
 
 def user_login(request):
@@ -540,17 +543,25 @@ def products(request):
 def edit(request):
     context = RequestContext(request)
     user_profile = UserInformation.objects.filter(UserId=request.user)[0]
+    user = User.objects.get(pk= request.user.id)
 
     if request.method == 'POST':
         form = UsersInformationFrom(request.POST, instance=user_profile)
-        form.save()
-        UserInformation.objects.filter(pk=user_profile.id).update()
+        user_form = UserForm(request.POST,instance=user)
+        if form.is_valid() and user_form.is_valid():
+            form.save()
+            user_form.save()
+            UserInformation.objects.filter(pk=user_profile.id).update()
+            User.objects.filter(pk=user.id).update()
+
 
         return HttpResponseRedirect('/basicview/profile')
     else:
         form = UsersInformationFrom(instance=user_profile)
+        user_form = UserForm(instance=user)
     return render(request, 'InternetBanking/Profile/edit.html', {'user': request.user,
-                                                                 'form': form}, context)
+                                                                 'form': form,
+                                                                 'user_form':user_form}, context)
 
 
 def stop(request):

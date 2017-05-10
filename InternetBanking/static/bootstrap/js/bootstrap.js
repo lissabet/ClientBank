@@ -1080,7 +1080,9 @@
 $("lll").submit(function (event) {
     event.preventDefault();
 });
-
+ $(function () {
+                $('input#datetimepicker4.form-control').datetimepicker();
+            });
 !function ($) {
 
     "use strict"; // jshint ;_;

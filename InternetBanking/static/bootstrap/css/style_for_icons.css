@@ -104,6 +104,26 @@ html{
 	-webkit-font-smoothing: antialiased;
 }
 
+ @keyframes bounce {
+                0%, 20%, 60%, 100% {
+                    -webkit-transform: translateY(0);
+                    transform: translateY(0);
+                }
+
+                40% {
+                    -webkit-transform: translateY(-20px);
+                    transform: translateY(-20px);
+                }
+
+                80% {
+                    -webkit-transform: translateY(-10px);
+                    transform: translateY(-10px);
+                }
+            }
+
+ .lnk:hover{
+	 animation: bounce 1s;
+ }
 
 .icon-phone:before,.icon-internet:before, .icon-mobile:before, .icon-mouse:before, .icon-directions:before, .icon-mail:before, .icon-paperplane:before, .icon-pencil:before, .icon-feather:before, .icon-paperclip:before, .icon-drawer:before, .icon-reply:before, .icon-reply-all:before, .icon-forward:before, .icon-user:before, .icon-users:before, .icon-user-add:before, .icon-vcard:before, .icon-export:before, .icon-location:before, .icon-map:before, .icon-compass:before, .icon-location-2:before, .icon-tools:before, .icon-cog:before, .icon-flag:before, .icon-link:before, .icon-bell:before, .icon-printer:before, .icon-flashlight:before, .icon-popup:before, .icon-house:before, .icon-quote:before, .icon-comment:before, .icon-chat:before, .icon-thumbs-down:before, .icon-thumbs-up:before, .icon-star:before, .icon-star-2:before, .icon-heart:before, .icon-heart-2:before, .icon-sharable:before, .icon-share:before, .icon-target:before, .icon-trophy:before, .icon-tag:before, .icon-camera:before, .icon-megaphone:before, .icon-moon:before, .icon-palette:before, .icon-leaf:before, .icon-music:before, .icon-music-2:before, .icon-new:before, .icon-graduation:before, .icon-book:before, .icon-newspaper:before, .icon-bag:before, .icon-airplane:before, .icon-lifebuoy:before, .icon-eye:before, .icon-clock:before, .icon-microphone:before, .icon-calendar:before, .icon-bolt:before, .icon-thunder:before, .icon-droplet:before, .icon-cd:before, .icon-briefcase:before, .icon-air:before, .icon-hourglass:before, .icon-gauge:before, .icon-language:before, .icon-network:before, .icon-key:before, .icon-battery:before, .icon-bucket:before, .icon-magnet:before, .icon-drive:before, .icon-cup:before, .icon-rocket:before, .icon-brush:before, .icon-suitcase:before, .icon-cone:before, .icon-earth:before, .icon-keyboard:before, .icon-browser:before, .icon-publish:before, .icon-progress-3:before, .icon-progress-2:before, .icon-brogress-1:before, .icon-progress-0:before, .icon-sun:before, .icon-sun-2:before, .icon-adjust:before, .icon-code:before, .icon-screen:before, .icon-infinity:before, .icon-light-bulb:before, .icon-credit-card:before, .icon-database:before, .icon-voicemail:before, .icon-clipboard:before, .icon-cart:before, .icon-box:before, .icon-ticket:before, .icon-rss:before, .icon-signal:before, .icon-thermometer:before, .icon-droplets:before, .icon-untitled:before, .icon-statistics:before, .icon-pie:before, .icon-bars:before, .icon-graph:before, .icon-lock:before, .icon-lock-open:before, .icon-logout:before, .icon-login:before, .icon-checkmark:before, .icon-cross:before, .icon-erase:before, .icon-blocked:before, .icon-info:before, .icon-cycle:before, .icon-cw:before, .icon-ccw:before, .icon-shuffle:before, .icon-arrow:before, .icon-arrow-2:before, .icon-retweet:before, .icon-loop:before, .icon-history:before, .icon-back:before, .icon-switch:before, .icon-list:before, .icon-add-to-list:before, .icon-layout:before, .icon-list-2:before, .icon-text:before, .icon-text-2:before, .icon-document:before, .icon-docs:before, .icon-landscape:before, .icon-pictures:before, .icon-video:before, .icon-music-3:before, .icon-folder:before, .icon-archive:before, .icon-trash:before, .icon-upload:before, .icon-download:before, .icon-disk:before, .icon-install:before, .icon-cloud:before, .icon-upload-2:before, .icon-bookmark:before, .icon-bookmarks:before, .icon-book-2:before, .icon-play:before, .icon-pause:before, .icon-record:before, .icon-stop:before, .icon-next:before, .icon-previous:before, .icon-first:before, .icon-last:before, .icon-resize-enlarge:before, .icon-resize-shrink:before, .icon-volume:before, .icon-sound:before, .icon-mute:before, .icon-flow-cascade:before, .icon-flow-branch:before, .icon-flow-tree:before, .icon-flow-line:before, .icon-flow-parallel:before, .icon-github:before, .icon-flickr:before, .icon-vimeo:before, .icon-twitter:before, .icon-facebook:before, .icon-googleplus:before, .icon-pinterest:before, .icon-linkedin:before, .icon-stumbleupon:before, .icon-lastfm:before, .icon-rdio:before, .icon-spotify:before, .icon-qq:before, .icon-skype:before, .icon-plus:before, .icon-minus:before, .icon-question:before, .icon-tumblr:before, .icon-dribbble:before {
 	font-family: 'entypo';
@@ -163,6 +183,7 @@ html{
 	color: rgba(222, 201, 124, 0.78);
 	background:rgba(173, 142, 127, 0.53);;
 	box-shadow: 0 0 0 4px rgba(157, 102, 70, 0.78);
+
 }
 
 .hi-icon-effect-3b .hi-icon:after {

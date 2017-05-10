@@ -8,7 +8,7 @@ urlpatterns = [
     url(r'^$', views.my_view, name='my_view'),
     url(r'^register/$', views.register, name='register'),
     url(r'^login/$', views.user_login, name='login'),
-    url(r'^logout/$', auth_views.logout, {'template_name': 'InternetBanking/login.html'}),
+    url(r'^logout/$', auth_views.logout, {'template_name': 'base.html'}),
     url(r'index/$', views.index, name='index'),
     url(r'profile/$', views.profile, name='profile'),
     url(r'export_product/$', views.product_export, name='export_product'),

@@ -8,7 +8,6 @@
     <script src="http://127.0.0.1:8000/static/bootstrap/js/pay.js"></script>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="http://127.0.0.1:8000/static/bootstrap/js/bootstrap.js"></script>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <h1 class="operation">Операции Интернет-банкинга ESBank</h1>
 
 
@@ -16,7 +15,7 @@
         <div class="row hi-icon-wrap hi-icon-effect-3 hi-icon-effect-3b">
             <div class="large-4 columns feature">
 
-                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">
+                <button type="button" class="btn btn-link lnk" data-toggle="modal" data-target="#myModal">
                     <span class="icon icon-phone hi-icon"></span>
                 </button>
                 <p style="text-align: center; font-weight: bold;">
@@ -29,8 +28,8 @@
 
             </div>
             <div class="large-4 columns feature">
-                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#InternetModal">
-                    <span class="icon icon-phone hi-icon"></span>
+                <button type="button" class="btn btn-link lnk" data-toggle="modal" data-target="#InternetModal">
+                    <span class="icon icon-internet hi-icon"></span>
                 </button>
                 <p style="text-align: center; font-weight: bold;">
                     <button type="button" class="btn btn-link" data-toggle="modal" data-target="#InternetModal">
@@ -42,8 +41,8 @@
             </div>
 
             <div class="large-4 columns feature">
-                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#FlatModal">
-                    <span class="icon icon-phone hi-icon"></span>
+                <button type="button" class="btn btn-link lnk" data-toggle="modal" data-target="#FlatModal">
+                    <span class="icon icon-trophy hi-icon"></span>
                 </button>
                 <p style="text-align: center; font-weight: bold;">
                     <button type="button" class="btn btn-link" data-toggle="modal" data-target="#FlatModal">
@@ -62,7 +61,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    <button type="button" class="close" data-dismiss="modal" onclick="location.reload()" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                     <h3 class="modal-title" id="myModalLabel">Пополнить баланс</h3>
                 </div>
@@ -76,9 +75,9 @@
                         <p class="key">Введите ключ номер №{{ Number }}</p>
                         {{ key_form.as_p }}
                         <div class="modal-footer" align="center">
-                            <div align="center"><input type="submit" name="submit" value="Сохранить"
+                            <div align="center"><input type="submit" name="submit" value="Оплатить"
                                                        class="btn btn-default"/>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Отменить</button>
+                                <button type="button" class="btn btn-default"  onclick="location.reload()" data-dismiss="modal">Отменить</button>
                             </div>
                         </div>
 
@@ -93,7 +92,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    <button type="button" class="close" data-dismiss="modal" onclick="location.reload()" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                     <h3 class="modal-title" id="myModalLabel">Оплатить Интернет</h3>
                 </div>
@@ -108,9 +107,10 @@
                         {{ key_form.as_p }}
 
                         <div class="modal-footer" align="center">
-                            <div align="center"><input type="submit" name="submit" value="Сохранить"
+                            <div align="center"><input type="submit" name="submit" value="Оплатить"
                                                        class="btn btn-default"/>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Отменить</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal"
+                                        onclick="location.reload()">Отменить</button>
                             </div>
                         </div>
                     </form>
@@ -124,7 +124,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    <button type="button" class="close" data-dismiss="modal" onclick="location.reload()"
+                            aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                     <h3 class="modal-title" id="myModalLabel">Оплатить услуги ЖКХ</h3>
                 </div>
@@ -138,9 +139,9 @@
                         <p class="key">Введите ключ номер №{{ Number }}</p>
                         {{ key_form.as_p }}
                         <div class="modal-footer" align="center">
-                            <div align="center"><input type="submit" name="submit" value="Сохранить"
+                            <div align="center"><input type="submit" name="submit" value="Оплатить"
                                                        class="btn btn-default"/>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Отменить</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal"onclick="location.reload()">Отменить</button>
                             </div>
                         </div>
                     </form>

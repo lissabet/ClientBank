@@ -111,6 +111,7 @@ h1#title {
 #register form input {
     height: 50px;
     outline: none;
+    border: none;
 }
 
 #login form input[type="text"], input[type="password"],

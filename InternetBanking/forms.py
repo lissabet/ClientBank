@@ -9,6 +9,18 @@ class UsersInformationFrom(forms.ModelForm):
     Address = forms.CharField(label="Адрес")
     Phone = forms.CharField(label="Телефон")
 
+    def __init__(self, *args, **kwargs):
+        super(UsersInformationFrom, self).__init__(*args, **kwargs)
+        self.fields['FullName'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['Address'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['Phone'].widget.attrs.update({
+            'class': 'form-control',
+        })
+
     class Meta:
         model = UserInformation
         fields = ('FullName', 'Address', 'Phone')
@@ -19,6 +31,21 @@ class UserForm(forms.ModelForm):
     confirm_password = forms.CharField(widget=forms.PasswordInput(), label="Повторите пароль")
     username = forms.CharField(label="Логин")
     email = forms.CharField(label="Email")
+
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        self.fields['password'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['confirm_password'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['username'].widget.attrs.update({
+            'class': 'form-control',
+        })
+        self.fields['email'].widget.attrs.update({
+            'class': 'form-control'
+        })
 
     def clean(self):
         cleaned_data = super(UserForm, self).clean()
@@ -51,15 +78,29 @@ class ChoiseForCurrency(forms.ModelChoiceField):
 
 
 class ProductForm(forms.ModelForm):
-    TypeId = ChoiseForProductType(queryset=ProductType.objects.all(), label="Тип продукта")
+    TypeId = ChoiseForProductType(queryset=ProductType.objects.all(), label="Тип продукта", empty_label=None)
     Balance = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
     ContractDate = forms.DateField(widget=forms.HiddenInput(), initial=datetime.date.today)
-    CurrencyId = ChoiseForCurrency(queryset=Currency.objects.all(), label="Вылюта продукта")
+    CurrencyId = ChoiseForCurrency(queryset=Currency.objects.all(), label="Вылюта продукта", empty_label=None)
     EndContractDate = forms.DateField(widget=forms.SelectDateWidget, label="Срок действия продукта")
+
+    def __init__(self, *args, **kwargs):
+        super(ProductForm, self).__init__(*args, **kwargs)
+        self.fields['TypeId'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['CurrencyId'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['EndContractDate'].widget.attrs.update({
+            'class': 'form-control',
+        })
 
     class Meta:
         model = Products
         fields = ('TypeId', 'CurrencyId', 'EndContractDate')
+
+
 
 
 class ChoiseForOperator(forms.ModelChoiceField):
@@ -162,6 +203,8 @@ class KeyForm(forms.Form):
 
 class ChangePassword(forms.Form):
     email = forms.CharField(label="Введите email")
+
+   
 
 
 class RecoverCodeForm(forms.Form):

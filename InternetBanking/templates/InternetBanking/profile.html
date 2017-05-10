@@ -6,54 +6,11 @@
 
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="http://127.0.0.1:8000/static/bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/static/bootstrap/css/profile_style.css">
 
-    <style>
-        input#id_FullName {
-            margin: 0px 20px 0px 99px;
-        }
+<h1 class="name">Личный профиль: {{ profile.FullName }}</h1>
+<div class="inf">
 
-        input#id_Address {
-            margin: 0 50px 0px 54px;
-        }
-
-        input#id_Phone {
-            margin: 0px 20px 0px 17px;
-        }
-
-        form {
-            text-align: center;
-        }
-
-        label[for=id_Address] {
-            padding-right: 20px;
-            margin: 0px 20px 0px 30px;
-        }
-
-        label[for=id_TypeId] {
-            padding-right: 75px;
-            margin: 0px 20px 0px 30px;;
-        }
-
-        label[for=id_CurrencyId] {
-            padding-right: 101px;
-            margin: 0px 20px 0px 30px;
-        }
-
-        select#id_CurrencyId {
-            position: relative;
-            left: -11%;
-        }
-
-        select#id_EndContractDate_month,
-        select#id_EndContractDate_day,
-        select#id_EndContractDate_year {
-            position: relative;
-            left: 3%;
-        }
-
-    </style>
-
-    <h1>Личный профиль: {{ profile.FullName }}</h1>
 
     <div class=" col-md-9 col-lg-9 " style="">
         <table class="table table-user-information">
@@ -85,12 +42,14 @@
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">
                 Добавить банковский продукт
             </button>
+            <a href="/basicview/operations/" class="btn btn-primary">Перейти к списку операций</a>
+            <a href="/basicview/archive/" class="btn btn-primary">Архив операций</a>
         </div>
     </div>
+</div>
 
 
-
-    <div align="right">
+    <div align="right" class="product">
         <h2>Список продуктов ESBank:</h2>
         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
             Посмотреть продукты
@@ -190,6 +149,7 @@
 
                         {% csrf_token %}
                         {{ form.as_p }}
+                        {{ user_form.as_p}}
                         <div align="center">
                             <div align="center"><input type="submit" name="submit" value="Сохранить"
                                                        class="btn btn-default"/>
