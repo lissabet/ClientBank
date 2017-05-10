@@ -6,10 +6,10 @@ from django.shortcuts import render, render_to_response
 from django.template import Context, loader, RequestContext
 from InternetBanking.forms import UserForm, UsersInformationFrom
 from InternetBanking.forms import ProductForm, PhoneOperationForm
-from InternetBanking.models import UserInformation, Operations, Products, ProductStatus, UsersKeys
+from InternetBanking.models import UserInformation, Operations, Products, ProductStatus, UsersKeys,TransferMoneyAchive
 from InternetBanking.models import PhoneOperation, FlatPay, InternetPay, User
 from InternetBanking.forms import InternetPayForm, FlatPayForm, KeyForm, LoginForm
-from InternetBanking.forms import ChangePassword, RecoverCodeForm, NewPasswordForm
+from InternetBanking.forms import ChangePassword, RecoverCodeForm, NewPasswordForm, MoneyTransferForm
 import random, datetime
 from django.core.mail import send_mail
 
@@ -119,6 +119,7 @@ def operations(request):
     phone_form = PhoneOperationForm(eventUser=request.user)
     pay_form = InternetPayForm(eventUser=request.user)
     pay_flat = FlatPayForm(eventUser=request.user)
+    transfer_form = MoneyTransferForm(eventUser=request.user)
     global i
     i = random.randint(1, 9)
     return render(request,
@@ -128,7 +129,8 @@ def operations(request):
                    'phone_form':phone_form,
                    'pay_form': pay_form,
                    'pay_flat':pay_flat,
-                   'Number':i}, context)
+                   'Number':i,
+                   'transfer_form':transfer_form}, context)
 
 
 def export_phone(request):
@@ -329,6 +331,10 @@ def profile(request):
     form = UsersInformationFrom(instance=user_profile)
     product_form = ProductForm()
     date = datetime.date.today()
+    key_form = KeyForm()
+    global i
+    i = random.randint(1, 9)
+    transfer_form = MoneyTransferForm(eventUser=request.user)
     for prod in products:
         if prod.EndContractDate >= date:
             Products.objects.filter(pk=prod.id).update(StatusId=2)
@@ -340,7 +346,10 @@ def profile(request):
                    'date': date,
                    'form': form,
                    'product_form': product_form,
-                   'user_form':user_form}, RequestContext(request))
+                   'user_form':user_form,
+                   'transfer_form':transfer_form,
+                   'key_form':key_form,
+                   'Number': i}, RequestContext(request))
 
 
 def user_login(request):
@@ -480,10 +489,12 @@ def archive(request):
     flat_pays = FlatPay.objects.filter(UserId=request.user)
     internet_operations = InternetPay.objects.filter(UserId=request.user)
     fullname = UserInformation.objects.filter(UserId=request.user)[0]
+    transfer = TransferMoneyAchive.objects.filter(UserId=request.user)
     return render(request, 'InternetBanking/archive.html', {'user': request.user,
                                                             'phone': phone_operations,
                                                             'flat': flat_pays,
                                                             'internet': internet_operations,
+                                                            'transfer': transfer,
                                                             'userinf': fullname}, context)
 
 
@@ -523,6 +534,11 @@ def product_export(request):
                 writer.writerow(
                     [rows.Date, 'Оплата Интернет провайдера {0}'.format(rows.InternetProviderId.Name),
                      rows.Amount]
+                )
+            pays = TransferMoneyAchive.objects.filter(ProductId=num)
+            for rows in pays:
+                writer.writerow(
+                    [rows.Date, 'Перевод средств на счет №{0}'.format(rows.AcceptUser), rows.Amount]
                 )
             return response
 
@@ -576,3 +592,55 @@ def active(request):
         num = int(request.POST["num"])
         Products.objects.filter(pk=num).update(StatusId=1)
         return HttpResponseRedirect('/basicview/profile/')
+
+
+def money_transfer(request):
+    context = RequestContext(request)
+    if request.method == 'POST':
+        transfer_form = MoneyTransferForm(data=request.POST, eventUser=request.user)
+        key_form = KeyForm(data=request.POST)
+        field = 'Key{}'.format(i)
+        userKey = UsersKeys.objects.filter(UserId=request.user)
+        if transfer_form.is_valid() and key_form.is_valid():
+            acceper = request.POST.get('AcceptAccount')
+            sender = request.POST.get('ProductId')
+            amount = request.POST.get('Amount')
+            key = key_form.cleaned_data.get('Key')
+            product = Products.objects.get(ContractNumber=acceper)
+            product_send = Products.objects.get(pk=sender)
+            if product and product.CurrencyId == product_send.CurrencyId and product.StatusId.id == 1 \
+                    and product_send.Balance >= int(amount) and key == userKey.values('{}'.format(field))[0][field]:
+                Products.objects.filter(pk=product.id).update(Balance= int(product.Balance) + int(amount))
+                Products.objects.filter(pk=sender).update(Balance=int(product_send.Balance) - int(amount))
+                achive = TransferMoneyAchive(UserId=request.user, AcceptUser=acceper, Amount=int(amount),
+                                             ProductId=product_send)
+                achive.save()
+                return HttpResponseRedirect('basicview/operations/')
+            else:
+                return HttpResponseRedirect('/basicview/nomoney')
+    else:
+        transfer_form = MoneyTransferForm(eventUser=request.user)
+        key_form = KeyForm()
+        global i
+        i = random.randint(1, 9)
+    return render(request, 'InternetBanking/operations/money_transfer.html', {'user': request.user,
+                                                                 'transfer_form': transfer_form,
+                                                                              'key_form': key_form,
+                                                                              'Number':i}, context)
+
+
+def transfer_export(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename=export.csv'
+
+    writer = csv.writer(response)
+    writer.writerow(['Дата', 'Сумма', 'Счет получатель', 'Номер продукта'])
+    pays = TransferMoneyAchive.objects.filter(UserId=request.user)
+    for rows in pays:
+        writer.writerow([rows.Date, '{0} {1}'.format(rows.Amount, rows.ProductId.CurrencyId.CurrencyCode),
+                         rows.AcceptUser, rows.ProductId.ContractNumber])
+    return response
+
+
+
+

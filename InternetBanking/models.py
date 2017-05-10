@@ -104,3 +104,10 @@ class UsersKeys(models.Model):
     Key7 = models.CharField(max_length=10)
     Key8 = models.CharField(max_length=10)
     Key9 = models.CharField(max_length=10)
+
+class TransferMoneyAchive(models.Model):
+    UserId = models.ForeignKey(User)
+    ProductId = models.ForeignKey(Products)
+    AcceptUser = models.CharField(max_length=55)
+    Date = models.DateField(default=datetime.date.today())
+    Amount = models.IntegerField()

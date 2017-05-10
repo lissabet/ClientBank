@@ -204,7 +204,7 @@ class KeyForm(forms.Form):
 class ChangePassword(forms.Form):
     email = forms.CharField(label="Введите email")
 
-   
+
 
 
 class RecoverCodeForm(forms.Form):
@@ -224,3 +224,22 @@ class NewPasswordForm(forms.Form):
             raise forms.ValidationError("Пароли не совпадают")
 
         return cleaned_data
+
+
+class MoneyTransferForm(forms.Form):
+    ProductId = ChoiseForProduct(queryset=Products.objects.all(), label="Продукт отправитель", empty_label=None)
+    AcceptAccount = forms.CharField(label="Счет получатель")
+    Amount = forms.IntegerField(label="Сумма перевода")
+
+    def __init__(self, eventUser, *args, **kwargs):
+        super(MoneyTransferForm, self).__init__(*args, **kwargs)
+        self.fields['ProductId'].queryset = Products.objects.filter(AccountNumber=eventUser.id).filter(StatusId=1)
+        self.fields['ProductId'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['AcceptAccount'].widget.attrs.update({
+            'class': 'form-control'
+        })
+        self.fields['Amount'].widget.attrs.update({
+            'class': 'form-control'
+        })

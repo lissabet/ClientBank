@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <h1>Перевод средств</h1>
+
+    <form id="user_form" method="post" action="/basicview/money_transfer/"
+          enctype="multipart/form-data">
+
+        {% csrf_token %}
+        {{ transfer_form.as_p }}
+        <p>Введите ключ номер №{{ Number }}</p>
+        {{ key_form.as_p }}
+
+        <input type="submit" name="submit" value="Перевести"/>
+    </form>
+
+{% endblock content %}

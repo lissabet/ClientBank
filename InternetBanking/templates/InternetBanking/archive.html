@@ -1,9 +1,17 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+<style>
+html{
+    overflow-y:scroll;
+}
+.tbl{
+    text-align: center;
+}
+</style>
 
     <h1 align="center">Архив совершенных операций клиента: {{ userinf.FullName }}</h1>
-    <table class="table table-bordered">
+    <table class="table table-bordered tbl">
         <caption>Оплата мобильного телефона</caption>
         <tr style="border: #1a1a1a; color: midnightblue; background-color: #3a87ad">
             <td>Дата оплаты</td>
@@ -23,7 +31,7 @@
 
     </table>
 
-    <table class="table table-bordered">
+    <table class="table table-bordered tbl">
         <caption>Оплата Интернет услуг</caption>
         <tr style="border: #1a1a1a; color: midnightblue; background-color: #3a87ad">
             <td>Дата</td>
@@ -45,7 +53,7 @@
 
     </table>
 
-    <table class="table table-bordered">
+    <table class="table table-bordered tbl">
         <caption>Оплата ЖКХ услуг</caption>
         <tr style="border: #1a1a1a; color: midnightblue; background-color: #3a87ad">
             <td>Дата</td>
@@ -58,6 +66,26 @@
             <tr>
                 <td>{{ pay.Date }}</td>
                 <td>{{ pay.AccountNumber }}</td>
+                <td>{{ pay.ProductId.TypeId.TypeName }} №{{ pay.ProductId.ContractNumber }}</td>
+                <td>{{ pay.Amount }} {{ pay.ProductId.CurrencyId.CurrencyCode }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+
+    <table class="table table-bordered tbl">
+        <caption>Перевод средств</caption>
+        <tr style="border: #1a1a1a; color: midnightblue; background-color: #3a87ad">
+            <td>Дата</td>
+            <td>Номер счета получателя</td>
+            <td>Номер счета отправителя</td>
+            <td>Сумма платежа</td>
+        </tr>
+
+        {% for pay in transfer %}
+            <tr>
+                <td>{{ pay.Date }}</td>
+                <td>№{{ pay.AcceptUser }}</td>
                 <td>{{ pay.ProductId.TypeId.TypeName }} №{{ pay.ProductId.ContractNumber }}</td>
                 <td>{{ pay.Amount }} {{ pay.ProductId.CurrencyId.CurrencyCode }}</td>
             </tr>

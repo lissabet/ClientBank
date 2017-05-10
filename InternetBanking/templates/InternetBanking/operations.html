@@ -12,7 +12,7 @@
 
 
     <div id="features" class="section features" data-magellan-destination="features">
-        <div class="row hi-icon-wrap hi-icon-effect-3 hi-icon-effect-3b">
+        <div class="row hi-icon-wrap hi-icon-effect-3 hi-icon-effect-3b icon-row">
             <div class="large-4 columns feature">
 
                 <button type="button" class="btn btn-link lnk" data-toggle="modal" data-target="#myModal">
@@ -50,6 +50,19 @@
                     </button>
                 </p>
                 <p style="text-align: center; font-weight: bold;"><a href="/basicview/export_flatpay/">Получить
+                    выписку</a></p>
+            </div>
+
+            <div class="large-4 columns feature">
+                <button type="button" class="btn btn-link lnk" data-toggle="modal" data-target="#transfer">
+                    <span class="icon icon-credit-card hi-icon"></span>
+                </button>
+                <p style="text-align: center; font-weight: bold;">
+                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#transfer">
+                        Перевод средств
+                    </button>
+                </p>
+                <p style="text-align: center; font-weight: bold;"><a href="/basicview/transfer_export/">Получить
                     выписку</a></p>
             </div>
         </div>
@@ -142,6 +155,36 @@
                             <div align="center"><input type="submit" name="submit" value="Оплатить"
                                                        class="btn btn-default"/>
                                 <button type="button" class="btn btn-default" data-dismiss="modal"onclick="location.reload()">Отменить</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="transfer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" onclick="location.reload()" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Перевод средств</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form style="margin: 10px" id="user_form" method="post" action="/basicview/money_transfer/"
+                          enctype="multipart/form-data" class="main">
+
+                        {% csrf_token %}
+                        {{ transfer_form.as_p }}
+                        <p class="key">Введите ключ номер №{{ Number }}</p>
+                        {{ key_form.as_p }}
+                        <div class="modal-footer" align="center">
+                            <div align="center"><input type="submit" name="submit" value="Оплатить"
+                                                       class="btn btn-default"/>
+                                <button type="button" class="btn btn-default"  onclick="location.reload()" data-dismiss="modal">Отменить</button>
                             </div>
                         </div>
                     </form>

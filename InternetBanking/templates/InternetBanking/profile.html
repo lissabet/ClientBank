@@ -44,6 +44,9 @@
             </button>
             <a href="/basicview/operations/" class="btn btn-primary">Перейти к списку операций</a>
             <a href="/basicview/archive/" class="btn btn-primary">Архив операций</a>
+           <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#transfer">
+                Перевод средств
+            </button> -->
         </div>
     </div>
 </div>
@@ -182,6 +185,36 @@
                             <div align="center"><input type="submit" name="submit" value="Создать"
                                                        class="btn btn-default"/>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Отменить</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="transfer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Перевод средств</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form style="margin: 10px" id="user_form" method="post" action="/basicview/money_transfer/"
+                          enctype="multipart/form-data" class="main">
+
+                        {% csrf_token %}
+                        {{ transfer_form.as_p }}
+                        <p class="key">Введите ключ номер №{{ Number }}</p>
+                        {{ key_form.as_p }}
+                        <div class="modal-footer" align="center">
+                            <div align="center"><input type="submit" name="submit" value="Оплатить"
+                                                       class="btn btn-default"/>
+                                <button type="button" class="btn btn-default"  onclick="location.reload()" data-dismiss="modal">Отменить</button>
                             </div>
                         </div>
                     </form>

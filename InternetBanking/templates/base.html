@@ -117,25 +117,27 @@
                 color: #ddcca9;
                 background-color: rgba(53, 40, 41, 0.74)
             }
-            a.lnk:hover{
-                border:none;
+
+            a.lnk:hover {
+                border: none;
                 background-color: rgba(94, 68, 70, 0.74);
                 animation: bounce 1s;
             }
         </style>
+        {% if user.is_authenticated %}
+            <div id="features" class="section features" data-magellan-destination="features">
+                <div class="row hi-icon-wrap hi-icon-effect-3 hi-icon-effect-3b">
+                    <div class="columns lnk">
 
-        <div id="features" class="section features" data-magellan-destination="features">
-            <div class="row hi-icon-wrap hi-icon-effect-3 hi-icon-effect-3b">
-                <div class="columns lnk">
-
-                    <a href="/basicview/operations/" class="btn btn-primary lnk">Перейти к списку операций</a>
-                </div>
-                <div class="large-4 columns feature lnk">
-                    <a href="/basicview/archive/" class="btn btn-primary lnk">Архив операций</a>
+                        <a href="/basicview/operations/" class="btn btn-primary lnk">Перейти к списку операций</a>
+                    </div>
+                    <div class="large-4 columns feature lnk">
+                        <a href="/basicview/archive/" class="btn btn-primary lnk">Архив операций</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+            </div>
+        {% endif %}
 
 {% endblock content %}
 </body>

@@ -1,293 +1,470 @@
-h1.operation{
+h1.operation {
     font-weight: bold;
     position: relative;
     left: 370px;
 }
 
-p.operation{
+p.operation {
     position: relative;
     left: 600px;
     top: 70px;
 }
 
-html{
-    overflow:  hidden;
+html {
+    overflow: hidden;
 }
 
 .button.white {
-	clear: both;
-	color: #4e97cc;
-	background-color: white;
-	border: 0 !important;
-	-moz-box-shadow: 0 1px 0 rgba(0,0,0,.2) !important;
-	-webkit-box-shadow: 0 1px 0 rgba(0,0,0,.2) !important;
-	box-shadow: 0 1px 0 rgba(0,0,0,.2) !important;
-	background-image: none !important;
+    clear: both;
+    color: #4e97cc;
+    background-color: white;
+    border: 0 !important;
+    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, .2) !important;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, .2) !important;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, .2) !important;
+    background-image: none !important;
 }
+
 .button.white:hover {
-	opacity: 0.9;
+    opacity: 0.9;
 }
 
 /* Section */
 .section {
-	padding: 70px 0;
+    padding: 70px 0;
 }
+
 .section.orange {
-	background-color: #4e97cc;
+    background-color: #4e97cc;
 }
+
 .section.gray {
-	border-top: 1px solid #f2f2f2;
-	border-bottom: 1px solid #f2f2f2;
-	background:#FCFCFC;
+    border-top: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
+    background: #FCFCFC;
 }
+
 .section .subheading {
-	font-size: 20px;
-	font-weight: 200;
-	line-height: 1.3em;
-	display: block;
-	text-align: center;
-	margin-bottom: 60px;
-	display: block;
+    font-size: 20px;
+    font-weight: 200;
+    line-height: 1.3em;
+    display: block;
+    text-align: center;
+    margin-bottom: 60px;
+    display: block;
 }
 
 /* Features */
 .feature {
-	text-align: center;
-	padding-top: 30px;
+    text-align: center;
+    padding-top: 30px;
 }
+
 .feature h3 {
-	font-size: 24px;
+    font-size: 24px;
 }
+
 .feature p {
-	font-size: 14px;
+    font-size: 14px;
     color: black;
     text-align: left;
 }
+
 .feature .icon {
 
-	font-size: 4.8em;
-	border-radius: 200px;
-	-moz-border-radius: 200px;
-	-webkit-border-radius: 200px;
-	padding-top: 25px;
-	width: 130px;
-	height: 130px;
-	display: inline-block;
-	text-align: center;
-	margin-bottom: 30px;
+    font-size: 4.8em;
+    border-radius: 200px;
+    -moz-border-radius: 200px;
+    -webkit-border-radius: 200px;
+    padding-top: 25px;
+    width: 130px;
+    height: 130px;
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 30px;
 }
-
-
-
 
 /* ICONS */
 @font-face {
-	font-family: 'entypo';
-	src:url('../fonts/entypo.eot');
-	src:url('../fonts/entypo.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/entypo.woff') format('woff'),
-		url('../fonts/entypo.ttf') format('truetype'),
-		url('../fonts/entypo.svg#entypo') format('svg');
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'entypo';
+    src: url('../fonts/entypo.eot');
+    src: url('../fonts/entypo.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/entypo.woff') format('woff'),
+    url('../fonts/entypo.ttf') format('truetype'),
+    url('../fonts/entypo.svg#entypo') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 
 /* Use the following CSS code if you want to use data attributes for inserting your icons */
 [data-icon]:before {
-	font-family: 'entypo';
-	content: attr(data-icon);
-	speak: none;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-	-webkit-font-smoothing: antialiased;
+    font-family: 'entypo';
+    content: attr(data-icon);
+    speak: none;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
 }
 
- @keyframes bounce {
-                0%, 20%, 60%, 100% {
-                    -webkit-transform: translateY(0);
-                    transform: translateY(0);
-                }
+@keyframes bounce {
+    0%, 20%, 60%, 100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
 
-                40% {
-                    -webkit-transform: translateY(-20px);
-                    transform: translateY(-20px);
-                }
+    40% {
+        -webkit-transform: translateY(-20px);
+        transform: translateY(-20px);
+    }
 
-                80% {
-                    -webkit-transform: translateY(-10px);
-                    transform: translateY(-10px);
-                }
-            }
-
- .lnk:hover{
-	 animation: bounce 1s;
- }
-
-.icon-phone:before,.icon-internet:before, .icon-mobile:before, .icon-mouse:before, .icon-directions:before, .icon-mail:before, .icon-paperplane:before, .icon-pencil:before, .icon-feather:before, .icon-paperclip:before, .icon-drawer:before, .icon-reply:before, .icon-reply-all:before, .icon-forward:before, .icon-user:before, .icon-users:before, .icon-user-add:before, .icon-vcard:before, .icon-export:before, .icon-location:before, .icon-map:before, .icon-compass:before, .icon-location-2:before, .icon-tools:before, .icon-cog:before, .icon-flag:before, .icon-link:before, .icon-bell:before, .icon-printer:before, .icon-flashlight:before, .icon-popup:before, .icon-house:before, .icon-quote:before, .icon-comment:before, .icon-chat:before, .icon-thumbs-down:before, .icon-thumbs-up:before, .icon-star:before, .icon-star-2:before, .icon-heart:before, .icon-heart-2:before, .icon-sharable:before, .icon-share:before, .icon-target:before, .icon-trophy:before, .icon-tag:before, .icon-camera:before, .icon-megaphone:before, .icon-moon:before, .icon-palette:before, .icon-leaf:before, .icon-music:before, .icon-music-2:before, .icon-new:before, .icon-graduation:before, .icon-book:before, .icon-newspaper:before, .icon-bag:before, .icon-airplane:before, .icon-lifebuoy:before, .icon-eye:before, .icon-clock:before, .icon-microphone:before, .icon-calendar:before, .icon-bolt:before, .icon-thunder:before, .icon-droplet:before, .icon-cd:before, .icon-briefcase:before, .icon-air:before, .icon-hourglass:before, .icon-gauge:before, .icon-language:before, .icon-network:before, .icon-key:before, .icon-battery:before, .icon-bucket:before, .icon-magnet:before, .icon-drive:before, .icon-cup:before, .icon-rocket:before, .icon-brush:before, .icon-suitcase:before, .icon-cone:before, .icon-earth:before, .icon-keyboard:before, .icon-browser:before, .icon-publish:before, .icon-progress-3:before, .icon-progress-2:before, .icon-brogress-1:before, .icon-progress-0:before, .icon-sun:before, .icon-sun-2:before, .icon-adjust:before, .icon-code:before, .icon-screen:before, .icon-infinity:before, .icon-light-bulb:before, .icon-credit-card:before, .icon-database:before, .icon-voicemail:before, .icon-clipboard:before, .icon-cart:before, .icon-box:before, .icon-ticket:before, .icon-rss:before, .icon-signal:before, .icon-thermometer:before, .icon-droplets:before, .icon-untitled:before, .icon-statistics:before, .icon-pie:before, .icon-bars:before, .icon-graph:before, .icon-lock:before, .icon-lock-open:before, .icon-logout:before, .icon-login:before, .icon-checkmark:before, .icon-cross:before, .icon-erase:before, .icon-blocked:before, .icon-info:before, .icon-cycle:before, .icon-cw:before, .icon-ccw:before, .icon-shuffle:before, .icon-arrow:before, .icon-arrow-2:before, .icon-retweet:before, .icon-loop:before, .icon-history:before, .icon-back:before, .icon-switch:before, .icon-list:before, .icon-add-to-list:before, .icon-layout:before, .icon-list-2:before, .icon-text:before, .icon-text-2:before, .icon-document:before, .icon-docs:before, .icon-landscape:before, .icon-pictures:before, .icon-video:before, .icon-music-3:before, .icon-folder:before, .icon-archive:before, .icon-trash:before, .icon-upload:before, .icon-download:before, .icon-disk:before, .icon-install:before, .icon-cloud:before, .icon-upload-2:before, .icon-bookmark:before, .icon-bookmarks:before, .icon-book-2:before, .icon-play:before, .icon-pause:before, .icon-record:before, .icon-stop:before, .icon-next:before, .icon-previous:before, .icon-first:before, .icon-last:before, .icon-resize-enlarge:before, .icon-resize-shrink:before, .icon-volume:before, .icon-sound:before, .icon-mute:before, .icon-flow-cascade:before, .icon-flow-branch:before, .icon-flow-tree:before, .icon-flow-line:before, .icon-flow-parallel:before, .icon-github:before, .icon-flickr:before, .icon-vimeo:before, .icon-twitter:before, .icon-facebook:before, .icon-googleplus:before, .icon-pinterest:before, .icon-linkedin:before, .icon-stumbleupon:before, .icon-lastfm:before, .icon-rdio:before, .icon-spotify:before, .icon-qq:before, .icon-skype:before, .icon-plus:before, .icon-minus:before, .icon-question:before, .icon-tumblr:before, .icon-dribbble:before {
-	font-family: 'entypo';
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
-	-webkit-font-smoothing: antialiased;
+    80% {
+        -webkit-transform: translateY(-10px);
+        transform: translateY(-10px);
+    }
 }
+
+.lnk:hover {
+    animation: bounce 1s;
+}
+
+.icon-phone:before, .icon-internet:before, .icon-mobile:before, .icon-mouse:before, .icon-directions:before,
+.icon-mail:before, .icon-paperplane:before, .icon-pencil:before, .icon-feather:before, .icon-paperclip:before,
+.icon-drawer:before, .icon-reply:before, .icon-reply-all:before, .icon-forward:before, .icon-user:before,
+.icon-users:before, .icon-user-add:before, .icon-vcard:before, .icon-export:before, .icon-location:before,
+.icon-map:before, .icon-compass:before, .icon-location-2:before, .icon-tools:before, .icon-cog:before,
+.icon-flag:before, .icon-link:before, .icon-bell:before, .icon-printer:before, .icon-flashlight:before,
+.icon-popup:before, .icon-house:before, .icon-quote:before, .icon-comment:before, .icon-chat:before,
+.icon-thumbs-down:before, .icon-thumbs-up:before, .icon-star:before, .icon-star-2:before, .icon-heart:before,
+.icon-heart-2:before, .icon-sharable:before, .icon-share:before, .icon-target:before, .icon-trophy:before,
+.icon-tag:before, .icon-camera:before, .icon-megaphone:before, .icon-moon:before, .icon-palette:before,
+.icon-leaf:before, .icon-music:before, .icon-music-2:before, .icon-new:before, .icon-graduation:before,
+.icon-book:before, .icon-newspaper:before, .icon-bag:before, .icon-airplane:before, .icon-lifebuoy:before,
+.icon-eye:before, .icon-clock:before, .icon-microphone:before, .icon-calendar:before, .icon-bolt:before,
+.icon-thunder:before, .icon-droplet:before, .icon-cd:before, .icon-briefcase:before, .icon-air:before,
+.icon-hourglass:before, .icon-gauge:before, .icon-language:before, .icon-network:before, .icon-key:before,
+.icon-battery:before, .icon-bucket:before, .icon-magnet:before, .icon-drive:before, .icon-cup:before,
+.icon-rocket:before, .icon-brush:before, .icon-suitcase:before, .icon-cone:before, .icon-earth:before, .icon-keyboard:before, .icon-browser:before, .icon-publish:before, .icon-progress-3:before, .icon-progress-2:before, .icon-brogress-1:before, .icon-progress-0:before, .icon-sun:before, .icon-sun-2:before, .icon-adjust:before, .icon-code:before, .icon-screen:before, .icon-infinity:before, .icon-light-bulb:before, .icon-credit-card:before, .icon-database:before, .icon-voicemail:before, .icon-clipboard:before, .icon-cart:before, .icon-box:before, .icon-ticket:before, .icon-rss:before, .icon-signal:before, .icon-thermometer:before, .icon-droplets:before, .icon-untitled:before, .icon-statistics:before, .icon-pie:before, .icon-bars:before, .icon-graph:before, .icon-lock:before, .icon-lock-open:before, .icon-logout:before, .icon-login:before, .icon-checkmark:before, .icon-cross:before, .icon-erase:before, .icon-blocked:before, .icon-info:before, .icon-cycle:before, .icon-cw:before, .icon-ccw:before, .icon-shuffle:before, .icon-arrow:before, .icon-arrow-2:before, .icon-retweet:before, .icon-loop:before, .icon-history:before, .icon-back:before, .icon-switch:before, .icon-list:before, .icon-add-to-list:before, .icon-layout:before, .icon-list-2:before, .icon-text:before, .icon-text-2:before, .icon-document:before, .icon-docs:before, .icon-landscape:before, .icon-pictures:before, .icon-video:before, .icon-music-3:before, .icon-folder:before, .icon-archive:before, .icon-trash:before, .icon-upload:before, .icon-download:before, .icon-disk:before, .icon-install:before, .icon-cloud:before, .icon-upload-2:before, .icon-bookmark:before, .icon-bookmarks:before, .icon-book-2:before, .icon-play:before, .icon-pause:before, .icon-record:before, .icon-stop:before, .icon-next:before, .icon-previous:before, .icon-first:before, .icon-last:before, .icon-resize-enlarge:before, .icon-resize-shrink:before, .icon-volume:before, .icon-sound:before, .icon-mute:before, .icon-flow-cascade:before, .icon-flow-branch:before, .icon-flow-tree:before, .icon-flow-line:before, .icon-flow-parallel:before, .icon-github:before, .icon-flickr:before, .icon-vimeo:before, .icon-twitter:before, .icon-facebook:before, .icon-googleplus:before, .icon-pinterest:before, .icon-linkedin:before, .icon-stumbleupon:before, .icon-lastfm:before, .icon-rdio:before, .icon-spotify:before, .icon-qq:before, .icon-skype:before, .icon-plus:before, .icon-minus:before, .icon-question:before, .icon-tumblr:before, .icon-dribbble:before {
+    font-family: 'entypo';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+}
+
 .icon-internet:before {
-	content: "\e06a";
-}
-.icon-phone:before{ content:'\e000'; }
-.icon-trophy:before {
-	content: "\e098";
-}
-.icon-browser:before {
-	content: "\e055";
+    content: "\e06a";
 }
 
+.icon-phone:before {
+    content: '\e000';
+}
+
+.icon-trophy:before {
+    content: "\e098";
+}
+
+.icon-browser:before {
+    content: "\e055";
+}
+
+.icon-credit-card:before {
+    content: "\e062";
+}
 
 /* Icon Effects */
 
-.entypo.mobile:before{ content:'\1F4F1'; }
+.entypo.mobile:before {
+    content: '\1F4F1';
+}
 
 .hi-icon-effect-3 .hi-icon {
-	box-shadow: 0 0 0 4px #a3a86e;
-	-webkit-transition: color 0.3s;
-	-moz-transition: color 0.3s;
-	transition: color 0.3s;
+    box-shadow: 0 0 0 4px #a3a86e;
+    -webkit-transition: color 0.3s;
+    -moz-transition: color 0.3s;
+    transition: color 0.3s;
 }
 
 .hi-icon-effect-3 .hi-icon:after {
-	top: -2px;
-	left: -2px;
-	padding: 2px;
-	z-index: -1;
-	background: green;
-	-webkit-transition: -webkit-transform 1s, opacity 0.6s;
-	-moz-transition: -moz-transform 1s, opacity 0.6s;
-	transition: transform 1s, opacity 0.6s;
+    top: -2px;
+    left: -2px;
+    padding: 2px;
+    z-index: -1;
+    background: green;
+    -webkit-transition: -webkit-transform 1s, opacity 0.6s;
+    -moz-transition: -moz-transform 1s, opacity 0.6s;
+    transition: transform 1s, opacity 0.6s;
 }
-
-
 
 /* Effect */
 .hi-icon-effect-3b .hi-icon {
-	color: #fff;
-	background: rgba(179, 163, 104, 0.78);
+    color: #fff;
+    background: rgba(179, 163, 104, 0.78);
 }
 
-.no-touch .hi-icon-effect-3b .hi-icon:hover ,
+.no-touch .hi-icon-effect-3b .hi-icon:hover,
 .icon .icon-tools .hi-icon:hover,
-.hi-icon:hover{
-	color: rgba(222, 201, 124, 0.78);
-	background:rgba(173, 142, 127, 0.53);;
-	box-shadow: 0 0 0 4px rgba(157, 102, 70, 0.78);
+.hi-icon:hover {
+    color: rgba(222, 201, 124, 0.78);
+    background: rgba(173, 142, 127, 0.53);;
+    box-shadow: 0 0 0 4px rgba(157, 102, 70, 0.78);
 
 }
 
 .hi-icon-effect-3b .hi-icon:after {
-	-webkit-transform: scale(2.3);
-	-moz-transform: scale(2.3);
-	-ms-transform: scale(2.3);
-	transform: scale(2.3);
-	opacity: 0;
+    -webkit-transform: scale(2.3);
+    -moz-transform: scale(2.3);
+    -ms-transform: scale(2.3);
+    transform: scale(2.3);
+    opacity: 0;
 }
 
 .no-touch .hi-icon-effect-3b .hi-icon:hover:after {
-	-webkit-transform: scale(1);
-	-moz-transform: scale(1);
-	-ms-transform: scale(1);
-	transform: scale(1);
-	opacity: 1;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
 }
 
-.row{
+.row {
     position: relative;
     left: 220px;
 }
+
+.icon-row {
+    position: relative;
+    left: 110px;
+}
+
 /* The Grid ---------------------- */
-.lt-ie9 .row .row { width: auto; max-width: none; min-width: 0; margin: 0 -15px; }
+.lt-ie9 .row .row {
+    width: auto;
+    max-width: none;
+    min-width: 0;
+    margin: 0 -15px;
+}
+
 .lt-ie9 .row.large-collapse .column,
-.lt-ie9 .row.large-collapse .columns { padding: 0; }
-.lt-ie9 .row .row { width: auto; max-width: none; min-width: 0; margin: 0 -15px; }
-.lt-ie9 .row .row.large-collapse { margin: 0; }
+.lt-ie9 .row.large-collapse .columns {
+    padding: 0;
+}
 
-.lt-ie9 .column, .columns { float: left; min-height: 1px; padding: 0 15px; position: relative; width: 300px; }
-.lt-ie9 .column.large-centered, .columns.large-centered { float: none; margin: 0 auto; }
+.lt-ie9 .row .row {
+    width: auto;
+    max-width: none;
+    min-width: 0;
+    margin: 0 -15px;
+}
 
-.lt-ie9 [class*="column"] + [class*="column"]:last-child { float: right; }
-.lt-ie9 [class*="column"] + [class*="column"].end { float: left; }
+.lt-ie9 .row .row.large-collapse {
+    margin: 0;
+}
+
+.lt-ie9 .column, .columns {
+    float: left;
+    min-height: 1px;
+    padding: 0 15px;
+    position: relative;
+    width: 300px;
+}
+
+.lt-ie9 .column.large-centered, .columns.large-centered {
+    float: none;
+    margin: 0 auto;
+}
+
+.lt-ie9 [class*="column"] + [class*="column"]:last-child {
+    float: right;
+}
+
+.lt-ie9 [class*="column"] + [class*="column"].end {
+    float: left;
+}
 
 .lt-ie9 .large-1,
-.lt-ie9 .row .large-1 { width: 8.33333%; }
+.lt-ie9 .row .large-1 {
+    width: 8.33333%;
+}
 
 .lt-ie9 .large-2,
-.lt-ie9 .row .large-2 { width: 16.66667%; }
+.lt-ie9 .row .large-2 {
+    width: 16.66667%;
+}
 
 .lt-ie9 .large-3,
-.lt-ie9 .row .large-3 { width: 25%; }
+.lt-ie9 .row .large-3 {
+    width: 25%;
+}
 
 .lt-ie9 .large-4,
 .lt-ie9 .row .large-4,
-.lt-ie9 .small-block-grid-3>li { width: 33.33333%; }
+.lt-ie9 .small-block-grid-3 > li {
+    width: 33.33333%;
+}
 
 .lt-ie9 .large-5,
-.lt-ie9 .row .large-5 { width: 41.66667%; }
+.lt-ie9 .row .large-5 {
+    width: 41.66667%;
+}
 
 .lt-ie9 .large-6,
-.lt-ie9 .row .large-6 { width: 50%; }
+.lt-ie9 .row .large-6 {
+    width: 50%;
+}
 
 .lt-ie9 .large-7,
-.lt-ie9 .row .large-7 { width: 58.33333%; }
+.lt-ie9 .row .large-7 {
+    width: 58.33333%;
+}
 
 .lt-ie9 .large-8,
-.lt-ie9 .row .large-8 { width: 66.66667%; }
+.lt-ie9 .row .large-8 {
+    width: 66.66667%;
+}
 
 .lt-ie9 .large-9,
-.lt-ie9 .row .large-9 { width: 75%; }
+.lt-ie9 .row .large-9 {
+    width: 75%;
+}
 
 .lt-ie9 .large-10,
-.lt-ie9 .row .large-10 { width: 83.33333%; }
+.lt-ie9 .row .large-10 {
+    width: 83.33333%;
+}
 
 .lt-ie9 .large-11,
-.lt-ie9 .row .large-11 { width: 91.66667%; }
+.lt-ie9 .row .large-11 {
+    width: 91.66667%;
+}
 
 .lt-ie9 .large-12,
+.lt-ie9 .row .large-offset-1 {
+    margin-left: 8.33333%;
+}
 
-.lt-ie9 .row .large-offset-1 { margin-left: 8.33333%; }
-.lt-ie9 .row .large-offset-2 { margin-left: 16.66667%; }
-.lt-ie9 .row .large-offset-3 { margin-left: 25%; }
-.lt-ie9 .row .large-offset-4 { margin-left: 33.33333%; }
-.lt-ie9 .row .large-offset-5 { margin-left: 41.66667%; }
-.lt-ie9 .row .large-offset-6 { margin-left: 50%; }
-.lt-ie9 .row .large-offset-7 { margin-left: 58.33333%; }
-.lt-ie9 .row .large-offset-8 { margin-left: 66.66667%; }
-.lt-ie9 .row .large-offset-9 { margin-left: 75%; }
-.lt-ie9 .row .large-offset-10 { margin-left: 83.33333%; }
+.lt-ie9 .row .large-offset-2 {
+    margin-left: 16.66667%;
+}
 
-.lt-ie9 .pull-2 { right: 16.66667%; }
-.lt-ie9 .pull-3 { right: 25%; }
-.lt-ie9 .pull-4 { right: 33.33333%; }
-.lt-ie9 .pull-5 { right: 41.66667%; }
-.lt-ie9 .pull-6 { right: 50%; }
-.lt-ie9 .pull-7 { right: 58.33333%; }
-.lt-ie9 .pull-8 { right: 66.66667%; }
-.lt-ie9 .pull-9 { right: 75%; }
-.lt-ie9 .pull-10 { right: 83.33333%; }
+.lt-ie9 .row .large-offset-3 {
+    margin-left: 25%;
+}
 
+.lt-ie9 .row .large-offset-4 {
+    margin-left: 33.33333%;
+}
 
-.lt-ie9 .push-2 { left: 16.66667%; }
-.lt-ie9 .push-3 { left: 25%; }
-.lt-ie9 .push-4 { left: 33.33333%; }
-.lt-ie9 .push-5 { left: 41.66667%; }
-.lt-ie9 .push-6 { left: 50%; }
-.lt-ie9 .push-7 { left: 58.33333%; }
-.lt-ie9 .push-8 { left: 66.66667%; }
-.lt-ie9 .push-9 { left: 75%; }
-.lt-ie9 .push-10 { left: 83.33333%; }
+.lt-ie9 .row .large-offset-5 {
+    margin-left: 41.66667%;
+}
+
+.lt-ie9 .row .large-offset-6 {
+    margin-left: 50%;
+}
+
+.lt-ie9 .row .large-offset-7 {
+    margin-left: 58.33333%;
+}
+
+.lt-ie9 .row .large-offset-8 {
+    margin-left: 66.66667%;
+}
+
+.lt-ie9 .row .large-offset-9 {
+    margin-left: 75%;
+}
+
+.lt-ie9 .row .large-offset-10 {
+    margin-left: 83.33333%;
+}
+
+.lt-ie9 .pull-2 {
+    right: 16.66667%;
+}
+
+.lt-ie9 .pull-3 {
+    right: 25%;
+}
+
+.lt-ie9 .pull-4 {
+    right: 33.33333%;
+}
+
+.lt-ie9 .pull-5 {
+    right: 41.66667%;
+}
+
+.lt-ie9 .pull-6 {
+    right: 50%;
+}
+
+.lt-ie9 .pull-7 {
+    right: 58.33333%;
+}
+
+.lt-ie9 .pull-8 {
+    right: 66.66667%;
+}
+
+.lt-ie9 .pull-9 {
+    right: 75%;
+}
+
+.lt-ie9 .pull-10 {
+    right: 83.33333%;
+}
+
+.lt-ie9 .push-2 {
+    left: 16.66667%;
+}
+
+.lt-ie9 .push-3 {
+    left: 25%;
+}
+
+.lt-ie9 .push-4 {
+    left: 33.33333%;
+}
+
+.lt-ie9 .push-5 {
+    left: 41.66667%;
+}
+
+.lt-ie9 .push-6 {
+    left: 50%;
+}
+
+.lt-ie9 .push-7 {
+    left: 58.33333%;
+}
+
+.lt-ie9 .push-8 {
+    left: 66.66667%;
+}
+
+.lt-ie9 .push-9 {
+    left: 75%;
+}
+
+.lt-ie9 .push-10 {
+    left: 83.33333%;
+}
 
 /* Nicolas Gallagher's micro clearfix */
-.lt-ie9 .row { *zoom: 1; }
-.lt-ie9 .row:before, .row:after { content: " "; display: table; }
-.lt-ie9 .row:after { clear: both; }
+.lt-ie9 .row {
+    *zoom: 1;
+}
+
+.lt-ie9 .row:before, .row:after {
+    content: " ";
+    display: table;
+}
+
+.lt-ie9 .row:after {
+    clear: both;
+}
