@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'InternetBanking',
     'rest_framework',
     'bootstrap3',
+    'googlecharts',
 ]
 AUTH_PROFILE_MODULE = 'project.pm.UserProfile'
 MIDDLEWARE = [

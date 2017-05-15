@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+    <style>
+        body {
+            background-image: none;
+            background-color: #484848;
+            overflow: auto;
+        }
+
+        .noselect {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+
+        }
+
+        .line {
+            padding-left: 50px;
+        }
+
+        ol,
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            display: inline-table;
+            color: black;
+            padding-left: 20px;
+        }
+
+        #chartjs-legend li span {
+            padding: 6px 20px;
+            border-radius: 13px;
+            color: white;
+        }
+    </style>
+    <div class="line">
+        <h3 style="color: rgba(209, 212, 211, 0.59)">Перевод средств за 2017 год</h3>
+        <div id="chartjs-legend" class="noselect"></div>
+        <canvas id="c" width="1000" height="500" style="background-color: rgba(151, 152, 126, 0.01)"></canvas>
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+    <script>
+        var ctx = document.getElementById("c").getContext("2d");
+        var data = {
+            labels: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+            datasets: [{
+                label: "BYN",
+                fillColor: "rgba(240, 128, 128,0.1)",
+                strokeColor: "rgba(240, 128, 128,0.9)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "rgba(240, 128, 128,0.9)",
+                pointHighlightFill: "#fff",
+                spanGaps: false,
+                LabelFontColor: "red",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: {{ data }}
+            },
+                {
+                    label: "USD",
+                    fillColor: "rgba(32, 178, 170,0.1)",
+                    strokeColor: "rgba(32, 178, 170,0.9)",
+                    pointColor: "rgba(220,220,220,1)",
+                    pointStrokeColor: "rgba(32, 178, 170,0.9)",
+                    pointHighlightFill: "#fff"
+                    ,
+                    LabelFontColor: "red",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: {{ dollar_date }}
+                }]
+
+        };
+        var options = {
+            scaleFontColor: "black",
+            scaleFontWeight: "bold",
+            animation: true,
+            maintainAspectRatio: true,
+            animationEasing: "easeOutBack",
+            animationSteps: 60,
+            scaleShowLabels: true,
+            legendCallback: function (chart) {
+                console.log(chart.data);
+                var text = [];
+                text.push('<ul>');
+                for (var i = 0; i < chart.data.datasets[0].data.length; i++) {
+                    text.push('<li>');
+                    text.push('<span style="background-color:' + chart.data.datasets[0].backgroundColor[i] + '">' + chart.data.datasets[0].data[i] + '</span>');
+                    if (chart.data.labels[i]) {
+                        text.push(chart.data.labels[i]);
+                    }
+                    text.push('</li>');
+                }
+                text.push('</ul>');
+                return text.join("");
+            }
+
+
+        };
+        Chart.defaults.global.defaultFontColor = '#FFF';
+
+        var MyNewChart = new Chart(ctx).Line(data, options);
+        document.getElementById("chartjs-legend").innerHTML = MyNewChart.generateLegend();
+    </script>
+{% endblock %}

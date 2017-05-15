@@ -10,7 +10,7 @@ from InternetBanking.models import UserInformation, Operations, Products, Produc
 from InternetBanking.models import PhoneOperation, FlatPay, InternetPay, User
 from InternetBanking.forms import InternetPayForm, FlatPayForm, KeyForm, LoginForm
 from InternetBanking.forms import ChangePassword, RecoverCodeForm, NewPasswordForm, MoneyTransferForm
-import random, datetime
+import random, datetime, qsstats
 from django.core.mail import send_mail
 
 i = 0
@@ -641,6 +641,32 @@ def transfer_export(request):
                          rows.AcceptUser, rows.ProductId.ContractNumber])
     return response
 
+
+def statistics_money_transfer(request):
+    context = RequestContext(request)
+    archiv = TransferMoneyAchive.objects.filter(UserId=request.user).filter(
+        ProductId__CurrencyId__CurrencyCode="BYN").values_list()
+    data = []
+    for month in range(12):
+        summa = 0
+        for notes in archiv:
+            if notes[4].month == month:
+                summa += int(notes[5])
+        data.append(summa)
+    archiv = TransferMoneyAchive.objects.filter(UserId=request.user).filter(
+        ProductId__CurrencyId__CurrencyCode="USD").values_list()
+    data_dollar = []
+    for month in range(12):
+        summa = 0
+        for notes in archiv:
+            if notes[4].month == month:
+                summa += int(notes[5])
+            data_dollar.append(summa)
+
+    print(data)
+
+    return render(request, 'InternetBanking/statistics/statistics.html', {'data':data,
+                                                                          'dollar_date': data_dollar}, context)
 
 
 

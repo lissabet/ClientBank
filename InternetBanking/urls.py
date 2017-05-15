@@ -34,6 +34,7 @@ urlpatterns = [
     url(r'successfully_password/$', views.successfully_password, name='successfully_password'),
     url(r'money_transfer/$',views.money_transfer,name='money_transfer'),
     url(r'transfer_export/$',views.transfer_export,name='transfer_export'),
+    url(r'statistics/$', views.statistics_money_transfer, name='statistics'),
 
 ]
 

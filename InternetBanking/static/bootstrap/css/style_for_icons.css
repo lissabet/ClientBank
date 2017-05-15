@@ -16,7 +16,6 @@ html {
 
 .button.white {
     clear: both;
-    color: #4e97cc;
     background-color: white;
     border: 0 !important;
     -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, .2) !important;
@@ -34,9 +33,7 @@ html {
     padding: 70px 0;
 }
 
-.section.orange {
-    background-color: #4e97cc;
-}
+
 
 .section.gray {
     border-top: 1px solid #f2f2f2;
@@ -212,6 +209,8 @@ html {
     color: rgba(222, 201, 124, 0.78);
     background: rgba(173, 142, 127, 0.53);;
     box-shadow: 0 0 0 4px rgba(157, 102, 70, 0.78);
+    border: none;
+
 
 }
 
@@ -220,6 +219,7 @@ html {
     -moz-transform: scale(2.3);
     -ms-transform: scale(2.3);
     transform: scale(2.3);
+    border: none;
     opacity: 0;
 }
 
