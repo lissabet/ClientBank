@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="825da9e0-ae28-4dbf-bd3d-b6eae99f5c30" name="Default" comment="add dir static with bootstrap">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/InternetBanking/templates/InternetBanking/admin/Users.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/InternetBanking/templates/InternetBanking/admin/admin_base.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/diagram1.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/InternetBanking/admin.py" afterPath="$PROJECT_DIR$/InternetBanking/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/InternetBanking/models.py" afterPath="$PROJECT_DIR$/InternetBanking/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/InternetBanking/templates/InternetBanking/statistics/statistics.html" afterPath="$PROJECT_DIR$/InternetBanking/templates/InternetBanking/statistics/statistics.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/InternetBanking/templates/base.html" afterPath="$PROJECT_DIR$/InternetBanking/templates/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/InternetBanking/urls.py" afterPath="$PROJECT_DIR$/InternetBanking/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/InternetBanking/views.py" afterPath="$PROJECT_DIR$/InternetBanking/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/untitled8/settings.py" afterPath="$PROJECT_DIR$/untitled8/settings.py" />
     </list>
     <ignored path="untitled8.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -95,11 +87,11 @@
                   <point x="0.0" y="0.0" />
                   <point x="0.0" y="0.0" />
                 </edge>
-                <edge source="InternetBanking.models.Products" target="InternetBanking.models.ProductStatus">
+                <edge source="InternetBanking.models.UserOperations" target="InternetBanking.models.Operations">
                   <point x="0.0" y="0.0" />
                   <point x="0.0" y="0.0" />
                 </edge>
-                <edge source="InternetBanking.models.UserOperations" target="InternetBanking.models.Operations">
+                <edge source="InternetBanking.models.Products" target="InternetBanking.models.ProductStatus">
                   <point x="0.0" y="0.0" />
                   <point x="0.0" y="0.0" />
                 </edge>
@@ -119,7 +111,7 @@
                   <point x="0.0" y="0.0" />
                   <point x="0.0" y="0.0" />
                 </edge>
-                <edge source="django.contrib.auth.models.User" target="django.contrib.auth.models.Permission">
+                <edge source="InternetBanking.models.FlatPay" target="django.contrib.auth.models.User">
                   <point x="0.0" y="0.0" />
                   <point x="0.0" y="0.0" />
                 </edge>
@@ -127,7 +119,7 @@
                   <point x="0.0" y="0.0" />
                   <point x="0.0" y="0.0" />
                 </edge>
-                <edge source="InternetBanking.models.FlatPay" target="django.contrib.auth.models.User">
+                <edge source="django.contrib.auth.models.User" target="django.contrib.auth.models.Permission">
                   <point x="0.0" y="0.0" />
                   <point x="0.0" y="0.0" />
                 </edge>
@@ -171,15 +163,15 @@
                   <point x="0.0" y="0.0" />
                   <point x="0.0" y="0.0" />
                 </edge>
-                <edge source="InternetBanking.models.UserApplication" target="InternetBanking.models.Applications">
-                  <point x="0.0" y="0.0" />
-                  <point x="0.0" y="0.0" />
-                </edge>
                 <edge source="django.contrib.auth.models.Group" target="django.contrib.auth.models.Permission">
                   <point x="0.0" y="0.0" />
                   <point x="0.0" y="0.0" />
                 </edge>
                 <edge source="InternetBanking.models.UsersKeys" target="django.contrib.auth.models.User">
+                  <point x="0.0" y="0.0" />
+                  <point x="0.0" y="0.0" />
+                </edge>
+                <edge source="InternetBanking.models.UserApplication" target="InternetBanking.models.Applications">
                   <point x="0.0" y="0.0" />
                   <point x="0.0" y="0.0" />
                 </edge>
@@ -1564,11 +1556,11 @@
               <point x="0.0" y="0.0" />
               <point x="0.0" y="0.0" />
             </edge>
-            <edge source="InternetBanking.models.Products" target="InternetBanking.models.ProductStatus">
+            <edge source="InternetBanking.models.UserOperations" target="InternetBanking.models.Operations">
               <point x="0.0" y="0.0" />
               <point x="0.0" y="0.0" />
             </edge>
-            <edge source="InternetBanking.models.UserOperations" target="InternetBanking.models.Operations">
+            <edge source="InternetBanking.models.Products" target="InternetBanking.models.ProductStatus">
               <point x="0.0" y="0.0" />
               <point x="0.0" y="0.0" />
             </edge>
@@ -1588,7 +1580,7 @@
               <point x="0.0" y="0.0" />
               <point x="0.0" y="0.0" />
             </edge>
-            <edge source="django.contrib.auth.models.User" target="django.contrib.auth.models.Permission">
+            <edge source="InternetBanking.models.FlatPay" target="django.contrib.auth.models.User">
               <point x="0.0" y="0.0" />
               <point x="0.0" y="0.0" />
             </edge>
@@ -1596,7 +1588,7 @@
               <point x="0.0" y="0.0" />
               <point x="0.0" y="0.0" />
             </edge>
-            <edge source="InternetBanking.models.FlatPay" target="django.contrib.auth.models.User">
+            <edge source="django.contrib.auth.models.User" target="django.contrib.auth.models.Permission">
               <point x="0.0" y="0.0" />
               <point x="0.0" y="0.0" />
             </edge>
@@ -1640,15 +1632,15 @@
               <point x="0.0" y="0.0" />
               <point x="0.0" y="0.0" />
             </edge>
-            <edge source="InternetBanking.models.UserApplication" target="InternetBanking.models.Applications">
-              <point x="0.0" y="0.0" />
-              <point x="0.0" y="0.0" />
-            </edge>
             <edge source="django.contrib.auth.models.Group" target="django.contrib.auth.models.Permission">
               <point x="0.0" y="0.0" />
               <point x="0.0" y="0.0" />
             </edge>
             <edge source="InternetBanking.models.UsersKeys" target="django.contrib.auth.models.User">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="InternetBanking.models.UserApplication" target="InternetBanking.models.Applications">
               <point x="0.0" y="0.0" />
               <point x="0.0" y="0.0" />
             </edge>
