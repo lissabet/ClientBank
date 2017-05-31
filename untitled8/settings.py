@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'bootstrap3',
     'googlecharts',
+    'django_extensions',
 ]
 AUTH_PROFILE_MODULE = 'project.pm.UserProfile'
 MIDDLEWARE = [

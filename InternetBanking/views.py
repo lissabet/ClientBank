@@ -6,7 +6,7 @@ from django.shortcuts import render, render_to_response
 from django.template import Context, loader, RequestContext
 from InternetBanking.forms import UserForm, UsersInformationFrom
 from InternetBanking.forms import ProductForm, PhoneOperationForm
-from InternetBanking.models import UserInformation, Operations, Products, ProductStatus, UsersKeys,TransferMoneyAchive
+from InternetBanking.models import UserInformation, Operations, Products, ProductStatus, UsersKeys, TransferMoneyAchive
 from InternetBanking.models import PhoneOperation, FlatPay, InternetPay, User
 from InternetBanking.forms import InternetPayForm, FlatPayForm, KeyForm, LoginForm
 from InternetBanking.forms import ChangePassword, RecoverCodeForm, NewPasswordForm, MoneyTransferForm
@@ -126,11 +126,11 @@ def operations(request):
                   'InternetBanking/operations.html',
                   {'user': request.user,
                    'key_form': key_form,
-                   'phone_form':phone_form,
+                   'phone_form': phone_form,
                    'pay_form': pay_form,
-                   'pay_flat':pay_flat,
-                   'Number':i,
-                   'transfer_form':transfer_form}, context)
+                   'pay_flat': pay_flat,
+                   'Number': i,
+                   'transfer_form': transfer_form}, context)
 
 
 def export_phone(request):
@@ -316,9 +316,21 @@ def flat_pay(request):
 
 def my_view(request):
     context = RequestContext(request)
+    usr_inf = UserInformation.objects.get(UserId=request.user)
+    print(usr_inf.RoleId.id)
     return render(request,
                   'base.html',
-                  {'user': request.user}, context)
+                  {'user': request.user,
+                   'usr_inf': usr_inf}, context)
+
+
+def administration(request):
+    context = RequestContext(request)
+    usr_inf = UserInformation.objects.get(UserId=request.user)
+    return render(request,
+                  'InternetBanking/admin/admin_base.html',
+                  {'user': request.user,
+                   'usr_inf': usr_inf}, context)
 
 
 @login_required(login_url='/basicview/login/')
@@ -326,7 +338,7 @@ def profile(request):
     context = UserInformation.objects.get(UserId=request.user.id)
     products = Products.objects.filter(AccountNumber=request.user.id)
     user_profile = UserInformation.objects.filter(UserId=request.user)[0]
-    user = User.objects.get(pk= request.user.id)
+    user = User.objects.get(pk=request.user.id)
     user_form = UserForm(instance=user)
     form = UsersInformationFrom(instance=user_profile)
     product_form = ProductForm()
@@ -346,9 +358,9 @@ def profile(request):
                    'date': date,
                    'form': form,
                    'product_form': product_form,
-                   'user_form':user_form,
-                   'transfer_form':transfer_form,
-                   'key_form':key_form,
+                   'user_form': user_form,
+                   'transfer_form': transfer_form,
+                   'key_form': key_form,
                    'Number': i}, RequestContext(request))
 
 
@@ -559,17 +571,16 @@ def products(request):
 def edit(request):
     context = RequestContext(request)
     user_profile = UserInformation.objects.filter(UserId=request.user)[0]
-    user = User.objects.get(pk= request.user.id)
+    user = User.objects.get(pk=request.user.id)
 
     if request.method == 'POST':
         form = UsersInformationFrom(request.POST, instance=user_profile)
-        user_form = UserForm(request.POST,instance=user)
+        user_form = UserForm(request.POST, instance=user)
         if form.is_valid() and user_form.is_valid():
             form.save()
             user_form.save()
             UserInformation.objects.filter(pk=user_profile.id).update()
             User.objects.filter(pk=user.id).update()
-
 
         return HttpResponseRedirect('/basicview/profile')
     else:
@@ -577,7 +588,7 @@ def edit(request):
         user_form = UserForm(instance=user)
     return render(request, 'InternetBanking/Profile/edit.html', {'user': request.user,
                                                                  'form': form,
-                                                                 'user_form':user_form}, context)
+                                                                 'user_form': user_form}, context)
 
 
 def stop(request):
@@ -610,7 +621,7 @@ def money_transfer(request):
             product_send = Products.objects.get(pk=sender)
             if product and product.CurrencyId == product_send.CurrencyId and product.StatusId.id == 1 \
                     and product_send.Balance >= int(amount) and key == userKey.values('{}'.format(field))[0][field]:
-                Products.objects.filter(pk=product.id).update(Balance= int(product.Balance) + int(amount))
+                Products.objects.filter(pk=product.id).update(Balance=int(product.Balance) + int(amount))
                 Products.objects.filter(pk=sender).update(Balance=int(product_send.Balance) - int(amount))
                 achive = TransferMoneyAchive(UserId=request.user, AcceptUser=acceper, Amount=int(amount),
                                              ProductId=product_send)
@@ -624,9 +635,9 @@ def money_transfer(request):
         global i
         i = random.randint(1, 9)
     return render(request, 'InternetBanking/operations/money_transfer.html', {'user': request.user,
-                                                                 'transfer_form': transfer_form,
+                                                                              'transfer_form': transfer_form,
                                                                               'key_form': key_form,
-                                                                              'Number':i}, context)
+                                                                              'Number': i}, context)
 
 
 def transfer_export(request):
@@ -663,10 +674,30 @@ def statistics_money_transfer(request):
                 summa += int(notes[5])
             data_dollar.append(summa)
 
-    print(data)
+    mobile_pays = PhoneOperation.objects.filter(UserId=request.user).count()
+    internet_pays = InternetPay.objects.filter(UserId=request.user).count()
+    flat_pays = FlatPay.objects.filter(UserId=request.user).count()
+    pays_data = [mobile_pays, internet_pays, flat_pays]
 
-    return render(request, 'InternetBanking/statistics/statistics.html', {'data':data,
-                                                                          'dollar_date': data_dollar}, context)
+    return render(request, 'InternetBanking/statistics/statistics.html', {'data': data,
+                                                                          'dollar_date': data_dollar,
+                                                                          'pays_data': pays_data}, context)
 
 
+def list_admin_users(request):
+    context = RequestContext(request)
+    users_inf = UserInformation.objects.all()
+    usr_inf = UserInformation.objects.get(UserId = request.user)
+    return render(request, 'InternetBanking/admin/Users.html', {'user': request.user,
+                                                                'usr_inf': usr_inf,
+                                                                'all_usr_inf': users_inf}, context)
 
+
+def detail_user(request):
+    context = RequestContext(request)
+    if request.method == "POST":
+        num = int(request.POST["num"])
+        user_inform = UserInformation.objects.get(UserId=num)
+
+    return render(request, 'InternetBanking/admin/Users.html', {'user': request.user,
+                                                                    'all_usr_inf': user_inform}, context)

@@ -35,6 +35,9 @@ urlpatterns = [
     url(r'money_transfer/$',views.money_transfer,name='money_transfer'),
     url(r'transfer_export/$',views.transfer_export,name='transfer_export'),
     url(r'statistics/$', views.statistics_money_transfer, name='statistics'),
+    url(r'all_users/$', views.list_admin_users, name='all_users'),
+    url(r'administration/$', views.administration, name='administration'),
+    url(r'user_detail/$', views.detail_user, name='user_detail'),
 
 ]
 

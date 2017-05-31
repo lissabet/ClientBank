@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <style>
+        html {
+            overflow-y: scroll;
+        }
+
+        body {
+            width: 100%;
+            background-image: none;
+            background: linear-gradient(0deg, rgba(70, 130, 180, 1), rgba(224, 255, 255, 1)) no-repeat center center fixed;
+            background-size: cover;
+
+        }
+
+        .tbl {
+            text-align: center;
+        }
+    </style>
+
+    <h1 align="center">Архив совершенных операций клиента: {{ userinf.FullName }}</h1>
+    <table class="table table-bordered tbl">
+        <caption>Оплата мобильного телефона</caption>
+        <tr style="border: #1a1a1a; color: midnightblue; background-color: #3a87ad">
+            <td>Логин</td>
+            <td>Email</td>
+            <td>Дата регистрации</td>
+            <td>Дата последнего логина</td>
+            <td>ФИО</td>
+            <td></td>
+        </tr>
+
+        {% for usr in all_usr_inf %}
+
+            <tr>
+            <td>{{ usr.UserId.username }}</td>
+            <td>{{ usr.UserId.email }}</td>
+            <td>{{ usr.UserId.date_joined }}</td>
+            <td>{{ usr.UserId.last_login }}</td>
+            <td>{{ usr.FullName }}</td>
+             <td>
+ <button type="button" name="num" value="{{ usr.UserId }}"  class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            Посмотреть продукты
+        </button>
+
+        </td>
+        {% endfor %}
+
+
+        </tr>
+
+    </table>
+
+
+
+    <div align="center"><a href="/basicview/">На главную</a><br/></div>
+
+
+    <div   class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" onclick="location.reload()"
+                            aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Перевод средств</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form style="margin: 10px"  id="user_form" method="post" action="/basicview/user_detail/"
+                          enctype="multipart/form-data" class="main" >
+                        <table class="table table-bordered tbl">
+                            <caption>Оплата мобильного телефона</caption>
+                            <tr style="border: #1a1a1a; color: midnightblue; background-color: #3a87ad">
+                                <td>Логин</td>
+                                <td>Email</td>
+                                <td>Дата регистрации</td>
+                                <td>Дата последнего логина</td>
+                                <td>ФИО</td>
+                                <td>Адрес</td>
+                                <td>Телефон</td>
+                                <td>Роль</td>
+                            </tr>
+
+                            {% for usr in all_usr_inf %}
+
+                                <tr>
+                                <td>{{ usr.UserId.username }}</td>
+                                <td>{{ usr.UserId.email }}</td>
+                                <td>{{ usr.UserId.date_joined }}</td>
+                                <td>{{ usr.UserId.last_login }}</td>
+                                <td>{{ usr.FullName }}</td>
+                                <td>{{ usr.Address }}</td>
+                                <td>{{ usr.Phone }}</td>
+                                <td>{{ usr.RoleId.name }}</td>
+                            {% endfor %}
+                            <td>
+
+                            </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -3,7 +3,7 @@ from InternetBanking.models import Users, UserInformation, ProductStatus, Produc
     UserOperations
 from InternetBanking.models import Applications, UserApplication, MobileOperators, PhoneOperation, InternetProviders, \
     InternetPay
-from InternetBanking.models import FlatPay
+from InternetBanking.models import FlatPay, Roles
 
 admin.site.register(Users)
 admin.site.register(UserInformation)
@@ -20,3 +20,4 @@ admin.site.register(PhoneOperation)
 admin.site.register(InternetPay)
 admin.site.register(InternetProviders)
 admin.site.register(FlatPay)
+admin.site.register(Roles)

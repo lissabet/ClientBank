@@ -8,12 +8,15 @@ class Users(models.Model):
     login = models.CharField(max_length=25)
     password = models.CharField(max_length=75)
 
+class Roles(models.Model):
+    name = models.CharField(max_length=50)
 
 class UserInformation(models.Model):
     UserId = models.ForeignKey(User)
     FullName = models.CharField(max_length=75)
     Address = models.CharField(max_length=250)
     Phone = models.CharField(max_length=50)
+    RoleId = models.ForeignKey(Roles)
 
 
 class ProductStatus(models.Model):
